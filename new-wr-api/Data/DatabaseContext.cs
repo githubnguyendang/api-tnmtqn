@@ -107,6 +107,12 @@ namespace new_wr_api.Data
         public DbSet<CTKTSDN_PDK_NuocMat>? CTKTSDN_PDK_NuocMat { get; set; }
         public DbSet<CTKTSDN_KTNDDCuaHoGD>? CTKTSDN_KTNDDCuaHoGD { get; set; }
 
+        // Thong tin du lieu - so luong chat luong nuoc
+
+        // public DbSet<CLN_NuocMat>? CLN_NuocMat { get; set; }
+
+
+
         //VanHanhHoChua
         public DbSet<VHHC_LuuVucSong>? VHHC_LuuVucSong { get; set; }
         public DbSet<VHHC_HoChua_ThongSoKT>? VHHC_HoChua_ThongSoKT { get; set; }

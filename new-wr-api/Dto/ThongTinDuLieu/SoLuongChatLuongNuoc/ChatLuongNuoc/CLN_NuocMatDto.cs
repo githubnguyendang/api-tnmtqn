@@ -3,6 +3,8 @@
     public class CLN_NuocMatDto
     {
         public int? Id { get; set; }
+
+        public DateTime? ThoiGianQuanTrac { get; set; }
         public string? LuuVucSong { get; set; }
         public string? SongSuoiHoChua { get; set; }
         public string? ViTriQuanTrac { get; set; }

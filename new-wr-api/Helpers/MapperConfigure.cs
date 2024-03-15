@@ -226,6 +226,8 @@ namespace new_wr_api.Helpers
             CreateMap<DanhMucNN_NoiTinh_AoHo, DanhMucNN_NoiTinh_AoHoDto>().ReverseMap();
             CreateMap<DanhMucNN_NoiTinh_SongSuoi, DanhMucNN_NoiTinh_SongSuoiDto>().ReverseMap();
 
+            CreateMap<CLN_NuocMat, CLN_NuocMatDto>().ReverseMap();
+
             //VanHanhHoChua
             CreateMap<VHHC_LuuVucSong, VHHC_LuuVucSongDto>().ReverseMap();
             CreateMap<VHHC_HoChua_ThongSoKT, VHHC_HoChua_ThongSoKTDto>().ReverseMap();
