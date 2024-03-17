@@ -28,5 +28,7 @@ namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
         public string? TaiKhoanSua { get; set; }
         public bool? DaXoa { get; set; }
         public virtual DuLieuNguonNuocThaiDiem? DuLieuNguonNuocThaiDiem { get; set; }
+        public virtual DuLieuNguonNuocThaiSinhHoat? DuLieuNguonNuocThaiSinhHoat { get; set; }
+
     }
 }

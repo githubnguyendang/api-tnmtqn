@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using new_wr_api.Data;
+using new_wr_api.Data.BC.KNTiepNhanNuocThai;
 using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong;
 using new_wr_api.Data.KiemKeTNN;
 using new_wr_api.Data.VHHC.MuaLu.LuongMua;
@@ -126,6 +127,10 @@ namespace new_wr_api.Helpers
             CreateMap<DuLieuNguonNuocNhan, DuLieuNguonNuocNhanDto>().ReverseMap();
             CreateMap<DuLieuNguonNuocThaiDiem, DuLieuNguonNuocThaiDiemDto>()
                 .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
+            CreateMap<DuLieuNguonNuocThaiSinhHoat, DuLieuNguonNuocThaiSinhHoatDto>()
+               .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
+            CreateMap<DuLieuNguonNuocThaiTrauBo, DuLieuNguonNuocThaiTrauBoDto>()
+              .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
 
             CreateMap<PhanDoanSong, PhanDoanSongDto>().ReverseMap();
 

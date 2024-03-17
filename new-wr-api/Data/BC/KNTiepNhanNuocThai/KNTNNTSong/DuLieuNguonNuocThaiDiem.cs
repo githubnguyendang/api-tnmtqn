@@ -10,6 +10,9 @@ namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
         public int Id { get; set; }
         public int IdPhanDoanSong { get; set; }
         public double? LuuLuongXaThai { get; set; }
+        public string? NguonThaiCongTrinh { get; set; }
+        public double? ToaDoX { get; set; }
+        public double? ToaDoY { get; set; }
 
         //tongtailuong
         public double? CtdiemBOD { get; set; }
