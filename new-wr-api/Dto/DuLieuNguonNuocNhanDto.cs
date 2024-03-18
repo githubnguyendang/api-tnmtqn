@@ -3,11 +3,8 @@
     public class DuLieuNguonNuocNhanDto
     {
         public int Id { get; set; }
-        public string? Song { get; set; }
-        public string? TenDoanSong { get; set; }
-        public double? ChieuDai { get; set; }
+        public int IdPhanDoanSong { get; set; }
         public double? LuuLuongDongChay { get; set; }
-
         //ketqua
         public double? CnnBOD { get; set; }
         public double? CnnCOD { get; set; }
@@ -45,5 +42,6 @@
         public double? LtdColiform => Math.Round((LuuLuongDongChay ?? 0) * (CqcColiform ?? 0) * 86.4, 2);
         public string? GhiChu { get; set; }
         public bool? DaXoa { get; set; }
+        public PhanDoanSongDto? PhanDoanSong { get; set; }
     }
 }

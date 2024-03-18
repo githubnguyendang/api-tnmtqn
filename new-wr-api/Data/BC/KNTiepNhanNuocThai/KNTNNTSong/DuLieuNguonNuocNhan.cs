@@ -1,17 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using new_wr_api.Dto;
 
-namespace new_wr_api.Data
+namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
 {
     public class DuLieuNguonNuocNhan
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string? Song { get; set; }
-        public string? TenDoanSong { get; set; }
-        public double? ChieuDai { get; set; }
+        public int IdPhanDoanSong { get; set; }
         public double? LuuLuongDongChay { get; set; }
 
         //ketqua
@@ -54,5 +51,8 @@ namespace new_wr_api.Data
         public DateTime? ThoiGianSua { get; set; }
         public string? TaiKhoanSua { get; set; }
         public bool? DaXoa { get; set; }
+
+        [ForeignKey("IdPhanDoanSong")]
+        public virtual PhanDoanSong? PhanDoanSong { get; set; }
     }
 }
