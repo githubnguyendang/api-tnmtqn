@@ -158,6 +158,7 @@ namespace new_wr_api.Data
         public DbSet<DuLieuNguonNuocThaiDiem>? DuLieuNguonNuocThaiDiem { get; set; }
         public DbSet<DuLieuNguonNuocThaiSinhHoat>? DuLieuNguonNuocThaiSinhHoat { get; set; }
         public DbSet<DuLieuNguonNuocThaiTrauBo>? DuLieuNguonNuocThaiTrauBo { get; set; }
+        public DbSet<DuLieuNguonNuocThaiLon>? DuLieuNguonNuocThaiLon { get; set; }
 
         //MoreDatabase
         public DbSet<Demo>? Demo { get; set; }

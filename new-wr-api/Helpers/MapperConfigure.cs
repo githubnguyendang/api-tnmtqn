@@ -131,6 +131,8 @@ namespace new_wr_api.Helpers
                .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
             CreateMap<DuLieuNguonNuocThaiTrauBo, DuLieuNguonNuocThaiTrauBoDto>()
               .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
+            CreateMap<DuLieuNguonNuocThaiLon, DuLieuNguonNuocThaiLonDto>()
+             .ForMember(dest => dest.PhanDoanSong, opt => opt.MapFrom(src => src.PhanDoanSong)).ReverseMap();
 
             CreateMap<PhanDoanSong, PhanDoanSongDto>().ReverseMap();
 

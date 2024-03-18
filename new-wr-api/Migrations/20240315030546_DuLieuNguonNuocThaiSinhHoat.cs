@@ -11,23 +11,6 @@ namespace new_wr_api.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "NguonThaiCongTrinh",
-                table: "DuLieuNguonNuocThaiDiem",
-                type: "nvarchar(max)",
-                nullable: true);
-
-            migrationBuilder.AddColumn<double>(
-                name: "ToaDoX",
-                table: "DuLieuNguonNuocThaiDiem",
-                type: "float",
-                nullable: true);
-
-            migrationBuilder.AddColumn<double>(
-                name: "ToaDoY",
-                table: "DuLieuNguonNuocThaiDiem",
-                type: "float",
-                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "DuLieuNguonNuocThaiSinhHoat",
@@ -81,18 +64,6 @@ namespace new_wr_api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "DuLieuNguonNuocThaiSinhHoat");
-
-            migrationBuilder.DropColumn(
-                name: "NguonThaiCongTrinh",
-                table: "DuLieuNguonNuocThaiDiem");
-
-            migrationBuilder.DropColumn(
-                name: "ToaDoX",
-                table: "DuLieuNguonNuocThaiDiem");
-
-            migrationBuilder.DropColumn(
-                name: "ToaDoY",
-                table: "DuLieuNguonNuocThaiDiem");
         }
     }
 }
