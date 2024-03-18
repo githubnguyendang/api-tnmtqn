@@ -82,6 +82,10 @@ services.AddScoped<DuLieuNguonNuocThaiDiemService>();
 services.AddScoped<DuLieuNguonNuocThaiSinhHoatService>();
 services.AddScoped<DuLieuNguonNuocThaiTrauBoService>();
 services.AddScoped<DuLieuNguonNuocThaiLonService>();
+services.AddScoped<DuLieuNguonNuocThaiGiaCamService>();
+services.AddScoped<DuLieuNguonNuocThaiTrongLuaService>();
+services.AddScoped<DuLieuNguonNuocThaiTrongCayService>();
+services.AddScoped<DuLieuNguonNuocThaiTrongRungService>();
 services.AddScoped<PhanDoanSongService>();
 
 services.AddScoped<Tram_ThongTinService>();
