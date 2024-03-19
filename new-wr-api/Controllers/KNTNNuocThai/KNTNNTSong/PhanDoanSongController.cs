@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong;
 using new_wr_api.Dto;
 using new_wr_api.Service;
+using static new_wr_api.Dto.PhanDoanSongDto;
 
 namespace new_wr_api.Controllers
 {
@@ -59,6 +59,20 @@ namespace new_wr_api.Controllers
             else
             {
                 return BadRequest(new { message = "Lưu vực :Lỗi xóa dữ liệu", error = true });
+            }
+        }
+
+        [HttpGet("tai-luong")]
+        public async Task<ActionResult<List<PhanDoanSongDto>>> GetCalculatedPollutantData()
+        {
+            try
+            {
+                var phanDoanSongsWithComputedData = await _service.GetDataCaculatePolutantAsync();
+                return Ok(phanDoanSongsWithComputedData);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
     }

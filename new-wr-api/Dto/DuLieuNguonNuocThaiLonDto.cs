@@ -19,12 +19,12 @@ namespace new_wr_api.Dto
         public double? CtLonTSS { get; set; }
         public double? CtLonColiform { get; set; }
 
-        public double? LtLonBOD => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonBOD ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtLonCOD => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonCOD ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtLonAmoni => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonAmoni ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtLonTongN => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTongN ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtLonTongP => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTongP ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtLonTSS => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTSS ?? 0) * (HeSoSuyGiam ?? 0));
+        public double? LtLonBOD => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonBOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtLonCOD => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonCOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtLonAmoni => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonAmoni ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtLonTongN => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTongN ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtLonTongP => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTongP ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtLonTSS => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonTSS ?? 0) * (HeSoSuyGiam ?? 0), 2);
         public double? LtLonColiform => Math.Round(((SoLon + SoDe+ SoGiaSucKhac) ?? 0) * (CtLonColiform ?? 0) * (HeSoSuyGiam ?? 0));
 
         public string? GhiChu { get; set; }

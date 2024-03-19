@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Data.VHHC.MuaLu.LuongMua;
 using new_wr_api.Dto;
 using new_wr_api.Dto.VHHC;
 using System.Security.Claims;

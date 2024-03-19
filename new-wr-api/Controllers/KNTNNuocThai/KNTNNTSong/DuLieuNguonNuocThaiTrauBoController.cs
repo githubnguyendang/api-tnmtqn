@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong;
 using new_wr_api.Dto;
 using new_wr_api.Service;
 
@@ -34,7 +33,7 @@ namespace new_wr_api.Controllers
 
         [HttpPost]
         [Route("luu")]
-        public async Task<ActionResult<Data.BC.KNTiepNhanNuocThai.KNTNNTSong.DuLieuNguonNuocThaiTrauBo>> Save(DuLieuNguonNuocThaiTrauBoDto moddel)
+        public async Task<ActionResult<DuLieuNguonNuocThaiTrauBo>> Save(DuLieuNguonNuocThaiTrauBoDto moddel)
         {
             var res = await _service.SaveAsync(moddel);
             if (res == true)

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using new_wr_api.Dto;
 
-namespace new_wr_api.Data.KiemKeTNN
+namespace new_wr_api.Data
 {
     public class KKTNN_NuocMat_SoLuong_AoHoDamPha
     {

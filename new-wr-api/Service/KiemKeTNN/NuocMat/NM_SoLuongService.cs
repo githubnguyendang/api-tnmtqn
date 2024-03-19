@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Data.KiemKeTNN;
 using new_wr_api.Dto;
 using new_wr_api.Models;
 using System.Security.Claims;

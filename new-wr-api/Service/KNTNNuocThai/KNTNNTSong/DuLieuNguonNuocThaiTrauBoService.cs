@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong;
 using new_wr_api.Dto;
 using System.Security.Claims;
 

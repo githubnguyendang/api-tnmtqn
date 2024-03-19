@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
+namespace new_wr_api.Data
 {
     public class DuLieuNguonNuocThaiGiaCam
     {
@@ -11,6 +11,7 @@ namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
         public int IdPhanDoanSong { get; set; }
         public int? SoGiaCam { get; set; }
         public double? HeSoSuyGiam { get; set; }
+
         //tongtailuong
         public double? CtGiaCamBOD { get; set; }
         public double? CtGiaCamCOD { get; set; }

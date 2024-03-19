@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Data.VHHC.MuaLu.LuongMua;
 using new_wr_api.Dto;
 using new_wr_api.Dto.VHHC;
 using new_wr_api.Service;

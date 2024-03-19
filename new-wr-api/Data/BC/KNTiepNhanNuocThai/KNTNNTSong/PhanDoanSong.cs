@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
+namespace new_wr_api.Data
 {
     public class PhanDoanSong
     {
@@ -27,8 +27,15 @@ namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTSong
         public DateTime? ThoiGianSua { get; set; }
         public string? TaiKhoanSua { get; set; }
         public bool? DaXoa { get; set; }
+        public virtual DuLieuNguonNuocNhan? DuLieuNguonNuocNhan { get; set; }
         public virtual DuLieuNguonNuocThaiDiem? DuLieuNguonNuocThaiDiem { get; set; }
         public virtual DuLieuNguonNuocThaiSinhHoat? DuLieuNguonNuocThaiSinhHoat { get; set; }
+        public virtual DuLieuNguonNuocThaiGiaCam? DuLieuNguonNuocThaiGiaCam { get; set; }
+        public virtual DuLieuNguonNuocThaiLon? DuLieuNguonNuocThaiLon { get; set; }
+        public virtual DuLieuNguonNuocThaiTrauBo? DuLieuNguonNuocThaiTrauBo { get; set; }
+        public virtual DuLieuNguonNuocThaiTrongCay? DuLieuNguonNuocThaiTrongCay { get; set; }
+        public virtual DuLieuNguonNuocThaiTrongLua? DuLieuNguonNuocThaiTrongLua { get; set; }
+        public virtual DuLieuNguonNuocThaiTrongRung? DuLieuNguonNuocThaiTrongRung { get; set; }
 
     }
 }
