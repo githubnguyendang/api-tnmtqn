@@ -9,7 +9,7 @@
         public double? DoAm { get; set; }
         public double? TocDoGio { get; set; }
     }
-    public class ApexChartSeriesQNDto
+    public class ApexChartSeriesTramDto
     {
         public string? name { get; set; }
         public List<double>? data { get; set; }
