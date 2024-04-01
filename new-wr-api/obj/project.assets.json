@@ -3430,19 +3430,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HuongLan\\.nuget\\packages\\": {}
+    "C:\\Users\\Dung Nguyxn\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\LapTrinhQuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
+      "projectUniqueName": "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
       "projectName": "new-wr-api",
-      "projectPath": "D:\\LapTrinhQuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
-      "packagesPath": "C:\\Users\\HuongLan\\.nuget\\packages\\",
-      "outputPath": "D:\\LapTrinhQuangNgai\\api-tnmtqn\\new-wr-api\\obj\\",
+      "projectPath": "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
+      "packagesPath": "C:\\Users\\Dung Nguyxn\\.nuget\\packages\\",
+      "outputPath": "D:\\Work\\api-tnmtqn\\new-wr-api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HuongLan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dung Nguyxn\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3462,11 +3462,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3535,7 +3530,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -152,6 +152,9 @@ services.AddScoped<MuaHienTaiService>();
 //demo
 services.AddScoped<DemoService>();
 
+//TramQuangNgai
+services.AddScoped<TramQuangNgaiService>();
+
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {
     options.Password.RequireDigit = false;

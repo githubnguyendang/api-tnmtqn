@@ -269,6 +269,9 @@ namespace new_wr_api.Helpers
 
             //demo
             CreateMap<Demo, DemoDto>().ReverseMap();
+
+            //TramQuangNgai
+            CreateMap<TramQuangNgai, TramQuangNgaiDto>().ReverseMap();
         }
     }
 }

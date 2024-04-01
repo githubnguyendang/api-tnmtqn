@@ -161,7 +161,8 @@ namespace new_wr_api.Data
         public DbSet<DuLieuNguonNuocThaiTrongRung>? DuLieuNguonNuocThaiTrongRung { get; set; }
         //MoreDatabase
         public DbSet<Demo>? Demo { get; set; }
-
+        ///TramQuangNgai
+        public DbSet<TramQuangNgai>? TramQuangNgai { get; set; }
 
 
         ////GS

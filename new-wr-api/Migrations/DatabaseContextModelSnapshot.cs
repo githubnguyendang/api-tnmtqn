@@ -6568,6 +6568,49 @@ namespace new_wr_api.Migrations
                     b.ToTable("ToChuc_CaNhan");
                 });
 
+            modelBuilder.Entity("new_wr_api.Data.TramQuangNgai", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool?>("DaXoa")
+                        .HasColumnType("bit");
+
+                    b.Property<double?>("DoAm")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("LuongMua")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("NhietDo")
+                        .HasColumnType("float");
+
+                    b.Property<string>("TaiKhoanSua")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TaiKhoanTao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ThoiGian")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ThoiGianSua")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ThoiGianTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double?>("TocDoGio")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TramQuangNgai");
+                });
+
             modelBuilder.Entity("new_wr_api.Data.Tram_LoaiTram", b =>
                 {
                     b.Property<int>("Id")
