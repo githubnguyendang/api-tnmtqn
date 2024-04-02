@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTAo
+namespace new_wr_api.Data
 {
     public class ThongTinAoHo
     {

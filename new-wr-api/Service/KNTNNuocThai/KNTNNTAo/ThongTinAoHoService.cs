@@ -1,0 +1,88 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using new_wr_api.Data;
+using new_wr_api.Dto;
+using System.Security.Claims;
+
+namespace new_wr_api.Service
+{
+    public class ThongTinAoHoService
+    {
+        private readonly DatabaseContext _context;
+        private readonly IMapper _mapper;
+        private readonly IHttpContextAccessor _httpContext;
+
+        public ThongTinAoHoService(DatabaseContext context, IMapper mapper, IHttpContextAccessor httpContext)
+        {
+            _context = context;
+            _mapper = mapper;
+            _httpContext = httpContext;
+        }
+        public async Task<List<ThongTinAoHoDto>> GetAllAsync()
+        {
+            var items = await _context.ThongTinAoHo!.Where(b => b.DaXoa == false)
+                .Include(p => p.ThongSoCLNAo)
+                .Include(p => p.CT_ThongTin)
+                .Include(p => p.CT_ThongTin).ThenInclude(ct => ct!.ThongSo)
+                .Where(p => p.CT_ThongTin != null)
+                .ToListAsync();
+
+            var pdsDtos = _mapper.Map<List<ThongTinAoHoDto>>(items);
+
+            foreach (var dto in pdsDtos)
+            {
+                //dto.DuLieuNguonNuocNhan!.ThongTinAoHo = null;
+                dto.ThongSoCLNAo = null;
+            }
+
+            return pdsDtos;
+        }
+        public async Task<ThongTinAoHoDto?> GetByIdAsync(int Id)
+        {
+            var item = await _context.ThongTinAoHo!.FindAsync(Id);
+            return _mapper.Map<ThongTinAoHoDto>(item);
+        }
+
+
+        public async Task<bool> SaveAsync(ThongTinAoHoDto dto)
+        {
+            var existingItem = await _context.ThongTinAoHo!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.DaXoa == false);
+
+            if (existingItem == null || dto.Id == 0)
+            {
+                var newItem = _mapper.Map<ThongTinAoHo>(dto);
+                newItem.DaXoa = false;
+                newItem.TaiKhoanTao = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
+                _context.ThongTinAoHo!.Add(newItem);
+            }
+            else
+            {
+                var updateItem = await _context.ThongTinAoHo!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.DaXoa == false);
+
+                updateItem = _mapper.Map(dto, updateItem);
+
+                updateItem!.ThoiGianSua = DateTime.Now;
+                updateItem.TaiKhoanSua = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
+                _context.ThongTinAoHo!.Update(updateItem);
+            }
+
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+        public async Task<bool> DeleteAsync(int Id)
+        {
+            var existingItem = await _context.ThongTinAoHo!.FirstOrDefaultAsync(d => d.Id == Id && d.DaXoa == false);
+
+            if (existingItem == null) { return false; }
+
+            existingItem!.DaXoa = true;
+            _context.ThongTinAoHo!.Update(existingItem);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+    }
+}

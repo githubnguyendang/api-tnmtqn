@@ -25,5 +25,7 @@
         public double? MtnColiform { get; set; }
         public string? GhiChu { get; set; }
         public bool? DaXoa { get; set; }
+        public ThongSoCLNAoDto? ThongSoCLNAo { get; set; }
+        public CT_ThongTinDto? CT_ThongTin { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace new_wr_api.Data
         public int Id { get; set; }
         public double? PH { get; set; }
         public double? BOD { get; set; }
+        public double? Amoni { get; set; }
         public double? COD { get; set; }
         public double? TOC { get; set; }
         public double? TSS { get; set; }

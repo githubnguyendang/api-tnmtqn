@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTAo;
+using new_wr_api.Data;
 
 namespace new_wr_api.Data
 {

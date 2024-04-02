@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using new_wr_api.Data;
-using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTAo;
 using new_wr_api.Dto;
 using new_wr_api.Dto.VHHC;
 using new_wr_api.Models;
@@ -168,6 +167,13 @@ namespace new_wr_api.Helpers
 
             CreateMap<ThongTinAoHo, ThongTinAoHoDto>()
            .ForMember(dest => dest.MtnBOD, opt => opt.MapFrom((src,dest) => (src.ThongSoCLNAo!.BOD - dest.CnnBOD) * (src.CT_ThongTin!.ThongSo!= null ? src.CT_ThongTin!.ThongSo.DungTichToanBo :0) * Math.Pow(10, -3) *0.7))
+           .ForMember(dest => dest.MtnCOD, opt => opt.MapFrom((src,dest) => (src.ThongSoCLNAo!.COD - dest.CnnCOD) * (src.CT_ThongTin!.ThongSo!= null ? src.CT_ThongTin!.ThongSo.DungTichToanBo :0) * Math.Pow(10, -3) *0.7))
+           .ForMember(dest => dest.MtnAmoni, opt => opt.MapFrom((src, dest) => (src.ThongSoCLNAo!.Amoni - dest.CnnAmoni) * (src.CT_ThongTin!.ThongSo != null ? src.CT_ThongTin!.ThongSo.DungTichToanBo : 0) * Math.Pow(10, -3) * 0.7))
+           .ForMember(dest => dest.MtnTongN, opt => opt.MapFrom((src, dest) => (src.ThongSoCLNAo!.TongNito - dest.CnnTongN) * (src.CT_ThongTin!.ThongSo != null ? src.CT_ThongTin!.ThongSo.DungTichToanBo : 0) * Math.Pow(10, -3) * 0.7))
+           .ForMember(dest => dest.MtnTongP, opt => opt.MapFrom((src, dest) => (src.ThongSoCLNAo!.TongPhosphor - dest.CnnTongP) * (src.CT_ThongTin!.ThongSo != null ? src.CT_ThongTin!.ThongSo.DungTichToanBo : 0) * Math.Pow(10, -3) * 0.7))
+           .ForMember(dest => dest.MtnTSS, opt => opt.MapFrom((src, dest) => (src.ThongSoCLNAo!.TSS - dest.CnnTSS) * (src.CT_ThongTin!.ThongSo != null ? src.CT_ThongTin!.ThongSo.DungTichToanBo : 0) * Math.Pow(10, -3) * 0.7))
+           .ForMember(dest => dest.MtnColiform, opt => opt.MapFrom((src, dest) => (src.ThongSoCLNAo!.TongColiform - dest.CnnColiform) * (src.CT_ThongTin!.ThongSo != null ? src.CT_ThongTin!.ThongSo.DungTichToanBo : 0) * Math.Pow(10, -3) * 0.7))
+
            .ReverseMap();
 
             //KiemKeTaiNguyenNuoc
