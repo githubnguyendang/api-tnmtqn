@@ -41,6 +41,13 @@ namespace new_wr_api.Controllers
         }
 
         [HttpGet]
+        [Route("thong-ke-yeu-to-khi-tuong")]
+        public async Task<List<ApexChartSeriesTramDto>> TramQuangNgai()
+        {
+            return (await _service.TramQuangNgaiAsync());
+        }
+
+        [HttpGet]
         [Route("xoa/{Id}")]
         public async Task<ActionResult<TramQuangNgai>> Delete(int Id)
         {

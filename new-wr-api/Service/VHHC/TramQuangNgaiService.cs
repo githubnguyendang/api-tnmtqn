@@ -60,25 +60,31 @@ namespace new_wr_api.Service
             return true;
         }
 
-        //public async Task<TramQuangNgaiDto> TramQuangNgaiAsync()
-        //{
-        //    var items = await _context.TramQuangNgai!.Where(d => d.Id > 0).OrderByDescending(d => d.ThoiGian).Take(31).OrderByDescending(d => d.ThoiGian)
-        //        .OrderBy(d => d.Id)
-        //        .AsQueryable().ToListAsync();
+        public async Task<List<ApexChartSeriesTramDto>> TramQuangNgaiAsync()
+        {
+            var items = await _context.TramQuangNgai!.Where(d => d.Id > 0).OrderByDescending(d => d.ThoiGian).Take(31).OrderByDescending(d => d.ThoiGian)
+                .OrderBy(d => d.Id)
+                .AsQueryable().ToListAsync();
 
-        //    var seriesList = new List<ApexChartSeriesTramDto>();
+            var seriesList = new List<ApexChartSeriesTramDto>();
 
-        //    seriesList.Add(new ApexChartSeriesTramDto
-        //    {
-        //        name = "LuongMua",
-        //        data = (double)items.LuongMua.ToList() // Convert the array to a list
-        //    });
-
-        //    foreach (var item in items)
-        //    {
-                
-        //    }
-        //}
+            seriesList.Add(new ApexChartSeriesTramDto
+            {
+                name = "Lượng mưa",
+                data = items.Select(x => x.LuongMua ?? 0.0).ToList() 
+            });
+            seriesList.Add(new ApexChartSeriesTramDto
+            {
+                name = "Nhiệt độ",
+                data = items.Select(x => x.NhietDo ?? 0.0).ToList()
+            });
+            seriesList.Add(new ApexChartSeriesTramDto
+            {
+                name = "Độ ẩm",
+                data = items.Select(x => x.DoAm ?? 0.0).ToList()
+            });
+            return seriesList;
+        }
 
         public async Task<bool> DeleteAsync(int Id)
         {
