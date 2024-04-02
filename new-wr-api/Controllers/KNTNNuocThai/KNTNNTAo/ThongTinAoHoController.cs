@@ -60,5 +60,19 @@ namespace new_wr_api.Controllers
                 return BadRequest(new { message = "Lưu vực :Lỗi xóa dữ liệu", error = true });
             }
         }
+
+        [HttpGet("kha-nang")]
+        public async Task<ActionResult<List<ThongTinAoHoDto>>> GetCalculatedPollutantData()
+        {
+            try
+            {
+                var phanDoanSongsWithComputedData = await _service.GetDataCaculatePolutantAsync();
+                return Ok(phanDoanSongsWithComputedData);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

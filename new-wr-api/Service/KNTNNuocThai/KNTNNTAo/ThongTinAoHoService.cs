@@ -29,15 +29,30 @@ namespace new_wr_api.Service
                 .ToListAsync();
 
             var pdsDtos = _mapper.Map<List<ThongTinAoHoDto>>(items);
+            return pdsDtos;
+        }
+
+        public async Task<List<ThongTinAoHoDto>> GetDataCaculatePolutantAsync()
+        {
+            var items = await _context.ThongTinAoHo!.Where(b => b.DaXoa == false)
+                .Include(p => p.ThongSoCLNAo)
+                .Include(p => p.CT_ThongTin)
+                .Include(p => p.CT_ThongTin).ThenInclude(ct => ct!.ThongSo)
+                .Where(p => p.CT_ThongTin != null)
+                .ToListAsync();
+
+            var pdsDtos = _mapper.Map<List<ThongTinAoHoDto>>(items);
 
             foreach (var dto in pdsDtos)
             {
-                //dto.DuLieuNguonNuocNhan!.ThongTinAoHo = null;
+                //dto.DuLieuNguonNuocNhan!.PhanDoanSong = null;
                 dto.ThongSoCLNAo = null;
+                dto.CT_ThongTin = null;
             }
 
             return pdsDtos;
         }
+
         public async Task<ThongTinAoHoDto?> GetByIdAsync(int Id)
         {
             var item = await _context.ThongTinAoHo!.FindAsync(Id);
