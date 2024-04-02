@@ -34,7 +34,7 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<TCQ_ThongTinDto?> GetById(int Id)
+        public async Task<TCQ_ThongTinDto> GetById(int Id)
         {
             return await _service.GetByIdAsync(Id);
         }

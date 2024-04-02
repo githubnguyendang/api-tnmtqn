@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using System.Security.Claims;
 
 namespace new_wr_api.Service
@@ -20,32 +20,32 @@ namespace new_wr_api.Service
             _httpContext = httpContext;
         }
 
-        public async Task<List<DashboardModel>> GetAllDashboardAsync()
+        public async Task<List<DashboardDto>> GetAllDashboardAsync()
         {
             var dashboards = await _context!.Dashboards!.OrderBy(x => x.Name).ToListAsync();
-            var dashboardModels = _mapper.Map<List<DashboardModel>>(dashboards);
+            var dashboardModels = _mapper.Map<List<DashboardDto>>(dashboards);
 
             var allFunctions = await _context!.Functions!.ToListAsync();
             foreach (var dashboardModel in dashboardModels)
             {
-                dashboardModel.Functions = _mapper.Map<List<FunctionModel>>(allFunctions);
+                dashboardModel.Functions = _mapper.Map<List<FunctionDto>>(allFunctions);
             }
 
             return dashboardModels;
         }
 
-        public async Task<List<RoleDashboardModel>> GetDashboardByRoleAsync(string roleName)
+        public async Task<List<RoleDashboardDto>> GetDashboardByRoleAsync(string roleName)
         {
             var role = await _context!.Roles!.FirstOrDefaultAsync(x => x!.Name!.ToLower() == roleName.ToLower());
             var dashboards = await _context!.Dashboards!.Where(x => x.IsDeleted == false).ToListAsync();
-            var roleDashboards = new List<RoleDashboardModel>();
+            var roleDashboards = new List<RoleDashboardDto>();
 
             foreach (var dashboard in dashboards)
             {
                 var rdash = await _context!.RoleDashboards!
                     .FirstOrDefaultAsync(x => x.RoleName == roleName && x.DashboardId == dashboard.Id);
 
-                var model = new RoleDashboardModel
+                var dto = new RoleDashboardDto
                 {
                     DashboardId = dashboard.Id,
                     DashboardName = dashboard.Name,
@@ -55,82 +55,83 @@ namespace new_wr_api.Service
 
                 if (rdash != null)
                 {
-                    model.Id = rdash.Id;
-                    model.RoleId = rdash.RoleId;
-                    model.RoleName = rdash.RoleName;
-                    model.PermitAccess = (bool)rdash.PermitAccess!;
+                    dto.Id = rdash.Id;
+                    dto.RoleId = rdash.RoleId;
+                    dto.RoleName = rdash.RoleName;
+                    dto.PermitAccess = (bool)rdash.PermitAccess!;
                 }
                 else
                 {
-                    model.RoleId = role?.Id;
-                    model.RoleName = role?.Name;
-                    model.PermitAccess = false;
+                    dto.RoleId = role?.Id;
+                    dto.RoleName = role?.Name;
+                    dto.PermitAccess = false;
                 }
 
-                roleDashboards.Add(model);
+                roleDashboards.Add(dto);
             }
 
-            return _mapper.Map<List<RoleDashboardModel>>(roleDashboards);
+            return _mapper.Map<List<RoleDashboardDto>>(roleDashboards);
         }
 
 
-        public async Task<List<UserDashboardModel>> GetDashboardByUserAsync(string userName)
+        public async Task<List<UserDashboardDto>> GetDashboardByUserAsync(string userName)
         {
             var user = await _context!.Users!.FirstOrDefaultAsync(x => x!.UserName!.ToLower() == userName.ToLower());
             var dashboards = await _context!.Dashboards!.Where(x => x.IsDeleted == false).ToListAsync();
-            var userDashboards = new List<UserDashboardModel>();
+            var userDashboards = new List<UserDashboardDto>();
 
             foreach (var dashboard in dashboards)
             {
                 var udash = await _context!.UserDashboards!
                     .FirstOrDefaultAsync(x => x.UserName == userName && x.DashboardId == dashboard.Id);
 
-                var model = new UserDashboardModel
+                var dto = new UserDashboardDto
                 {
                     DashboardId = dashboard.Id,
                     DashboardName = dashboard.Name,
                     FileControl = dashboard.Path,
+                    Description = dashboard.Description,
                     UserId = user?.Id
                 };
 
                 if (udash != null)
                 {
-                    model.Id = udash.Id;
-                    model.UserId = udash.UserId;
-                    model.UserName = udash.UserName;
-                    model.PermitAccess = (bool)udash.PermitAccess!;
+                    dto.Id = udash.Id;
+                    dto.UserId = udash.UserId;
+                    dto.UserName = udash.UserName;
+                    dto.PermitAccess = (bool)udash.PermitAccess!;
                 }
                 else
                 {
-                    model.UserId = user?.Id;
-                    model.UserName = user?.UserName;
-                    model.PermitAccess = false;
+                    dto.UserId = user?.Id;
+                    dto.UserName = user?.UserName;
+                    dto.PermitAccess = false;
                 }
 
-                userDashboards.Add(model);
+                userDashboards.Add(dto);
             }
 
-            return _mapper.Map<List<UserDashboardModel>>(userDashboards);
+            return _mapper.Map<List<UserDashboardDto>>(userDashboards);
         }
 
-        public async Task<DashboardModel?> GetDashboardByIdAsync(int Id)
+        public async Task<DashboardDto> GetDashboardByIdAsync(int Id)
         {
             var item = await _context!.Dashboards!.FindAsync(Id);
-            var dash = _mapper.Map<DashboardModel>(item);
+            var dash = _mapper.Map<DashboardDto>(item);
             var functions = await _context!.Functions!.Where(x => x.Id > 0).ToListAsync();
-            dash.Functions = _mapper.Map<List<FunctionModel>>(functions);
+            dash.Functions = _mapper.Map<List<FunctionDto>>(functions);
 
             return dash;
         }
 
 
-        public async Task<bool> SaveDashboardAsync(DashboardModel model)
+        public async Task<bool> SaveDashboardAsync(DashboardDto dto)
         {
-            var existingItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == model.Id);
+            var existingItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == dto.Id);
 
-            if (existingItem == null || model.Id == 0)
+            if (existingItem == null || dto.Id == 0)
             {
-                var newItem = _mapper.Map<Dashboards>(model);
+                var newItem = _mapper.Map<Dashboards>(dto);
                 newItem.IsDeleted = false;
                 newItem.CreatedTime = DateTime.Now;
                 newItem.CreatedUser = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? null;
@@ -138,9 +139,9 @@ namespace new_wr_api.Service
             }
             else
             {
-                var updateItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == model.Id);
+                var updateItem = await _context.Dashboards!.FirstOrDefaultAsync(d => d.Id == dto.Id);
 
-                updateItem = _mapper.Map(model, updateItem);
+                updateItem = _mapper.Map(dto, updateItem);
 
                 updateItem!.ModifiedTime = DateTime.Now;
                 updateItem.ModifiedUser = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? null;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using System.Data;
 
 namespace new_wr_api.Service
@@ -20,26 +20,52 @@ namespace new_wr_api.Service
             _mapper = mapper;
         }
 
-        public async Task<List<RoleModel>> GetAllRolesAsync()
+        public async Task<List<RoleDto>> GetAllRolesAsync()
         {
             var items = await _context.Roles
                 .Where(u => u.IsDeleted == false)
                 .ToListAsync();
-            var listItems = _mapper.Map<List<RoleModel>>(items);
+            var listItems = _mapper.Map<List<RoleDto>>(items);
 
             foreach (var item in listItems)
             {
-                var dashIds = _context!.RoleDashboards!.Where(x => x.RoleId == item.Id).Select(x => x.DashboardId).ToList();
-                var dashboards = await _context!.Dashboards!.Where(x => dashIds.Contains(x.Id)).ToListAsync();
-                item.Dashboards = _mapper.Map<List<DashboardModel>>(dashboards);
-                foreach (var dash in item.Dashboards)
+                await PopulateDataForRoleAsync(item);
+            }
+
+            return listItems;
+        }
+
+        public async Task<RoleDto> GetRoleByIdAsync(string roleId)
+        {
+            var item = await _roleManager.FindByIdAsync(roleId);
+            var role = _mapper.Map<RoleDto>(item);
+            await PopulateDataForRoleAsync(role);
+
+            return role;
+        }
+
+        private async Task PopulateDataForRoleAsync(RoleDto roleDto)
+        {
+            var dashIds = _context!.RoleDashboards!.Where(x => x.RoleId == roleDto.Id).Select(x => x.DashboardId).ToList();
+            if (dashIds.Any())
+            {
+                var dashboards = await _context.Dashboards!.Where(x => x.IsDeleted == false).ToListAsync();
+                dashboards = (List<Dashboards>)dashboards.Where(x => dashIds.Contains(x.Id)).ToList();
+                roleDto.Dashboards = _mapper.Map<List<DashboardDto>>(dashboards);
+                foreach (var dash in roleDto.Dashboards)
                 {
                     var functions = await _context!.Functions!.Where(x => x.Id > 0).ToListAsync();
-                    dash.Functions = _mapper.Map<List<FunctionModel>>(functions);
+                    if (dash.Path!.ToLower() != "user")
+                        functions = functions.Where(x => x.PermitCode != "ASSIGNROLE"
+                                                    && x.PermitCode != "RESETPASSWORD"
+                                                    && x.PermitCode != "SETROLE"
+                                                    && x.PermitCode != "ASSIGNFUNCTION"
+                                                    ).ToList();
+                    dash.Functions = _mapper.Map<List<FunctionDto>>(functions);
                     foreach (var function in dash.Functions)
                     {
                         var existingPermission = await _context.Permissions!.
-                            FirstOrDefaultAsync(d => d.FunctionId == function.Id && d.DashboardId == dash.Id && d.RoleId == item.Id);
+                            FirstOrDefaultAsync(d => d.FunctionId == function.Id && d.DashboardId == dash.Id && d.RoleId == roleDto.Id);
 
                         if (existingPermission != null)
                         {
@@ -52,52 +78,20 @@ namespace new_wr_api.Service
                     }
                 }
             }
-
-            return listItems;
-        }
-
-        public async Task<RoleModel> GetRoleByIdAsync(string roleId)
-        {
-            var item = await _roleManager.FindByIdAsync(roleId);
-            var role = _mapper.Map<RoleModel>(item);
-            var dashIds = _context!.RoleDashboards!.Where(x => x.RoleId == roleId).Select(x => x.DashboardId).ToList();
-            var dashboards = await _context!.Dashboards!.Where(x => dashIds.Contains(x.Id)).ToListAsync();
-            role.Dashboards = _mapper.Map<List<DashboardModel>>(dashboards);
-            foreach (var dash in role.Dashboards)
-            {
-                var functions = await _context!.Functions!.Where(x => x.Id > 0).ToListAsync();
-                dash.Functions = _mapper.Map<List<FunctionModel>>(functions);
-                foreach (var function in dash.Functions)
-                {
-                    var existingPermission = await _context.Permissions!.
-                        FirstOrDefaultAsync(d => d.FunctionId == function.Id && d.DashboardId == dash.Id && d.RoleId == role.Id);
-
-                    if (existingPermission != null)
-                    {
-                        function.Status = true;
-                    }
-                    else
-                    {
-                        function.Status = false;
-                    }
-                }
-            }
-
-            return role;
         }
 
 
-        public async Task<bool> SaveRoleAsync(RoleModel model)
+        public async Task<bool> SaveRoleAsync(RoleDto dto)
         {
-            var exitsRole = await _roleManager.FindByIdAsync(model.Id!);
+            var exitsRole = await _roleManager.FindByIdAsync(dto.Id);
 
             if (exitsRole == null)
             {
                 // Create a new user
                 AspNetRoles item = new AspNetRoles();
-                if (model.Name == item.Name) { return false; }
-                item.Name = model.Name;
-                item.IsDefault = model.IsDefault;
+                if (dto.Name == item.Name) { return false; }
+                item.Name = dto.Name;
+                item.IsDefault = dto.IsDefault;
                 item.IsDeleted = false;
 
                 await _roleManager.CreateAsync(item);
@@ -105,8 +99,8 @@ namespace new_wr_api.Service
             }
             else
             {
-                exitsRole.Name = model.Name;
-                exitsRole.IsDefault = model.IsDefault;
+                exitsRole.Name = dto.Name;
+                exitsRole.IsDefault = dto.IsDefault;
                 exitsRole.IsDeleted = false;
                 await _roleManager.UpdateAsync(exitsRole);
                 return true;

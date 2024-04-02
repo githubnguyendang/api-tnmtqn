@@ -1,6 +1,6 @@
-﻿namespace new_wr_api.Models
+﻿namespace new_wr_api.Dto
 {
-    public class PermissionModel
+    public class PermissionDto
     {
         public int Id { get; set; }
         public string? UserName { get; set; }

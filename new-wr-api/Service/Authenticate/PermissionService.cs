@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 
 namespace new_wr_api.Service
 {
@@ -18,32 +18,32 @@ namespace new_wr_api.Service
             _httpContext = httpContext;
         }
 
-        public async Task<List<PermissionModel>> GetAllPermissionAsync()
+        public async Task<List<PermissionDto>> GetAllPermissionAsync()
         {
             var items = await _context.Permissions!.Where(x => x.Id > 0).ToListAsync();
-            return _mapper.Map<List<PermissionModel>>(items);
+            return _mapper.Map<List<PermissionDto>>(items);
         }
 
-        public async Task<PermissionModel?> GetPermissionByIdAsync(int Id)
+        public async Task<PermissionDto> GetPermissionByIdAsync(int Id)
         {
             var item = await _context.Permissions!.FindAsync(Id);
-            return _mapper.Map<PermissionModel>(item);
+            return _mapper.Map<PermissionDto>(item);
         }
 
-        public async Task<bool> SavePermissionAsync(PermissionModel model)
+        public async Task<bool> SavePermissionAsync(PermissionDto dto)
         {
-            var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.Id == model.Id);
+            var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.Id == dto.Id);
 
-            if (existingItem == null || model.Id == 0)
+            if (existingItem == null || dto.Id == 0)
             {
-                var newItem = _mapper.Map<Permissions>(model);
+                var newItem = _mapper.Map<Permissions>(dto);
                 _context.Permissions!.Add(newItem);
             }
             else
             {
-                var updateItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.Id == model.Id);
+                var updateItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.Id == dto.Id);
 
-                updateItem = _mapper.Map(model, updateItem);
+                updateItem = _mapper.Map(dto, updateItem);
 
                 _context.Permissions!.Update(updateItem!);
             }
@@ -52,19 +52,19 @@ namespace new_wr_api.Service
             return true;
         }
 
-        public async Task<bool> DeletePermissionAsync(PermissionModel modle)
+        public async Task<bool> DeletePermissionAsync(PermissionDto dto)
         {
-            if (modle.RoleId != null)
+            if (dto.RoleId != null)
             {
-                var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.FunctionId == modle.FunctionId && d.DashboardId == modle.DashboardId && d.RoleId == modle.RoleId);
+                var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.FunctionId == dto.FunctionId && d.DashboardId == dto.DashboardId && d.RoleId == dto.RoleId);
 
                 if (existingItem == null) { return false; }
 
                 _context.Permissions!.Remove(existingItem);
             }
-            else if (modle.UserId != null)
+            else if (dto.UserId != null)
             {
-                var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.FunctionId == modle.FunctionId && d.DashboardId == modle.DashboardId && d.UserId == modle.UserId);
+                var existingItem = await _context.Permissions!.FirstOrDefaultAsync(d => d.FunctionId == dto.FunctionId && d.DashboardId == dto.DashboardId && d.UserId == dto.UserId);
 
                 if (existingItem == null) { return false; }
 

@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserDashboardController : ControllerBase
     {
         private readonly UserDashboardService _service;
@@ -20,45 +20,45 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<UserDashboardModel>> GetAllUserDashboard()
+        public async Task<List<UserDashboardDto>> GetAllUserDashboard()
         {
             return (await _service.GetAllUserDashboardAsync());
         }
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<UserDashboardModel?> GetUserDashboardById(int Id)
+        public async Task<UserDashboardDto> GetUserDashboardById(int Id)
         {
             return await _service.GetUserDashboardByIdAsync(Id);
         }
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult<UserDashboards>> SaveUserDashboard(UserDashboardModel moddel)
+        public async Task<ActionResult<UserDashboards>> SaveUserDashboard(UserDashboardDto dto)
         {
-            var res = await _service.SaveUserDashboardAsync(moddel);
+            var res = await _service.SaveUserDashboardAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "UserDashboard: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved user-dashboard successfully" });
             }
             else
             {
-                return BadRequest(new { message = "UserDashboard: Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Save user-dashboard failed", });
             }
         }
 
         [HttpPost]
         [Route("delete")]
-        public async Task<ActionResult<UserDashboards>> DeleteUserDashboard(UserDashboardModel moddel)
+        public async Task<ActionResult<UserDashboards>> DeleteUserDashboard(UserDashboardDto dto)
         {
-            var res = await _service.DeleteUserDashboardAsync(moddel);
+            var res = await _service.DeleteUserDashboardAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "UserDashboard: Dữ liệu đã được xóa" });
+                return Ok(new { message = "User-dashboard successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "UserDashboard: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing user-dashboards failed", error = true });
             }
         }
     }

@@ -8,10 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Newtonsoft.Json;
-using new_wr_api.Models.Authenticate;
-using new_wr_api.Models;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+using new_wr_api.Dto;
 
 namespace new_wr_api.Service
 {
@@ -36,19 +33,18 @@ namespace new_wr_api.Service
             _httpContext = httpContext;
         }
 
-        public async Task<bool> RegisterAsync(UserModel model)
+        public async Task<bool> RegisterAsync(UserDto dto)
         {
             // Create a new user
             AspNetUsers user = new AspNetUsers
             {
-                UserName = model.UserName,
-                Email = model.Email,
-                FullName = model.FullName,
-                PhoneNumber = model.PhoneNumber,
+                UserName = dto.UserName,
+                Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
                 IsDeleted = false
             };
 
-            var res = await _userManager.CreateAsync(user, model.Password!);
+            var res = await _userManager.CreateAsync(user, dto.Password!);
 
             var role = await _roleManager.Roles.FirstOrDefaultAsync(u => u.IsDefault == true);
 
@@ -60,15 +56,15 @@ namespace new_wr_api.Service
             return false;
         }
 
-        public async Task<string> LoginAsync(LoginViewModel model)
+        public async Task<string> LoginAsync(LoginViewDto dto)
         {
-            var res = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+            var res = await _signInManager.PasswordSignInAsync(dto.UserName, dto.Password, dto.RememberMe, false);
             if (!res.Succeeded)
             {
                 return string.Empty;
             }
 
-            var user = await _userManager.FindByNameAsync(model.UserName);
+            var user = await _userManager.FindByNameAsync(dto.UserName);
             var roles = await _userManager.GetRolesAsync(user!);
 
             var claims = new List<Claim>
@@ -76,27 +72,19 @@ namespace new_wr_api.Service
                 new Claim(JwtRegisteredClaimNames.Sub, user!.Id),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("id", user.Id),
-                new Claim(ClaimTypes.Name, user.UserName ?? ""),
-                new Claim(ClaimTypes.NameIdentifier, user.FullName ?? ""),
+                new Claim(ClaimTypes.Name, user.UserName ?? "")
             };
 
-            var addedPermissions = new HashSet<string>(); // Sử dụng HashSet để lưu trữ các quyền đã thêm vào danh sách
+            var addedPermissions = new HashSet<string>();
 
             foreach (var role in roles)
             {
 
                 claims.Add(new Claim(ClaimTypes.Role, role));
-
-                // Lấy danh sách quyền thuộc vai trò
                 var rolePermissions = await _context.Permissions!.Where(p => p.RoleName == role).ToListAsync();
-
-                // Thêm quyền vào danh sách claims
                 foreach (var permission in rolePermissions)
                 {
-                    // Lấy thông tin dashSrc từ SQL
                     var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                    // Tạo một quyền dưới dạng đối tượng JSON
                     var permissionObject = new
                     {
                         funcCode = permission.FunctionCode,
@@ -104,30 +92,21 @@ namespace new_wr_api.Service
                     };
 
                     var permissionJson = JsonConvert.SerializeObject(permissionObject);
-
-                    // Kiểm tra xem quyền đã được thêm vào danh sách chưa
                     if (!addedPermissions.Contains(permissionJson))
                     {
-                        // Thêm quyền vào danh sách claims
                         var permissionClaim = new Claim("Permission", permissionJson);
                         claims.Add(permissionClaim);
 
-                        // Đánh dấu quyền đã được thêm vào danh sách
                         addedPermissions.Add(permissionJson);
                     }
                 }
             }
 
-            // Lấy danh sách quyền theo tên người dùng
             var userPermissions = await _context.Permissions!.Where(p => p.UserName == user.UserName).ToListAsync();
 
-            // Thêm quyền vào danh sách claims
             foreach (var permission in userPermissions)
             {
-                // Lấy thông tin dashSrc từ SQL
                 var dashSrc = await _context.Dashboards!.Where(d => d.Id == permission.DashboardId).Select(d => d.Path).FirstOrDefaultAsync();
-
-                // Tạo một quyền dưới dạng đối tượng JSON
                 var permissionObject = new
                 {
                     funcCode = permission.FunctionCode,
@@ -136,14 +115,10 @@ namespace new_wr_api.Service
 
                 var permissionJson = JsonConvert.SerializeObject(permissionObject);
 
-                // Kiểm tra xem quyền đã được thêm vào danh sách chưa
                 if (!addedPermissions.Contains(permissionJson))
                 {
-                    // Thêm quyền vào danh sách claims
                     var permissionClaim = new Claim("Permission", permissionJson);
                     claims.Add(permissionClaim);
-
-                    // Đánh dấu quyền đã được thêm vào danh sách
                     addedPermissions.Add(permissionJson);
                 }
             }
@@ -166,30 +141,40 @@ namespace new_wr_api.Service
         }
 
 
-        public async Task<bool> UpdatePasswordAsync(ChangePasswordModel model)
+        public async Task<PasswordChangeResult> UpdatePasswordAsync(PasswordChange password)
         {
-            var ret = false;
-            if (model.currentPassword != model.newConfirmPassword) ret = false;
-            var user = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
-            if (user == null) ret = false;
-            if (model.currentPassword != null || model.newPassword != null)
+            if (password.newPassword != password.newConfirmPassword)
             {
-                var res = await _userManager.ChangePasswordAsync(user!, model.currentPassword!, model.newPassword!);
-                ret = res.Succeeded;
+                return new PasswordChangeResult(false, "New password and confirmation password do not match.");
             }
-            return ret;
+
+            var user = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
+            if (user == null)
+            {
+                return new PasswordChangeResult(false, "User not found.");
+            }
+
+            var res = await _userManager.ChangePasswordAsync(user, password.currentPassword, password.newPassword);
+            if (res.Succeeded)
+            {
+                await _userManager.UpdateAsync(user);
+                return new PasswordChangeResult(true, "Password changed successfully.");
+            }
+
+            return new PasswordChangeResult(false, null);
         }
 
-        public async Task<bool> SetPasswordAsync(SetPasswordModel model)
+
+        public async Task<bool> SetPasswordAsync(UserDto dto, string newPassword)
         {
-            var user = await _userManager.FindByNameAsync(model.user!.UserName!);
+            var user = await _userManager.FindByNameAsync(dto.UserName!);
 
             if (user != null)
             {
                 var removePasswordResult = await _userManager.RemovePasswordAsync(user);
                 if (removePasswordResult.Succeeded)
                 {
-                    var addPasswordResult = await _userManager.AddPasswordAsync(user, model.newPassword!);
+                    var addPasswordResult = await _userManager.AddPasswordAsync(user, newPassword);
                     return addPasswordResult.Succeeded;
                 }
             }
@@ -198,9 +183,9 @@ namespace new_wr_api.Service
         }
 
 
-        public async Task<bool> AssignRoleAsync(AssignRoleModel model)
+        public async Task<bool> AssignRoleAsync(AssignRoleDto dto)
         {
-            var user = await _userManager.FindByIdAsync(model.userId);
+            var user = await _userManager.FindByIdAsync(dto.userId);
             if (user == null) { return false; }
 
             // Remove all existing roles of the user
@@ -210,24 +195,38 @@ namespace new_wr_api.Service
             await _userManager.RemoveFromRolesAsync(user!, existingRoles);
 
             // Add the new role to the user
-            await _userManager.AddToRoleAsync(user!, model.roleName);
+            await _userManager.AddToRoleAsync(user!, dto.roleName);
 
             return true;
         }
 
-        public async Task<bool> RemoveRoleAsync(AssignRoleModel model)
+        public async Task<bool> RemoveRoleAsync(AssignRoleDto dto)
         {
-            var u = await _userManager.FindByIdAsync(model.userId);
+            var u = await _userManager.FindByIdAsync(dto.userId);
             // Check if the user is already in the role
-            var isInRole = await _userManager.IsInRoleAsync(u!, model.roleName);
+            var isInRole = await _userManager.IsInRoleAsync(u!, dto.roleName);
             if (isInRole)
             {
-                await _userManager.RemoveFromRoleAsync(u!, model.roleName);
+                await _userManager.RemoveFromRoleAsync(u!, dto.roleName);
                 var role = await _roleManager.Roles.FirstOrDefaultAsync(u => u.IsDefault == true);
                 await _userManager.AddToRoleAsync(u!, role!.Name!);
 
                 return true;
             }
+            return false;
+        }
+
+        public async Task<bool> CheckAccessPermission(string userName, string linkControl, string action)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null || linkControl == null || action == null) { return false; }
+            if (await _userManager.IsInRoleAsync(user, "Administrator")) return true;
+
+            var dash = _context.Dashboards!.Where(x => x.Path == linkControl).FirstOrDefault();
+            if (dash == null) return false;
+            var existingPermission = await _context!.Permissions!.FirstOrDefaultAsync(d => d.FunctionCode!.ToLower() == action.ToLower() && d.DashboardId == dash.Id && d.UserId == user.Id);
+            if (existingPermission != null) return true;
+
             return false;
         }
 

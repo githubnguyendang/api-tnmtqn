@@ -1,4 +1,4 @@
-﻿namespace new_wr_api.Dto.VHHC
+﻿namespace new_wr_api.Dto
 {
     public class MuaHienTaiDto
     {

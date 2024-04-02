@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly UserService _service;
@@ -20,52 +20,52 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<UserModel>> GetAllUsers()
+        public async Task<List<UserDto>> GetAllUsers([FromQuery] FormFilterUser filter)
         {
-            return await _service.GetAllUsersAsync();
+            return await _service.GetAllUsersAsync(filter);
         }
 
         [HttpGet]
         [Route("{userId}")]
-        public async Task<UserModel> GetUserById(string userId)
+        public async Task<UserDto> GetUserById(string userId)
         {
             return await _service.GetUserByIdAsync(userId);
         }
 
         [HttpGet]
         [Route("getuserinfo/{userId}")]
-        public async Task<UserInfoModel> GetUserInfoByIdAsync(string userId)
+        public async Task<UserInfoDto> GetUserInfoByIdAsync(string userId)
         {
             return await _service.GetUserInfoByIdAsync(userId);
         }
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult> SaveUser(UserModel model)
+        public async Task<ActionResult> SaveUser(UserDto dto)
         {
-            var res = await _service.SaveUserAsync(model);
+            var res = await _service.SaveUserAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Tài khoản: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved user successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Tài khoản: Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Save user failed", error = true });
             }
         }
 
         [HttpPost]
         [Route("delete")]
-        public async Task<ActionResult> DeleteUser(UserModel model)
+        public async Task<ActionResult> DeleteUser(UserDto dto)
         {
-            var res = await _service.DeleteUserAsync(model);
+            var res = await _service.DeleteUserAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Tài khoản: Dữ liệu đã được xóa" });
+                return Ok(new { message = "User successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "Tài khoản: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing user failed", error = true });
             }
         }
     }

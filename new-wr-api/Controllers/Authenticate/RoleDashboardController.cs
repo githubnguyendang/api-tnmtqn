@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class RoleDashboardController : ControllerBase
     {
         private readonly RoleDashboardService _service;
@@ -20,45 +20,45 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<RoleDashboardModel>> GetAllRoleDashboard()
+        public async Task<List<RoleDashboardDto>> GetAllRoleDashboard()
         {
             return (await _service.GetAllRoleDashboardAsync());
         }
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<RoleDashboardModel?> GetRoleDashboardById(int Id)
+        public async Task<RoleDashboardDto> GetRoleDashboardById(int Id)
         {
             return await _service.GetRoleDashboardByIdAsync(Id);
         }
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult<RoleDashboards>> SaveRoleDashboard(RoleDashboardModel moddel)
+        public async Task<ActionResult<RoleDashboards>> SaveRoleDashboard(RoleDashboardDto moddel)
         {
             var res = await _service.SaveRoleDashboardAsync(moddel);
             if (res == true)
             {
-                return Ok(new { message = "RoleDashboard: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved role-dashboard successfully" });
             }
             else
             {
-                return BadRequest(new { message = "RoleDashboard: Lỗi lưu dữ liệu",  });
+                return BadRequest(new { message = "Save role-dashboard failed", });
             }
         }
 
         [HttpPost]
         [Route("delete")]
-        public async Task<ActionResult<RoleDashboards>> DeleteRoleDashboard(RoleDashboardModel moddel)
+        public async Task<ActionResult<RoleDashboards>> DeleteRoleDashboard(RoleDashboardDto moddel)
         {
             var res = await _service.DeleteRoleDashboardAsync(moddel);
             if (res == true)
             {
-                return Ok(new { message = "RoleDashboard: Dữ liệu đã được xóa" });
+                return Ok(new { message = "Role-dashboard successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "RoleDashboard: Lỗi xóa dữ liệu",  });
+                return BadRequest(new { message = "Removing role-dashboards failed", error = true });
             }
         }
     }

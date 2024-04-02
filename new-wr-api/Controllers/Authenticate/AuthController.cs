@@ -2,9 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using System.Security.Claims;
-using new_wr_api.Models.Authenticate;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
@@ -22,75 +21,74 @@ namespace new_wr_api.Controllers
 
         [HttpPost]
         [Route("register")]
-        public async Task<ActionResult> Register(UserModel model)
+        public async Task<ActionResult> Register(UserDto dto)
         {
-            var res = await _repo.RegisterAsync(model);
+            var res = await _repo.RegisterAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Đăng ký tài khoản thành công" });
+                return Ok(new { message = "Account registered successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Đăng ký tài khoản thất bại, tài khoản này đã tồn tại", error = true });
+                return BadRequest(new { message = "Account registration failed, this account already exists", error = true });
             }
 
         }
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewDto dto)
         {
-            var res = await _repo.LoginAsync(model);
+            var res = await _repo.LoginAsync(dto);
             if (string.IsNullOrEmpty(res))
             {
-                return BadRequest(new { message = "Thông tin tài khoản hoặc mật khẩu không chính xác", error = true });
+                return BadRequest(new { message = "Account information or password is incorrect", error = true });
             }
             return Ok(res);
         }
 
         [HttpPost]
         [Route("change-password")]
-        public async Task<ActionResult<AspNetUsers>> UpdatePassword(ChangePasswordModel model)
+        public async Task<ActionResult<AspNetUsers>> UpdatePassword(PasswordChange password)
         {
-            var res = await _repo.UpdatePasswordAsync(model);
-            if (res == true)
+            var res = await _repo.UpdatePasswordAsync(password);
+            if (res.Message != null)
             {
-                return Ok(new { message = "Đổi mật khẩu thành công" });
+                return Ok(new { message = res.Message, succeeded = res.Succeeded });
             }
             else
             {
-                //return BadRequest(new { message = "Đổi mật khẩu thất bại", error = true });
-                return BadRequest(new { message = "Đổi mật khẩu thất bại", error = true, data = new { model } });
+                return BadRequest(new { message = "Password change failed", error = true, res });
             }
         }
 
         [HttpPost]
         [Route("set-password")]
-        public async Task<ActionResult<AspNetUsers>> SetPassword(SetPasswordModel model)
+        public async Task<ActionResult<AspNetUsers>> SetPassword(UserDto dto, string newPassword)
         {
-            var res = await _repo.SetPasswordAsync(model);
+            var res = await _repo.SetPasswordAsync(dto, newPassword);
             if (res == true)
             {
-                return Ok(new { message = "Đặt mật khẩu thành công" });
+                return Ok(new { message = "Set password successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Đặt mật khẩu thất bại", error = true });
+                return BadRequest(new { message = "Setting password failed", error = true });
             }
         }
 
         [HttpPost]
         [Route("assign-role")]
-        public async Task<ActionResult> AssignRole(AssignRoleModel model)
+        public async Task<ActionResult> AssignRole(AssignRoleDto dto)
         {
-            var res = await _repo.AssignRoleAsync(model);
+            var res = await _repo.AssignRoleAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Dữ liệu đã được lưu" });
+                return Ok(new { message = "Assign roles successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Role assignment failed", error = true });
             }
 
         }
@@ -98,18 +96,26 @@ namespace new_wr_api.Controllers
         [HttpPost]
         [Route("remove-role")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult> RemoveRole(AssignRoleModel model)
+        public async Task<ActionResult> RemoveRole(AssignRoleDto dto)
         {
-            var res = await _repo.RemoveRoleAsync(model);
+            var res = await _repo.RemoveRoleAsync(dto);
 
             if (res == true)
             {
-                return Ok(new { message = "Dữ liệu đã được xóa" });
+                return Ok(new { message = "Remove roles successfully" });
             }
             else
             {
-                return Ok(new { message = "Lỗi xóa dữ liệu", error = true });
+                return Ok(new { message = "Remove roles failed", error = true });
             }
+        }
+
+
+        [HttpPost]
+        [Route("check-access-permission")]
+        public async Task<bool> CheckAccessPermission([FromQuery] string userName, string linkControl, string action)
+        {
+            return await _repo.CheckAccessPermission(userName, linkControl, action);
         }
 
         [HttpPost]

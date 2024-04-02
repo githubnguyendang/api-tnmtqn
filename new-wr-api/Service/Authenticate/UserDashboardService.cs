@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 
 namespace new_wr_api.Service
 {
@@ -17,33 +17,33 @@ namespace new_wr_api.Service
             _mapper = mapper;
         }
 
-        public async Task<List<UserDashboardModel>> GetAllUserDashboardAsync()
+        public async Task<List<UserDashboardDto>> GetAllUserDashboardAsync()
         {
             var items = await _context.UserDashboards!.Where(x => x.Id > 0).ToListAsync();
-            return _mapper.Map<List<UserDashboardModel>>(items);
+            return _mapper.Map<List<UserDashboardDto>>(items);
         }
 
-        public async Task<UserDashboardModel> GetUserDashboardByIdAsync(int Id)
+        public async Task<UserDashboardDto> GetUserDashboardByIdAsync(int Id)
         {
             var item = await _context!.UserDashboards!.FindAsync(Id);
-            return _mapper.Map<UserDashboardModel>(item);
+            return _mapper.Map<UserDashboardDto>(item);
         }
 
-        public async Task<bool> SaveUserDashboardAsync(UserDashboardModel model)
+        public async Task<bool> SaveUserDashboardAsync(UserDashboardDto dto)
         {
-            var exitsItem = await _context!.UserDashboards!.FindAsync(model.Id);
+            var exitsItem = await _context!.UserDashboards!.FindAsync(dto.Id);
 
-            if (exitsItem == null || model.Id == 0)
+            if (exitsItem == null || dto.Id == 0)
             {
-                var newItem = _mapper.Map<UserDashboards>(model);
+                var newItem = _mapper.Map<UserDashboards>(dto);
 
                 _context.UserDashboards!.Add(newItem);
             }
             else
             {
-                var updateItem = await _context.UserDashboards!.FirstOrDefaultAsync(d => d.Id == model.Id);
+                var updateItem = await _context.UserDashboards!.FirstOrDefaultAsync(d => d.Id == dto.Id);
 
-                updateItem = _mapper.Map(model, updateItem);
+                updateItem = _mapper.Map(dto, updateItem);
                 _context.UserDashboards!.Update(updateItem!);
             }
 
@@ -52,9 +52,9 @@ namespace new_wr_api.Service
         }
 
 
-        public async Task<bool> DeleteUserDashboardAsync(UserDashboardModel model)
+        public async Task<bool> DeleteUserDashboardAsync(UserDashboardDto dto)
         {
-            var exitsItem = await _context!.UserDashboards!.FindAsync(model.Id);
+            var exitsItem = await _context!.UserDashboards!.FindAsync(dto.Id);
 
             if (exitsItem == null) { return false; }
 
