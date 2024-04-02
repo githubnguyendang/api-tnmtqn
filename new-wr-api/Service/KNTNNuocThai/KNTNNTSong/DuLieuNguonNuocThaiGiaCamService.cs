@@ -37,7 +37,7 @@ namespace new_wr_api.Service
             return listItems;
         }
 
-        public async Task<DuLieuNguonNuocThaiGiaCamDto?> GetByIdAsync(int Id)
+        public async Task<DuLieuNguonNuocThaiGiaCamDto> GetByIdAsync(int Id)
         {
             var item = await _context.DuLieuNguonNuocThaiGiaCam!.FindAsync(Id);
             return _mapper.Map<DuLieuNguonNuocThaiGiaCamDto>(item);

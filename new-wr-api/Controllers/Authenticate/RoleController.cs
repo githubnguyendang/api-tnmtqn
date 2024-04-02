@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class RoleController : ControllerBase
     {
         private readonly RoleService _service;
@@ -19,30 +19,30 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<RoleModel>> GetAllRoles()
+        public async Task<List<RoleDto>> GetAllRoles()
         {
             return await _service.GetAllRolesAsync();
         }
 
         [HttpGet]
         [Route("{roleId}")]
-        public async Task<RoleModel?> GetRoleById(string roleId)
+        public async Task<RoleDto> GetRoleById(string roleId)
         {
             return await _service.GetRoleByIdAsync(roleId);
         }
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult> SaveRole(RoleModel model)
+        public async Task<ActionResult> SaveRole(RoleDto model)
         {
             var res = await _service.SaveRoleAsync(model);
             if (res == true)
             {
-                return Ok(new { message = "Role: Dữ liệu đã được lưu" });
+                return Ok(new { message = "Saved role successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Role: Lỗi lưu dữ liệu", error = true });
+                return BadRequest(new { message = "Save role failed", error = true });
             }
         }
 
@@ -53,11 +53,11 @@ namespace new_wr_api.Controllers
             var res = await _service.DeleteRoleAsync(roleId);
             if (res == true)
             {
-                return Ok(new { message = "Role: Dữ liệu đã được xóa" });
+                return Ok(new { message = "Role successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "Role: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing role failed", error = true });
             }
         }
     }

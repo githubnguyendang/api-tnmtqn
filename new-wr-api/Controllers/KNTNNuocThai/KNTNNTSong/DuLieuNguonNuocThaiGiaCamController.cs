@@ -26,7 +26,7 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<DuLieuNguonNuocThaiGiaCamDto?> GetById(int Id)
+        public async Task<DuLieuNguonNuocThaiGiaCamDto> GetById(int Id)
         {
             return await _service.GetByIdAsync(Id);
         }

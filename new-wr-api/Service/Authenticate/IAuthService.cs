@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using new_wr_api.Models;
-using new_wr_api.Models.Authenticate;
+using new_wr_api.Dto;
 
 namespace new_wr_api.Service
 {
     public interface IAuthService
     {
-        public Task<bool> RegisterAsync(UserModel model);
-        public Task<string> LoginAsync(LoginViewModel model);
+        public Task<bool> RegisterAsync(UserDto dto);
+        public Task<string> LoginAsync(LoginViewDto dto);
         public Task<bool> LogoutAsync(HttpContext context);
-        public Task<bool> AssignRoleAsync(AssignRoleModel model);
-        public Task<bool> RemoveRoleAsync(AssignRoleModel model);
-        public Task<bool> UpdatePasswordAsync(ChangePasswordModel model);
-        public Task<bool> SetPasswordAsync(SetPasswordModel model);
-
+        public Task<bool> AssignRoleAsync(AssignRoleDto dto);
+        public Task<bool> RemoveRoleAsync(AssignRoleDto dto);
+        public Task<PasswordChangeResult> UpdatePasswordAsync(PasswordChange password);
+        public Task<bool> SetPasswordAsync(UserDto dto, string newPassword);
+        public Task<bool> CheckAccessPermission(string userName, string linkControl, string action);
     }
 }

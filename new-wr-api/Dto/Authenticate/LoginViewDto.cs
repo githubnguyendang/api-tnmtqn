@@ -1,6 +1,6 @@
-﻿namespace new_wr_api.Models.Authenticate
+﻿namespace new_wr_api.Dto
 {
-    public class LoginViewModel
+    public class LoginViewDto
     {
         public string UserName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

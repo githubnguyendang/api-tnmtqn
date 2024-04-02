@@ -1,4 +1,4 @@
-﻿namespace new_wr_api.Models.Files
+﻿namespace new_wr_api.Dto.Files
 {
     public class GetModel
     {

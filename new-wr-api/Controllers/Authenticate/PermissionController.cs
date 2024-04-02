@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Data;
-using new_wr_api.Models;
+using new_wr_api.Dto;
 using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class PermissionController : ControllerBase
     {
         private readonly PermissionService _service;
@@ -20,45 +20,45 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<List<PermissionModel>> GetAllPermission()
+        public async Task<List<PermissionDto>> GetAllPermission()
         {
             return (await _service.GetAllPermissionAsync());
         }
 
         [HttpGet]
         [Route("{Id}")]
-        public async Task<PermissionModel?> GetPermissionById(int Id)
+        public async Task<PermissionDto> GetPermissionById(int Id)
         {
             return await _service.GetPermissionByIdAsync(Id);
         }
 
         [HttpPost]
         [Route("save")]
-        public async Task<ActionResult<Permissions>> SavePermission(PermissionModel moddel)
+        public async Task<ActionResult<Permissions>> SavePermission(PermissionDto dto)
         {
-            var res = await _service.SavePermissionAsync(moddel);
+            var res = await _service.SavePermissionAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Quyền hạn: Đã được thêm" });
+                return Ok(new { message = "Saved permission successfully" });
             }
             else
             {
-                return BadRequest(new { message = "Quyền hạn: Lỗi", error = true });
+                return BadRequest(new { message = "Save permission failed", error = true });
             }
         }
 
         [HttpPost]
         [Route("delete")]
-        public async Task<ActionResult<Permissions>> DeletePermission(PermissionModel moddel)
+        public async Task<ActionResult<Permissions>> DeletePermission(PermissionDto dto)
         {
-            var res = await _service.DeletePermissionAsync(moddel);
+            var res = await _service.DeletePermissionAsync(dto);
             if (res == true)
             {
-                return Ok(new { message = "Quyền hạn: Dữ liệu đã được xóa" });
+                return Ok(new { message = "Permission successfully deleted" });
             }
             else
             {
-                return BadRequest(new { message = "Quyền hạn: Lỗi xóa dữ liệu", error = true });
+                return BadRequest(new { message = "Removing permissions failed", error = true });
             }
         }
     }

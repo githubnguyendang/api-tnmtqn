@@ -26,7 +26,7 @@ namespace new_wr_api.Service
             return _mapper.Map<List<DemoDto>>(items);
         }
 
-        public async Task<DemoDto?> GetByIdAsync(int Id)
+        public async Task<DemoDto> GetByIdAsync(int Id)
         {
             var item = await _context.Demo!.FindAsync(Id);
             return _mapper.Map<DemoDto>(item);

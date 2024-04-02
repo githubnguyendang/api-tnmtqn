@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj": {}
+    "D:\\Project\\QuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj": {}
   },
   "projects": {
-    "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj": {
+    "D:\\Project\\QuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
+        "projectUniqueName": "D:\\Project\\QuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
         "projectName": "new-wr-api",
-        "projectPath": "D:\\Work\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
-        "packagesPath": "C:\\Users\\Dung Nguyxn\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\api-tnmtqn\\new-wr-api\\obj\\",
+        "projectPath": "D:\\Project\\QuangNgai\\api-tnmtqn\\new-wr-api\\new-wr-api.csproj",
+        "packagesPath": "C:\\Users\\webng\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\QuangNgai\\api-tnmtqn\\new-wr-api\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dung Nguyxn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\webng\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -94,6 +99,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.16, 7.0.16]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[7.0.16, 7.0.16]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.16, 7.0.16]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[7.0.16, 7.0.16]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -102,7 +125,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

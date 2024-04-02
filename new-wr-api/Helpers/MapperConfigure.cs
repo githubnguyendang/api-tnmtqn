@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using new_wr_api.Data;
 using new_wr_api.Dto;
-using new_wr_api.Dto.VHHC;
-using new_wr_api.Models;
-using new_wr_api.Models.Authenticate;
-using static new_wr_api.Dto.PhanDoanSongDto;
 
 namespace new_wr_api.Helpers
 {
@@ -16,37 +12,37 @@ namespace new_wr_api.Helpers
             //-------------Authenticatiion--------------------
 
             //Users
-            CreateMap<AspNetUsers, UserModel>().ReverseMap();
+            CreateMap<AspNetUsers, UserDto>().ReverseMap();
 
             //Users Info
-            CreateMap<AspNetUsers, UserInfoModel>().ForMember(dest => dest.Dashboards, opt =>
+            CreateMap<AspNetUsers, UserInfoDto>().ForMember(dest => dest.Dashboards, opt =>
                 {
                     opt.MapFrom((src, dest) => dest.Dashboards);
                 }).ReverseMap();
 
             //Roles
-            CreateMap<AspNetRoles, RoleModel>()
+            CreateMap<AspNetRoles, RoleDto>()
                 .ForMember(dest => dest.Dashboards, opt =>
                 {
                     opt.MapFrom((src, dest) => dest.Dashboards);
                 }).ReverseMap();
 
             //Dashboards
-            CreateMap<Dashboards, DashboardModel>()
+            CreateMap<Dashboards, DashboardDto>()
                 .ForMember(dest => dest.Functions, opt =>
                 {
                     opt.MapFrom((src, dest) => dest.Functions);
                 }).ReverseMap();
 
             //Permissions
-            CreateMap<Permissions, PermissionModel>().ReverseMap();
+            CreateMap<Permissions, PermissionDto>().ReverseMap();
 
             //Dashboard for Roles and Users
-            CreateMap<UserDashboards, UserDashboardModel>().ReverseMap();
-            CreateMap<RoleDashboards, RoleDashboardModel>().ReverseMap();
+            CreateMap<UserDashboards, UserDashboardDto>().ReverseMap();
+            CreateMap<RoleDashboards, RoleDashboardDto>().ReverseMap();
 
             //functions
-            CreateMap<Functions, FunctionModel>().ReverseMap();
+            CreateMap<Functions, FunctionDto>().ReverseMap();
 
             //-------------Other mapper--------------------
 
