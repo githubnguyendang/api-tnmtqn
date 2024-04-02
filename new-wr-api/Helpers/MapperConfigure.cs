@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using new_wr_api.Data;
+using new_wr_api.Data.BC.KNTiepNhanNuocThai.KNTNNTAo;
 using new_wr_api.Dto;
 using new_wr_api.Dto.VHHC;
 using new_wr_api.Models;
@@ -162,6 +163,12 @@ namespace new_wr_api.Helpers
             .ForMember(dest => dest.LtnColiform, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdColiform : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnColiform : 0) - dest.LtColiform) * 0.7)))
 
             .ReverseMap();
+
+            //mtn
+
+            CreateMap<ThongTinAoHo, ThongTinAoHoDto>()
+           .ForMember(dest => dest.MtnBOD, opt => opt.MapFrom((src,dest) => (src.ThongSoCLNAo!.BOD - dest.CnnBOD) * (src.CT_ThongTin!.ThongSo!= null ? src.CT_ThongTin!.ThongSo.DungTichToanBo :0) * Math.Pow(10, -3) *0.7))
+           .ReverseMap();
 
             //KiemKeTaiNguyenNuoc
             CreateMap<Tram_ThongTin, Tram_ThongTinDto>()

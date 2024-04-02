@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240402030445_KhaNangTiepNhanNuocThaiAo")]
+    partial class KhaNangTiepNhanNuocThaiAo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -6646,49 +6649,6 @@ namespace new_wr_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ToChuc_CaNhan");
-                });
-
-            modelBuilder.Entity("new_wr_api.Data.TramQuangNgai", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool?>("DaXoa")
-                        .HasColumnType("bit");
-
-                    b.Property<double?>("DoAm")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("LuongMua")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("NhietDo")
-                        .HasColumnType("float");
-
-                    b.Property<string>("TaiKhoanSua")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaiKhoanTao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ThoiGian")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ThoiGianSua")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ThoiGianTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("TocDoGio")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TramQuangNgai");
                 });
 
             modelBuilder.Entity("new_wr_api.Data.Tram_LoaiTram", b =>
