@@ -54,11 +54,11 @@ namespace new_wr_api.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("delete")]
-        public async Task<ActionResult> DeleteUser(UserDto dto)
+        [HttpGet]
+        [Route("xoa/{Id}")]
+        public async Task<ActionResult> DeleteUser(string Id)
         {
-            var res = await _service.DeleteUserAsync(dto);
+            var res = await _service.DeleteUserAsync(Id);
             if (res == true)
             {
                 return Ok(new { message = "User successfully deleted" });

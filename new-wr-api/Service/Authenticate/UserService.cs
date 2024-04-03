@@ -161,9 +161,9 @@ namespace new_wr_api.Service
             }
         }
 
-        public async Task<bool> DeleteUserAsync(UserDto model)
+        public async Task<bool> DeleteUserAsync(string id)
         {
-            var user = await _userManager.FindByIdAsync(model.Id!);
+            var user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
                 user.IsDeleted = true;

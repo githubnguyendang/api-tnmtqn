@@ -216,20 +216,17 @@ namespace new_wr_api.Service
             return false;
         }
 
-        public async Task<bool> CheckAccessPermission(string linkControl, string action)
+        public async Task<bool> CheckAccessPermission(string userName, string linkControl, string action)
         {
-            var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
-            if (currentUser != null && currentUser.UserName != null)
-            {
-                var user = await _userManager.FindByNameAsync(currentUser.UserName);
-                if (user == null || linkControl == null || action == null) { return false; }
-                if (await _userManager.IsInRoleAsync(user, "Administrator")) return true;
+            var user = await _userManager.FindByNameAsync(userName);
+            if (user == null || linkControl == null || action == null) { return false; }
+            if (await _userManager.IsInRoleAsync(user, "Administrator")) return true;
 
-                var dash = _context.Dashboards!.Where(x => x.Path == linkControl).FirstOrDefault();
-                if (dash == null) return false;
-                var existingPermission = await _context!.Permissions!.FirstOrDefaultAsync(d => d.FunctionCode!.ToLower() == action.ToLower() && d.DashboardId == dash.Id && d.UserId == user.Id);
-                if (existingPermission != null) return true;
-            }
+            var dash = _context.Dashboards!.Where(x => x.Path == linkControl).FirstOrDefault();
+            if (dash == null) return false;
+            var existingPermission = await _context!.Permissions!.FirstOrDefaultAsync(d => d.FunctionCode!.ToLower() == action.ToLower() && d.DashboardId == dash.Id && d.UserId == user.Id);
+            if (existingPermission != null) return true;
+
             return false;
         }
 
