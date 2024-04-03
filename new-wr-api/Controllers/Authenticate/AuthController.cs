@@ -113,9 +113,9 @@ namespace new_wr_api.Controllers
 
         [HttpPost]
         [Route("check-access-permission")]
-        public async Task<bool> CheckAccessPermission([FromQuery] string userName, string linkControl, string action)
+        public async Task<bool> CheckAccessPermission([FromQuery] string linkControl, string action)
         {
-            return await _repo.CheckAccessPermission(userName, linkControl, action);
+            return await _repo.CheckAccessPermission(linkControl, action);
         }
 
         [HttpPost]

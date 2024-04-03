@@ -12,6 +12,6 @@ namespace new_wr_api.Service
         public Task<bool> RemoveRoleAsync(AssignRoleDto dto);
         public Task<PasswordChangeResult> UpdatePasswordAsync(PasswordChange password);
         public Task<bool> SetPasswordAsync(UserDto dto, string newPassword);
-        public Task<bool> CheckAccessPermission(string userName, string linkControl, string action);
+        public Task<bool> CheckAccessPermission(string linkControl, string action);
     }
 }
