@@ -23,14 +23,14 @@ namespace new_wr_api.Service
 
         public async Task<List<PhanDoanSongDto>> GetAllAsync()
         {
-            var items = await _context.PhanDoanSong!.Where(b => b.DaXoa == false)
+            var items = await _context.PhanDoanSong!
                 .ToListAsync();
             return _mapper.Map<List<PhanDoanSongDto>>(items);
         }
 
         public async Task<List<PhanDoanSongDto>> GetDataCaculatePolutantAsync()
         {
-            var items = await _context.PhanDoanSong!.Where(b => b.DaXoa == false)
+            var items = await _context.PhanDoanSong!
                 .Include(x => x.DuLieuNguonNuocNhan)
                 .Include(p => p.DuLieuNguonNuocThaiDiem)
                 .Include(p => p.DuLieuNguonNuocThaiSinhHoat)
