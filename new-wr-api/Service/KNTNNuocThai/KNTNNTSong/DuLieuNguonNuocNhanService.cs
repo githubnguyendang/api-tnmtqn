@@ -60,7 +60,7 @@ namespace new_wr_api.Service
                 var updateItem = await _context.DuLieuNguonNuocNhan!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.DaXoa == false);
 
                 updateItem = _mapper.Map(dto, updateItem);
-
+                updateItem!.DaXoa = false;
                 updateItem!.ThoiGianSua = DateTime.Now;
                 updateItem.TaiKhoanSua = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
                 _context.DuLieuNguonNuocNhan!.Update(updateItem);
