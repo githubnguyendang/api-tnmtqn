@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using new_wr_api.Data;
 using new_wr_api.Dto;
 using new_wr_api.Service;
+using new_wr_api.Service.BaoCaoBieuMau;
 using System.Text;
 using System.Text.Json.Serialization;
 
@@ -66,6 +67,7 @@ services.AddScoped<BieuMauMuoiSauService>();
 services.AddScoped<BieuMauMuoiBayService>();
 services.AddScoped<BieuMauMuoiTamService>();
 services.AddScoped<BieuMauMuoiChinService>();
+services.AddScoped<BieuMauHaiMuoiService>();
 services.AddScoped<BieuMauHaiMotService>();
 services.AddScoped<BieuMauHaiHaiService>();
 services.AddScoped<BieuMauHaiBaService>();
