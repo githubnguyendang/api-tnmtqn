@@ -21,13 +21,15 @@ namespace new_wr_api.Service
             _mapper = mapper;
             _httpContext = httpContext;
         }
-        public async Task<List<CLN_NuocMatDto>> GetAllCLN_NuocMatAsync()
+        public async Task<List<CLN_NuocMatDto>> GetAllCLN_NuocMatAsync(int tu_nam, int den_nam)
         {
-            var items = await _context.CLN_NuocMat!.Where(d => d.DaXoa == false)
+            var items = _context.CLN_NuocMat!.Where(d => d.DaXoa == false)
                 .OrderBy(d => d.Id)
-                .AsQueryable().ToListAsync();
+                .AsQueryable();
 
-            var ttdlDto = _mapper.Map<List<CLN_NuocMatDto>>(items);
+            if (tu_nam > 0 || den_nam > 0) items = items.Where(x => x.ThoiGianQuanTrac >= tu_nam && x.ThoiGianQuanTrac <= den_nam);
+
+            var ttdlDto = _mapper.Map<List<CLN_NuocMatDto>>(await items.ToListAsync());
 
             return ttdlDto;
         }

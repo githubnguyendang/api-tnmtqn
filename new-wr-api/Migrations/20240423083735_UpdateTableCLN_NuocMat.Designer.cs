@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240423083735_UpdateTableCLN_NuocMat")]
+    partial class UpdateTableCLN_NuocMat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1333,68 +1336,11 @@ namespace new_wr_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<double?>("BOD5Dot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("BOD5Dot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("BOD5Dot3")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("CODDot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("CODDot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("CODDot3")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DODot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DODot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("DODot3")
-                        .HasColumnType("float");
-
                     b.Property<bool?>("DaXoa")
                         .HasColumnType("bit");
 
-                    b.Property<string>("KyHieuDiemQuanTrac")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LuuVucSong")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("NitoDot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("NitoDot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("NitoDot3")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhDot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhDot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhDot3")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhotphoDot1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhotphoDot2")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("PhotphoDot3")
-                        .HasColumnType("float");
 
                     b.Property<string>("SongSuoiHoChua")
                         .HasColumnType("nvarchar(max)");
@@ -1405,8 +1351,8 @@ namespace new_wr_api.Migrations
                     b.Property<string>("TaiKhoanTao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ThoiGianQuanTrac")
-                        .HasColumnType("int");
+                    b.Property<string>("ThoiGianQuanTrac")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ThoiGianSua")
                         .HasColumnType("datetime2");
@@ -1416,6 +1362,60 @@ namespace new_wr_api.Migrations
 
                     b.Property<string>("ViTriQuanTrac")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("bod5_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("bod5_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("bod5_dot3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("cod_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("cod_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("cod_dot3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("do_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("do_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("do_dot3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("nito_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("nito_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("nito_dot3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ph_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ph_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ph_dot3")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("photpho_dot1")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("photpho_dot2")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("photpho_dot3")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
