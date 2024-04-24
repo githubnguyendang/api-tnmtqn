@@ -13,6 +13,8 @@ namespace new_wr_api.Data
         public string? SongSuoiHoChua { get; set; }
         public string? ViTriQuanTrac { get; set; }
         public string? KyHieuDiemQuanTrac { get; set; }
+        public double? X { get; set; }
+        public double? Y { get; set; }
         public double? PhDot1 { get; set; }
         public double? PhDot2 { get; set; }
         public double? PhDot3 { get; set; }
