@@ -1,6 +1,4 @@
-﻿using new_wr_api.Migrations;
-
-namespace new_wr_api.Dto
+﻿namespace new_wr_api.Dto
 {
     public class DuLieuNguonNuocThaiLonDto
     {

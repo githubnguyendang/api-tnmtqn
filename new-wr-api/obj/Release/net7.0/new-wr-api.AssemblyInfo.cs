@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("new-wr-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5dc8a406c3a85e02531a54ea6a0c4c2c48d6849c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9fee2ffe331cfbce1da0e5109fd31c454d1ed5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("new-wr-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("new-wr-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
