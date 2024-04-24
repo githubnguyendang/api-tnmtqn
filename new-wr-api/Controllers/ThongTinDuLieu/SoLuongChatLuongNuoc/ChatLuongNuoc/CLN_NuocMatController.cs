@@ -19,11 +19,12 @@ namespace new_wr_api.Controllers
         }
 
         [HttpGet]
-        [Route("danh-sach/{tu_nam}/{den_nam}")]
-        public async Task<List<CLN_NuocMatDto>> GetAll(int tu_nam, int den_nam)
+        [Route("danh-sach")]
+        public async Task<List<CLN_NuocMatDto>> GetAll([FromQuery] int tu_nam, [FromQuery] int den_nam)
         {
             return await _service.GetAllCLN_NuocMatAsync(tu_nam, den_nam);
         }
+
 
         [HttpPost]
         [Route("luu")]
