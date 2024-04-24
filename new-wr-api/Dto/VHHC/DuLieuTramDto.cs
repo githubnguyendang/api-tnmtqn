@@ -1,13 +1,19 @@
 ﻿namespace new_wr_api.Dto
 {
-    public class TramQuangNgaiDto
+    public class DuLieuTramDto
     {
         public int? Id { get; set; }
-        public string? ThoiGian { get; set; }
+        public int? IdTram { get; set; }
+        public string? TenTram { get; set; }
+        public double? X { get; set; }
+        public double? Y { get; set; }
+        public DateTime? ThoiGian { get; set; }
         public double? LuongMua { get; set; }
         public double? NhietDo { get; set; }
+        public string? HuongGio { get; set; }
         public double? DoAm { get; set; }
         public double? TocDoGio { get; set; }
+        public bool? DaXoa { get; set; }
     }
     public class ApexChartSeriesTramDto
     {

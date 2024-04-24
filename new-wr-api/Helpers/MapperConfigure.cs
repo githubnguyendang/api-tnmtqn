@@ -280,7 +280,11 @@ namespace new_wr_api.Helpers
             CreateMap<Demo, DemoDto>().ReverseMap();
 
             //TramQuangNgai
-            CreateMap<TramQuangNgai, TramQuangNgaiDto>().ReverseMap();
+            CreateMap<DuLieuTram, DuLieuTramDto>()
+                .ForMember(dest => dest.TenTram, opt => opt.MapFrom(src => src.Tram!.TenTram))
+                .ForMember(dest => dest.X, opt => opt.MapFrom(src => src.Tram!.X))
+                .ForMember(dest => dest.Y, opt => opt.MapFrom(src => src.Tram!.Y))
+                .ReverseMap();
         }
     }
 }

@@ -39,6 +39,7 @@ namespace new_wr_api.Data
         public virtual Huyen? Huyen { get; set; }
 
         public virtual ICollection<KKTNN_NuocMua_TongLuong>? KKTNN_NuocMua_TongLuong { get; set; }
+        public virtual ICollection<DuLieuTram>? DuLieuTram { get; set; }
 
     }
 }

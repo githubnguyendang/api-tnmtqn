@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240424115230_Update_Table_DuLieuTram_Lan_3")]
+    partial class Update_Table_DuLieuTram_Lan_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -3783,7 +3786,10 @@ namespace new_wr_api.Migrations
                     b.Property<string>("HuongGio")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdTram")
+                    b.Property<int?>("IdLoaiTram")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("IdTram")
                         .HasColumnType("int");
 
                     b.Property<double?>("LuongMua")
@@ -7263,10 +7269,8 @@ namespace new_wr_api.Migrations
             modelBuilder.Entity("new_wr_api.Data.DuLieuTram", b =>
                 {
                     b.HasOne("new_wr_api.Data.Tram_ThongTin", "Tram")
-                        .WithMany("DuLieuTram")
-                        .HasForeignKey("IdTram")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("IdTram");
 
                     b.Navigation("Tram");
                 });
@@ -7531,8 +7535,6 @@ namespace new_wr_api.Migrations
 
             modelBuilder.Entity("new_wr_api.Data.Tram_ThongTin", b =>
                 {
-                    b.Navigation("DuLieuTram");
-
                     b.Navigation("KKTNN_NuocMua_TongLuong");
                 });
 
