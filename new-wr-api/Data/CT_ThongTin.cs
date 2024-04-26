@@ -64,6 +64,9 @@ namespace new_wr_api.Data
         [ForeignKey("IdXa")]
         public virtual Xa? Xa { get; set; }
 
+        [ForeignKey("IdLuuVuc")]
+        public virtual LuuVucSong? LuuVuc { get; set; }
+
         [ForeignKey("IdMucDichKT")]
         public virtual MucDichKT? MucDichKTSD { get; set; }
 

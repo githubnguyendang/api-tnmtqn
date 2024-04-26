@@ -17,8 +17,22 @@ namespace new_wr_api.Service
         }
         public async Task<List<BieuMauMuoiDto>> GetAllBieuMauMuoiAsync()
         {
-            var items = await _context.BieuMauSoMuoi!.Where(x => x.Id > 0).ToListAsync();
-            return _mapper.Map<List<BieuMauMuoiDto>>(items);
+            var result = await _context.LuuVucSong!
+                 .Where(lvs => lvs.Id > 0)
+                 .Select(lvs => new BieuMauMuoiDto
+                 {
+                     Id = lvs.Id,
+                     TenLVS = lvs.TenLVS,
+                     TongCongTrinh = lvs.CongTrinh!.Count,
+                     CTTuoiNuocMat = 0,
+                     CTTuoiNuocDuoiDat = 0,
+                     CTThuyDien = lvs.CongTrinh.Where(ct => ct.IdLoaiCT == 4).Count(),
+                     CTMucDichKhacNuocMat = 0,
+                     CTMucDichKhacNuocDuoiDat = 0,
+                 })
+                 .ToListAsync();
+
+            return result;
         }
 
         public async Task<bool> SaveBieuMauMuoiAsync(BieuMauMuoiDto dto)
