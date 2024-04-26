@@ -25,6 +25,13 @@ namespace new_wr_api.Controllers
         }
 
         [HttpGet]
+        [Route("so11")]
+        public async Task<List<BieuMauMuoiDto>> BieuMau11()
+        {
+            return await _bm10.GetAllAsync();
+        }
+
+        [HttpGet]
         [Route("so12")]
         public async Task<List<BieuMauMuoiHaiDto>> BieuMau12()
         {
