@@ -9,11 +9,13 @@ namespace new_wr_api.Controllers
     public class BaoCaoBieuMauController : ControllerBase
     {
         private readonly BieuMauMuoiService _bm10;
+        private readonly BieuMauMuoiMotService _bm11;
         private readonly BieuMauMuoiHaiService _bm12;
 
-        public BaoCaoBieuMauController(BieuMauMuoiService bm10, BieuMauMuoiHaiService bm12)
+        public BaoCaoBieuMauController(BieuMauMuoiService bm10, BieuMauMuoiMotService bm11, BieuMauMuoiHaiService bm12)
         {
             _bm10 = bm10;
+            _bm11 = bm11;
             _bm12 = bm12;
         }
 
@@ -26,9 +28,9 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("so11")]
-        public async Task<List<BieuMauMuoiDto>> BieuMau11()
+        public async Task<List<BieuMauMuoiMotDto>> BieuMau11()
         {
-            return await _bm10.GetAllAsync();
+            return await _bm11.GetAllAsync();
         }
 
         [HttpGet]
