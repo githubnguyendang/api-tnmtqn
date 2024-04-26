@@ -8,17 +8,17 @@ namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BieuMauSoMuoiController : ControllerBase
+    public class BaoCaoBieuMauController : ControllerBase
     {
         private readonly BieuMauMuoiService _service;
 
-        public BieuMauSoMuoiController(BieuMauMuoiService service)
+        public BaoCaoBieuMauController(BieuMauMuoiService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        [Route("danhsach")]
+        [Route("so10")]
         public async Task<List<BieuMauMuoiDto>> GetAll()
         {
             return await _service.GetAllBieuMauMuoiAsync();
