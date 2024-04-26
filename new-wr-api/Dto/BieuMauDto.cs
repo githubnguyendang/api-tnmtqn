@@ -183,14 +183,18 @@
     public class BieuMauMuoiBaDto
     {
         public int? Id { get; set; }
+        public string? SongSuoiHoChua { get; set; }
         public string? ViTriQuanTrac { get; set; }
+        public string? LuuVucSong { get; set; }
         public double? BOD5LonNhat { get; set; }
         public double? BOD5NhoNhat { get; set; }
+        public double? BOD5TrungBinh { get; set; }
         public double? CODLonNhat { get; set; }
         public double? CODNhoNhat { get; set; }
+        public double? CODTrungBinh { get; set; }
         public double? DOLonNhat { get; set; }
         public double? DONhoNhat { get; set; }
-        public string? GhiChu { get; set; }
+        public double? DOTrungBinh { get; set; }
     }
 
     public class BieuMauMuoiBonDto
