@@ -15,7 +15,7 @@ namespace new_wr_api.Service
             _context = context;
             _mapper = mapper;
         }
-        public async Task<List<BieuMauMuoiDto>> GetAllBieuMauMuoiAsync()
+        public async Task<List<BieuMauMuoiDto>> GetAllAsync()
         {
             var validLoaiCTIds = new HashSet<int?> { 4, 5, 6, 7, 11, 12, 13, 14, 15 };
             var nuocMatKhacIds = new HashSet<int?> { 5, 6, 11, 12, 13, 14, 15 };

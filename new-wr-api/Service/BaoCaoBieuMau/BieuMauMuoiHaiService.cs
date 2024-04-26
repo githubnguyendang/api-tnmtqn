@@ -15,45 +15,27 @@ namespace new_wr_api.Service
             _context = context;
             _mapper = mapper;
         }
-        public async Task<List<BieuMauMuoiHaiDto>> GetAllBieuMauMuoiHaiAsync()
+        public async Task<List<BieuMauMuoiHaiDto>> GetAllAsync()
         {
-            var items = await _context.BieuMauSoMuoiHai!.Where(x => x.Id > 0).ToListAsync();
-            return _mapper.Map<List<BieuMauMuoiHaiDto>>(items);
-        }
+            var validLoaiCTIds = new HashSet<int?> { 4, 5, 6, 7, 11, 12, 13, 14, 15 };
+            var nuocMatKhacIds = new HashSet<int?> { 5, 6, 11, 12, 13, 14, 15 };
 
-        public async Task<bool> SaveBieuMauMuoiHaiAsync(BieuMauMuoiHaiDto dto)
-        {
-            var exitsItem = await _context!.BieuMauSoMuoiHai!.FindAsync(dto.Id);
+            var result = await _context.LuuVucSong!
+                 .Where(lvs => lvs.Id > 0)
+                 .Select(lvs => new BieuMauMuoiHaiDto
+                 {
+                     Id = lvs.Id,
+                     TenLVS = lvs.TenLVS,
+                     TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
+                     TuoiNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     TuoiNguonNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     KhaiThacThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0),
+                     MucDichKhacNguonNuocMat = lvs.CongTrinh!.Where(ct => nuocMatKhacIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Count(),
+                     MucDichKhacNguonNuocDD = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT != null && !ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                 })
+                 .ToListAsync();
 
-            if (exitsItem == null || dto.Id == 0)
-            {
-                var newItem = _mapper.Map<BieuMauSoMuoiHai>(dto);
-
-                _context.BieuMauSoMuoiHai!.Add(newItem);
-            }
-            else
-            {
-                var updateItem = await _context.BieuMauSoMuoiHai!.FirstOrDefaultAsync(d => d.Id == dto.Id);
-
-                updateItem = _mapper.Map(dto, updateItem);
-                _context.BieuMauSoMuoiHai!.Update(updateItem!);
-            }
-
-            await _context.SaveChangesAsync();
-            return true;
-        }
-
-
-        public async Task<bool> DeleteBieuMauMuoiHaiAsync(int Id)
-        {
-            var exitsItem = await _context!.BieuMauSoMuoiHai!.FirstOrDefaultAsync(d => d.Id == Id);
-
-            if (exitsItem == null) { return false; }
-
-            _context.BieuMauSoMuoiHai?.Remove(exitsItem);
-            await _context.SaveChangesAsync();
-
-            return true;
+            return result;
         }
     }
 }
