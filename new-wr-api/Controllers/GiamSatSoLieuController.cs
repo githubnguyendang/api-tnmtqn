@@ -19,9 +19,9 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("danhsach")]
-        public async Task<List<GS_SoLieuDto>> GetAll(int? loaict, int? tochuc_canhan, string? tenct)
+        public async Task<List<GS_SoLieuDto>> GetAll(int? loai_ct, int? tochuc_canhan, string? tenct)
         {
-            return await _service.GetAllAsync(loaict, tochuc_canhan, tenct);
+            return await _service.GetAllAsync(loai_ct, tochuc_canhan, tenct);
         }
     }
 }

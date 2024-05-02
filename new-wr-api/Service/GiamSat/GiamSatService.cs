@@ -34,8 +34,6 @@ namespace new_wr_api.Service
                 .OrderBy(x => x.IdLoaiCT)
                 .AsQueryable();
 
-            var congtrinh = await query.ToListAsync();
-
             // Apply additional filters based on parameters
             if (loaict > 0)
             {
@@ -51,6 +49,8 @@ namespace new_wr_api.Service
             {
                 query = query.Where(ct => ct.TenCT!.Contains(tenct));
             }
+
+            var congtrinh = await query.ToListAsync();
 
             // Map the construction information to DTOs
             var congTrinhDtos = _mapper.Map<List<GS_SoLieuDto>>(congtrinh);
