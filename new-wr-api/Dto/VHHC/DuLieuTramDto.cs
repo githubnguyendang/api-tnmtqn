@@ -19,5 +19,7 @@
     {
         public string? name { get; set; }
         public List<double>? data { get; set; }
+        public DuLieuTramDto? ThoiGian { get; set; }
     }
+
 }
