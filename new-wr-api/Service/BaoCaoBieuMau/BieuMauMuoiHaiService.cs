@@ -26,7 +26,7 @@ namespace new_wr_api.Service
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
                      TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
-                     TuoiNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT!.ToLower().Contains("tưới")).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0),
+                     TuoiNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0),
                      TuoiNguonNuocDuoiDat = 0,
                      KhaiThacThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0),
                      MucDichKhacNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0) * 86400,
