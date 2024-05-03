@@ -17,7 +17,7 @@ namespace new_wr_api.Service
         }
         public async Task<List<BieuMauMuoiHaiDto>> GetAllAsync()
         {
-            var validLoaiCTIds = new HashSet<int?> { 5, 7 };
+            var validLoaiCTIds = new HashSet<int?> { 4, 5, 7 };
 
             var result = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)

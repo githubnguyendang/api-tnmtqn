@@ -17,8 +17,7 @@ namespace new_wr_api.Service
         }
         public async Task<List<BieuMauMuoiDto>> GetAllAsync()
         {
-            var validLoaiCTIds = new HashSet<int?> { 4, 5, 6, 7, 11, 12, 13, 14, 15 };
-            var nuocMatIds = new HashSet<int?> { 5, 6, 11, 12, 13, 14, 15 };
+            var validLoaiCTIds = new HashSet<int?> { 4, 5, 7 };
 
             var result = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)
@@ -27,11 +26,11 @@ namespace new_wr_api.Service
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
                      TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
-                     CTTuoiNuocMat = lvs.CongTrinh!.Where(ct => nuocMatIds.Contains(ct.IdLoaiCT) && ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
-                     CTTuoiNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     CTTuoiNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     CTTuoiNuocDuoiDat = 0,
                      CTThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Count(),
-                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => nuocMatIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Count(),
-                     CTMucDichKhacNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT != null && !ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Count(),
+                     CTMucDichKhacNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT != null).Count(),
                  })
                  .ToListAsync();
 
