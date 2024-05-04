@@ -19,7 +19,7 @@ namespace new_wr_api.Service
         {
             var validLoaiCTIds = new HashSet<int?> { 4, 5, 7 };
 
-            var result = await _context.LuuVucSong!
+            var items = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)
                  .Select(lvs => new BieuMauMuoiHaiDto
                  {
@@ -28,29 +28,46 @@ namespace new_wr_api.Service
                      TongCongTrinh = lvs.CongTrinh!
                                     .Count(ct => validLoaiCTIds
                                     .Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
-                     TuoiNguonNuocMat = lvs.CongTrinh!
+                     TuoiNguonNuocMat = Math.Round((double)(lvs.CongTrinh!
                                         .Where(ct => ct.IdLoaiCT == 5)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
                                         .Where(lld => lld.IdMucDich == 5)
-                                        .Sum(lld => lld.LuuLuong) / 86400,
+                                        .Sum(lld => lld.LuuLuong) / 86400), 2), //convert m3/day to m3/s
                      TuoiNguonNuocDuoiDat = 0,
-                     KhaiThacThuyDien = lvs.CongTrinh!
+                     KhaiThacThuyDien = Math.Round((double)lvs.CongTrinh!
                                          .Where(ct => ct.IdLoaiCT == 4)
-                                         .Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0),
-                     MucDichKhacNguonNuocMat = lvs.CongTrinh!
+                                         .Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0), 2),
+                     MucDichKhacNguonNuocMat = Math.Round((double)lvs.CongTrinh!
                                         .Where(ct => ct.IdLoaiCT == 5)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
                                         .Where(lld => lld.IdMucDich != 5)
-                                        .Sum(lld => lld.LuuLuong),
-                     MucDichKhacNguonNuocDD = lvs.CongTrinh!
+                                        .Sum(lld => lld.LuuLuong), 2),
+                     MucDichKhacNguonNuocDD = Math.Round((double)lvs.CongTrinh!
                                         .Where(ct => ct.IdLoaiCT == 7)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
                                         .Where(lld => lld.IdMucDich > 0)
-                                        .Sum(lld => lld.LuuLuong),
+                                        .Sum(lld => lld.LuuLuong), 2),
                  })
                  .ToListAsync();
 
-            return result;
+            // Calculate total for summary row
+            var total = new BieuMauMuoiHaiDto
+            {
+                Id = -1,
+                TenLVS = "Tổng",
+                TongCongTrinh = items.Sum(item => item.TongCongTrinh),
+                TuoiNguonNuocMat = items.Sum(item => item.TuoiNguonNuocMat),
+                TuoiNguonNuocDuoiDat = 0,
+                KhaiThacThuyDien = items.Sum(item => item.KhaiThacThuyDien),
+                MucDichKhacNguonNuocMat = items.Sum(item => item.MucDichKhacNguonNuocMat),
+                MucDichKhacNguonNuocDD = items.Sum(item => item.MucDichKhacNguonNuocDD)
+            };
+
+            // Adding the total DTO to the items list
+            items.Add(total);
+
+            // Order items by Id, with total as the last item added manually
+            return items.OrderBy(item => item.Id).ToList();
         }
     }
 }
