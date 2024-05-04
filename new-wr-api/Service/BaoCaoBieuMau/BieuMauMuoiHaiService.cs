@@ -25,12 +25,28 @@ namespace new_wr_api.Service
                  {
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
-                     TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
-                     TuoiNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0),
+                     TongCongTrinh = lvs.CongTrinh!
+                                    .Count(ct => validLoaiCTIds
+                                    .Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
+                     TuoiNguonNuocMat = lvs.CongTrinh!
+                                        .Where(ct => ct.IdLoaiCT == 5)
+                                        .SelectMany(ct => ct.LuuLuongTheoMucDich!)
+                                        .Where(lld => lld.IdMucDich == 5)
+                                        .Sum(lld => lld.LuuLuong) / 86400,
                      TuoiNguonNuocDuoiDat = 0,
-                     KhaiThacThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0),
-                     MucDichKhacNguonNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0) * 86400,
-                     MucDichKhacNguonNuocDD = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.MucDichKT != null).Sum(ct => ct.ThongSo != null ? ct.ThongSo.QKTLonNhat : 0) * 86400,
+                     KhaiThacThuyDien = lvs.CongTrinh!
+                                         .Where(ct => ct.IdLoaiCT == 4)
+                                         .Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0),
+                     MucDichKhacNguonNuocMat = lvs.CongTrinh!
+                                        .Where(ct => ct.IdLoaiCT == 5)
+                                        .SelectMany(ct => ct.LuuLuongTheoMucDich!)
+                                        .Where(lld => lld.IdMucDich != 5)
+                                        .Sum(lld => lld.LuuLuong),
+                     MucDichKhacNguonNuocDD = lvs.CongTrinh!
+                                        .Where(ct => ct.IdLoaiCT == 7)
+                                        .SelectMany(ct => ct.LuuLuongTheoMucDich!)
+                                        .Where(lld => lld.IdMucDich > 0)
+                                        .Sum(lld => lld.LuuLuong),
                  })
                  .ToListAsync();
 
