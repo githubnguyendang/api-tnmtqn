@@ -280,11 +280,18 @@ namespace new_wr_api.Helpers
             CreateMap<Demo, DemoDto>().ReverseMap();
 
             //TramQuangNgai
-            CreateMap<DuLieuTram, DuLieuTramDto>()
-                .ForMember(dest => dest.TenTram, opt => opt.MapFrom(src => src.Tram!.TenTram))
-                .ForMember(dest => dest.X, opt => opt.MapFrom(src => src.Tram!.X))
-                .ForMember(dest => dest.Y, opt => opt.MapFrom(src => src.Tram!.Y))
-                .ReverseMap();
+            CreateMap<Tram_ThongTin, DuLieuTramDto>()
+               .ForMember(dest => dest.TenTram, opt => opt.MapFrom(src => src.TenTram))
+               .ForMember(dest => dest.X, opt => opt.MapFrom(src => src.X))
+               .ForMember(dest => dest.Y, opt => opt.MapFrom(src => src.Y))
+               .ForMember(dest => dest.ThoiGian, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.ThoiGian)))
+               .ForMember(dest => dest.LuongMua, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.LuongMua)))
+               .ForMember(dest => dest.NhietDo, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.NhietDo)))
+               .ForMember(dest => dest.DoAm, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.DoAm)))
+               .ForMember(dest => dest.HuongGio, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.HuongGio)))
+               .ForMember(dest => dest.TocDoGio, opt => opt.MapFrom(src => src.DuLieuTram!.Max(d => d.TocDoGio)))
+               .ReverseMap();
+            CreateMap<DuLieuTram, DuLieuTramDto>().ReverseMap();
         }
     }
 }
