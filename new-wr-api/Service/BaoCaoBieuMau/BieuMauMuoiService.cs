@@ -25,11 +25,11 @@ namespace new_wr_api.Service
                  {
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
-                     TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
+                     TongCongTrinh = lvs.CongTrinh!.Count(ct => validLoaiCTIds.Contains(ct.IdLoaiCT)),
                      CTTuoiNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5).Count(),
                      CTTuoiNuocDuoiDat = 0,
                      CTThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Count(),
-                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.LoaiCT!.IdCha == 3 && ct.IdLoaiCT != 5 && ct.MucDichKT == null || !ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
+                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.LoaiCT!.IdCha == 1 && ct.IdLoaiCT != 4 && ct.IdLoaiCT != 5).Count(),
                      CTMucDichKhacNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7).Count(),
                  })
                  .ToListAsync();
