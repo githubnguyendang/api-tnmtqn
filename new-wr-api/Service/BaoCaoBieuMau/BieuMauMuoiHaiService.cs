@@ -44,9 +44,7 @@ namespace new_wr_api.Service
                                         .Sum(lld => lld.LuuLuong), 2),
                      MucDichKhacNguonNuocDD = Math.Round((double)lvs.CongTrinh!
                                         .Where(ct => ct.IdLoaiCT == 7)
-                                        .SelectMany(ct => ct.LuuLuongTheoMucDich!)
-                                        .Where(lld => lld.IdMucDich > 0)
-                                        .Sum(lld => lld.LuuLuong), 2),
+                                        .Sum(ct => ct.ThongSo.QKTLonNhat), 2),
                  })
                  .ToListAsync();
 
