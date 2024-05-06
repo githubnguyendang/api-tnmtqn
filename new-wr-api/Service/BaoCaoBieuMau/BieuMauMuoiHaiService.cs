@@ -17,7 +17,6 @@ namespace new_wr_api.Service
         }
         public async Task<List<BieuMauMuoiHaiDto>> GetAllAsync()
         {
-            var validLoaiCTIds = new HashSet<int?> { 4, 5, 7 };
 
             var items = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)
@@ -26,24 +25,23 @@ namespace new_wr_api.Service
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
                      TongCongTrinh = lvs.CongTrinh!
-                                    .Count(ct => validLoaiCTIds
-                                    .Contains(ct.IdLoaiCT) && ct.MucDichKT != null),
+                                    .Count(ct => ct.DaXoa == false && ct.LoaiCT!.IdCha == 1 || ct.IdLoaiCT == 7),
                      TuoiNguonNuocMat = Math.Round((double)(lvs.CongTrinh!
-                                        .Where(ct => ct.IdLoaiCT == 5)
+                                        .Where(ct => ct.IdLoaiCT == 5 && ct.DaXoa == false)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
                                         .Where(lld => lld.IdMucDich == 5)
                                         .Sum(lld => lld.LuuLuong) / 86400), 2), //convert m3/day to m3/s
                      TuoiNguonNuocDuoiDat = 0,
                      KhaiThacThuyDien = Math.Round((double)lvs.CongTrinh!
-                                         .Where(ct => ct.IdLoaiCT == 4)
+                                         .Where(ct => ct.IdLoaiCT == 4 && ct.DaXoa == false)
                                          .Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0), 2),
                      MucDichKhacNguonNuocMat = Math.Round((double)lvs.CongTrinh!
-                                        .Where(ct => ct.IdLoaiCT == 5)
+                                        .Where(ct => ct.LoaiCT!.IdCha == 1 && ct.IdLoaiCT != 5 && ct.DaXoa == false)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
                                         .Where(lld => lld.IdMucDich != 5)
                                         .Sum(lld => lld.LuuLuong), 2),
                      MucDichKhacNguonNuocDD = Math.Round((double)lvs.CongTrinh!
-                                        .Where(ct => ct.IdLoaiCT == 7)
+                                        .Where(ct => ct.IdLoaiCT == 7 && ct.DaXoa == false)
                                         .Sum(ct => ct.ThongSo.QKTLonNhat), 2),
                  })
                  .ToListAsync();

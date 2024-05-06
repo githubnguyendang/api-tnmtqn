@@ -39,7 +39,7 @@ namespace new_wr_api.Service.BaoCaoBieuMau
                 .AsQueryable();
 
             // Return the list of DTOs
-             var congtrinh = await query.ToListAsync();
+            var congtrinh = await query.ToListAsync();
             var congTrinhDtos = _mapper.Map<List<CT_ThongTinDto>>(congtrinh);
 
             // Return the list of DTOs
