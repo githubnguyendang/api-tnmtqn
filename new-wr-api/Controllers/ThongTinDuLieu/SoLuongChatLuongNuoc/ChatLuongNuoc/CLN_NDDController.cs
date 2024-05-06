@@ -20,10 +20,11 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("danh-sach")]
-        public async Task<List<CLN_NDDDto>> GetAll()
+        public async Task<List<CLN_NDDDto>> GetAll([FromQuery] int tu_nam, [FromQuery] int den_nam)
         {
-            return await _service.GetAllCLN_NDDAsync();
+            return await _service.GetAllCLN_NDDAsync(tu_nam, den_nam);
         }
+
 
         [HttpPost]
         [Route("luu")]

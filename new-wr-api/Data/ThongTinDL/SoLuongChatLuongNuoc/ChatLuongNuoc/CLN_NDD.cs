@@ -5,29 +5,41 @@ namespace new_wr_api.Data
 {
     public class CLN_NDD
     {
+        
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        public int? ThoiGianQuanTrac { get; set; }
         public string? LuuVucSong { get; set; }
-        public string? SongSuoiHoChua { get; set; }
+        public string? TangChuaNuoc { get; set; }
         public string? ViTriQuanTrac { get; set; }
-        public double? PhMax { get; set; }
-        public double? PhMin { get; set; }
-        public double? ColiformMax { get; set; }
-        public double? ColiformMin { get; set; }
-        public double? NitrateMax { get; set; }
-        public double? NitrateMin { get; set; }
-        public double? AmoniMax { get; set; }
-        public double? AmoniMin { get; set; }
-        public double? TDSMax { get; set; }
-        public double? TDSMin { get; set; }
-        public double? DoCungMax { get; set; }
-        public double? DoCungMin { get; set; }
-        public double? ASMax { get; set; }
-        public double? ASMin { get; set; }
-        public double? ChlorideMax { get; set; }
-        public double? ChlorideMin { get; set; }
-        public string? GhiChu { get; set; }
+        public string? KyHieuDiemQuanTrac { get; set; }
+        public double? X { get; set; }
+        public double? Y { get; set; }
+        public double? PhDot1 { get; set; }
+        public double? PhDot2 { get; set; }
+        public double? PhDot3 { get; set; }
+        public double? ColiformDot1 { get; set; }
+        public double? ColiformDot2 { get; set; }
+        public double? ColiformDot3 { get; set; }
+        public double? NitrateDot1 { get; set; }
+        public double? NitrateDot2 { get; set; }
+        public double? NitrateDot3 { get; set; }
+        public double? AmoniDot1 { get; set; }
+        public double? AmoniDot2 { get; set; }
+        public double? AmoniDot3 { get; set; }
+        public double? TDSDot1 { get; set; }
+        public double? TDSDot2 { get; set; }
+        public double? TDSDot3 { get; set; }
+        public double? DoCungDot1 { get; set; }
+        public double? DoCungDot2 { get; set; }
+        public double? DoCungDot3 { get; set; }
+        public double? ArsenicDot1 { get; set; }
+        public double? ArsenicDot2 { get; set; }
+        public double? ArsenicDot3 { get; set; }
+        public double? ChlorideDot1 { get; set; }
+        public double? ChlorideDot2 { get; set; }
+        public double? ChlorideDot3 { get; set; }
         public DateTime? ThoiGianTao { get; set; }
         public string? TaiKhoanTao { get; set; }
         public DateTime? ThoiGianSua { get; set; }

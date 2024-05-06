@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240506090455_CLN_NDD")]
+    partial class CLN_NDD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -836,28 +839,16 @@ namespace new_wr_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<double?>("AmoniLonNhat")
+                        .HasColumnType("float");
+
                     b.Property<double?>("AmoniNhoNhat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("AmonilonNhat")
+                    b.Property<double?>("AsenLonNhat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("ArsenicLonNhat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ArsenicNhoNhat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ChlorideLonNhat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ChlorideNhoNhat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ColiformNhoNhat")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("ColiformlonNhat")
+                    b.Property<double?>("AsenNhoNhat")
                         .HasColumnType("float");
 
                     b.Property<double?>("DoCungLonNhat")
@@ -869,13 +860,10 @@ namespace new_wr_api.Migrations
                     b.Property<string>("GhiChu")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LuuVucSong")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("NitrateNhoNhat")
+                    b.Property<double?>("NitratLonNhat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("NitratelonNhat")
+                    b.Property<double?>("NitratNhoNhat")
                         .HasColumnType("float");
 
                     b.Property<double?>("PHNhoNhat")
@@ -884,14 +872,11 @@ namespace new_wr_api.Migrations
                     b.Property<double?>("PHlonNhat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("TDSNhoNhat")
+                    b.Property<double?>("SulfatLonNhat")
                         .HasColumnType("float");
 
-                    b.Property<double?>("TDSlonNhat")
+                    b.Property<double?>("SulfatNhoNhat")
                         .HasColumnType("float");
-
-                    b.Property<string>("TangChuaNuoc")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ViTriQuanTrac")
                         .HasColumnType("nvarchar(max)");

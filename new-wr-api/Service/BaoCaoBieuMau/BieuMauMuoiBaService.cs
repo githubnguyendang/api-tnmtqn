@@ -30,7 +30,7 @@ namespace new_wr_api.Service
                     BOD5TrungBinh = Math.Round((double)new[] { cln.BOD5Dot1, cln.BOD5Dot2, cln.BOD5Dot3 }.Average()!, 2),
                     CODLonNhat = new[] { cln.CODDot1, cln.CODDot2, cln.CODDot3 }.Max(),
                     CODNhoNhat = new[] { cln.CODDot1, cln.CODDot2, cln.CODDot3 }.Min(),
-                    CODTrungBinh = Math.Round((double)new[] { cln.CODDot1, cln.CODDot2, cln.BOD5Dot3 }.Average()!, 2),
+                    CODTrungBinh = Math.Round((double)new[] { cln.CODDot1, cln.CODDot2, cln.CODDot3 }.Average()!, 2),
                     DOLonNhat = new[] { cln.DODot1, cln.DODot2, cln.DODot3 }.Max(),
                     DONhoNhat = new[] { cln.DODot1, cln.DODot2, cln.DODot3 }.Min(),
                     DOTrungBinh = Math.Round((double)new[] { cln.DODot1, cln.DODot2, cln.DODot3 }.Average()!, 2),
