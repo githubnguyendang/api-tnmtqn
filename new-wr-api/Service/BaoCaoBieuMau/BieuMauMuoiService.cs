@@ -29,7 +29,7 @@ namespace new_wr_api.Service
                      CTTuoiNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5).Count(),
                      CTTuoiNuocDuoiDat = 0,
                      CTThuyDien = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 4).Count(),
-                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 5 && ct.MucDichKT != null && !ct.MucDichKT.ToLower().Contains("tưới")).Count(),
+                     CTMucDichKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.LoaiCT!.IdCha == 3 && ct.IdLoaiCT != 5 && ct.MucDichKT == null || !ct.MucDichKT!.ToLower().Contains("tưới")).Count(),
                      CTMucDichKhacNuocDuoiDat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7).Count(),
                  })
                  .ToListAsync();
