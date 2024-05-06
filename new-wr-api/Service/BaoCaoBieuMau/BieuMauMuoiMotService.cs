@@ -32,7 +32,7 @@ namespace new_wr_api.Service
                      CongTrinhDapDang = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 11).Count(),
                      CongTrinhCong = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 12).Count(),
                      CongTrinhTramBom = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 6).Count(),
-                     CongTrinhKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 14).Count(),
+                     CongTrinhKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 14 || ct.IdLoaiCT == 10).Count(),
                      CongTrinhGieng = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7).Count(),
                      CongTrinhKhacNDD = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 15).Count(),
                  })
