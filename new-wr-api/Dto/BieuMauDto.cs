@@ -172,12 +172,12 @@
     {
         public int? Id { get; set; }
         public string? TenLVS { get; set; }
-        public double? TongCongTrinh { get; set; }
-        public double? TuoiNguonNuocMat { get; set; }
-        public double? TuoiNguonNuocDuoiDat { get; set; }
-        public double? KhaiThacThuyDien { get; set; }
-        public double? MucDichKhacNguonNuocMat { get; set; }
-        public double? MucDichKhacNguonNuocDD { get; set; }
+        public double TongCongTrinh { get; set; }
+        public double TuoiNguonNuocMat { get; set; }
+        public double TuoiNguonNuocDuoiDat { get; set; }
+        public double KhaiThacThuyDien { get; set; }
+        public double MucDichKhacNguonNuocMat { get; set; }
+        public double MucDichKhacNguonNuocDD { get; set; }
     }
 
     public class BieuMauMuoiBaDto
