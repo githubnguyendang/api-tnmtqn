@@ -19,7 +19,7 @@ namespace new_wr_api.Service
         {
             var validLoaiCTIds = new HashSet<int?> { 4, 5, 7 };
 
-            var result = await _context.LuuVucSong!
+            var items = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)
                  .Select(lvs => new BieuMauMuoiDto
                  {
@@ -34,7 +34,24 @@ namespace new_wr_api.Service
                  })
                  .ToListAsync();
 
-            return result;
+            // Calculate total for summary row
+            var total = new BieuMauMuoiDto
+            {
+                Id = -1,
+                TenLVS = "Tổng",
+                TongCongTrinh = items.Sum(item => item.TongCongTrinh),
+                CTTuoiNuocMat = items.Sum(item => item.CTTuoiNuocMat),
+                CTTuoiNuocDuoiDat = 0,
+                CTThuyDien = items.Sum(item => item.CTThuyDien),
+                CTMucDichKhacNuocMat = items.Sum(item => item.CTMucDichKhacNuocMat),
+                CTMucDichKhacNuocDuoiDat = items.Sum(item => item.CTMucDichKhacNuocDuoiDat)
+            };
+
+            // Adding the total DTO to the items list
+            items.Add(total);
+
+            // Order items by Id, with total as the last item added manually
+            return items.OrderBy(item => item.Id).ToList();
         }
     }
 }
