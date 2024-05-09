@@ -14,7 +14,7 @@
         public int? NuocMan_IdHuyen { get; set; }
         public double? NuocMan_TruLuong { get; set; }
         public TangChuaNuocDto? TangChuaNuoc { get; set; }
-        public DonViHCDto? donvi_hanhchinh { get; set; }
+        public ViTriDto? donvi_hanhchinh { get; set; }
         public NuocManNuocNgotDto? NuocNgot { get; set; }
         public NuocManNuocNgotDto? NuocMan { get; set; }
 

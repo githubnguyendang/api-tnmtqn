@@ -1,16 +1,10 @@
 ﻿namespace new_wr_api.Dto
 {
-    public class DonViHCDto
+    public class ViTriDto
     {
-        public int? Id { get; set; }
-        public string? TenTinh { get; set; }
-        public string? IdTinh { get; set; }
-        public string? TenHuyen { get; set; }
         public string? IdHuyen { get; set; }
-        public string? TenXa { get; set; }
-        public string? IdXa { get; set; }
-        public string? CapHanhChinh { get; set; }
-        public bool? DaXoa { get; set; }
+        public string? TenHuyen { get; set; }
+        public List<XaDto> Xa { get; set; } = new List<XaDto>();
     }
     public class HuyenDto
     {

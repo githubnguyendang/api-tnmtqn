@@ -24,8 +24,8 @@ namespace new_wr_api.Service
             // Retrieve data from the database asynchronously
             var items = await _context.CT_ThongTin!
                 .Where(d => d.DaXoa == false)
-                .Include(d => d.Xa)
-                .Include(d => d.Huyen)
+                //.Include(d => d.Xa)
+                //.Include(d => d.Huyen)
                 .Include(d => d.LoaiCT)
                 .Include(d => d.ThongSo)
                 .Include(d => d.MucDichKTSD)

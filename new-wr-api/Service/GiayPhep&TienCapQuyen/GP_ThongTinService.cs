@@ -38,8 +38,7 @@ namespace new_wr_api.Service
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.ThongSo)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LoaiCT)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LuuLuongTheoMucDich)
-                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.Huyen)
-                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.Xa)
+                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.CT_ViTri!).ThenInclude(vt => vt.Xa!).ThenInclude(x => x.Huyen)
                 .Include(gp => gp.GP_TCQ)
                 .OrderBy(x => x.NgayKy)
                 .AsQueryable();
@@ -77,15 +76,15 @@ namespace new_wr_api.Service
 
             if (filterDto.huyen > 0)
             {
-                query = query.Where(gp => gp.CongTrinh!.IdHuyen!.Contains(filterDto.huyen.ToString()!));
+                query = query.Where(gp => gp.CongTrinh!.CT_ViTri!.Any(v => v.Xa!.Huyen!.IdHuyen.Contains(filterDto.huyen.ToString()!)));
             }
 
             if (filterDto.xa > 0)
             {
-                query = query.Where(gp => gp.CongTrinh!.IdXa!.Contains(filterDto.xa.ToString()!));
+                query = query.Where(gp => gp.CongTrinh!.CT_ViTri!.Any(v => v.Xa!.IdXa.Contains(filterDto.huyen.ToString()!)));
             }
 
-            if (filterDto.huyen > 0)
+            if (filterDto.tang_chuanuoc > 0)
             {
                 query = query.Where(gp => gp.CongTrinh!.IdTangChuaNuoc == filterDto.tang_chuanuoc);
             }
@@ -146,7 +145,7 @@ namespace new_wr_api.Service
 
                 if (await _userManager.IsInRoleAsync(currentUser!, "District"))
                 {
-                    query = query.Where(x => x.CongTrinh!.IdHuyen == currentUser!.IdHuyen);
+                    query = query.Where(x => x.CongTrinh!.CT_ViTri!.Any(v => v.Xa!.Huyen!.IdHuyen == currentUser!.IdHuyen));
                 }
             }
 
@@ -335,15 +334,15 @@ namespace new_wr_api.Service
 
             if (filterDto.huyen > 0)
             {
-                query = query.Where(gp => gp.CongTrinh!.IdHuyen!.Contains(filterDto.huyen.ToString()!));
+                query = query.Where(gp => gp.CongTrinh!.CT_ViTri!.Any(v => v.Xa!.Huyen!.IdHuyen.Contains(filterDto.huyen.ToString()!)));
             }
 
             if (filterDto.xa > 0)
             {
-                query = query.Where(gp => gp.CongTrinh!.IdXa!.Contains(filterDto.xa.ToString()!));
+                query = query.Where(gp => gp.CongTrinh!.CT_ViTri!.Any(v => v.Xa!.IdXa.Contains(filterDto.xa.ToString()!)));
             }
 
-            if (filterDto.huyen > 0)
+            if (filterDto.tang_chuanuoc > 0)
             {
                 query = query.Where(gp => gp.CongTrinh!.IdTangChuaNuoc == filterDto.tang_chuanuoc);
             }

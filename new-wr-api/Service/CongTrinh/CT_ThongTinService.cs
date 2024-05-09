@@ -33,8 +33,7 @@ namespace new_wr_api.Service
                 .Include(ct => ct.TangChuaNuoc)
                 .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
                 .Include(ct => ct.ThongSo)
-                .Include(ct => ct.Xa)
-                .Include(ct => ct.Huyen)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa).ThenInclude(x => x!.Huyen)
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .Include(ct => ct.LuuLuongTheoMucDich)
@@ -54,12 +53,12 @@ namespace new_wr_api.Service
 
             if (IdXa > 0)
             {
-                query = query.Where(ct => ct.IdXa!.Contains(IdXa.ToString()!));
+                query = query.Where(ct => ct.CT_ViTri!.Any(x => x.IdXa!.Contains(IdXa.ToString()!)));
             }
 
             if (IdHuyen > 0)
             {
-                query = query.Where(ct => ct.IdHuyen!.Contains(IdHuyen.ToString()!));
+                query = query.Where(ct => ct.CT_ViTri!.Any(x => x.Xa!.Huyen!.IdHuyen!.Contains(IdXa.ToString()!)));
             }
 
             if (IdSong > 0)
@@ -98,7 +97,7 @@ namespace new_wr_api.Service
 
                 if (await _userManager.IsInRoleAsync(currentUser!, "District"))
                 {
-                    query = query.Where(ct => ct.IdHuyen == currentUser!.IdHuyen);
+                    query = query.Where(ct => ct.CT_ViTri!.Any(x => x.Xa!.Huyen!.IdHuyen == currentUser!.IdHuyen));
                 }
             }
 
@@ -126,8 +125,8 @@ namespace new_wr_api.Service
             .Include(ct => ct.TangChuaNuoc)
             .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
             .Include(ct => ct.ThongSo)
-            .Include(ct => ct.Xa)
-            .Include(ct => ct.Huyen)
+            //.Include(ct => ct.Xa)
+            //.Include(ct => ct.Huyen)
             .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
             .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
             .Include(ct => ct.LuuLuongTheoMucDich)
@@ -171,7 +170,7 @@ namespace new_wr_api.Service
         }
 
         // Method to save or update a CT_ThongTin entity
-        public async Task<int> SaveAsync(CT_ThongTinDto dto)
+        public async Task<int> SaveAsync(CT_ThongTinDto_Save dto)
         {
             int id = 0;
             var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);

@@ -14,6 +14,7 @@ namespace new_wr_api.Data
         public string? CheDoKT { get; set; }
         public string? CaoTrinhDap { get; set; }
         public string? CheDoXT { get; set; }
+        public string? NguonNuocXT { get; set; }
         public double? ChieuCaoDap { get; set; }
         public double? ChieuDaiCong { get; set; }
         public double? ChieuDaiDap { get; set; }

@@ -34,24 +34,24 @@ namespace new_wr_api.Service
             {
                 if (!string.IsNullOrEmpty(dto.NuocNgot_IdXa.ToString()))
                 {
-                    var ds = await _context.DonViHC!.FirstOrDefaultAsync(dv => dv.IdXa == dto!.NuocNgot_IdXa.ToString());
-                    if (ds != null)
-                    {
-                        dto.NuocNgot = new NuocManNuocNgotDto
-                        {
-                            Xa = ds!.TenXa,
-                            Huyen = ds!.TenHuyen
-                        };
-                    }
-                    var cs = await _context.DonViHC!.FirstOrDefaultAsync(dv => dv.IdXa == dto!.NuocMan_IdXa.ToString());
-                    if (cs != null)
-                    {
-                        dto.NuocMan = new NuocManNuocNgotDto
-                        {
-                            Xa = cs!.TenXa,
-                            Huyen = cs!.TenHuyen
-                        };
-                    }
+                    //var ds = await _context.DonViHC!.FirstOrDefaultAsync(dv => dv.IdXa == dto!.NuocNgot_IdXa.ToString());
+                    //if (ds != null)
+                    //{
+                    //    dto.NuocNgot = new NuocManNuocNgotDto
+                    //    {
+                    //        Xa = ds!.TenXa,
+                    //        Huyen = ds!.TenHuyen
+                    //    };
+                    //}
+                    //var cs = await _context.DonViHC!.FirstOrDefaultAsync(dv => dv.IdXa == dto!.NuocMan_IdXa.ToString());
+                    //if (cs != null)
+                    //{
+                    //    dto.NuocMan = new NuocManNuocNgotDto
+                    //    {
+                    //        Xa = cs!.TenXa,
+                    //        Huyen = cs!.TenHuyen
+                    //    };
+                    //}
                 }
             }
             return tongLuongNDDDto;

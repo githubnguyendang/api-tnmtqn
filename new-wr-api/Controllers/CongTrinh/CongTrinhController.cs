@@ -9,7 +9,7 @@ namespace new_wr_api.Controllers
 {
     [Route("cong-trinh")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CongTrinhController : ControllerBase
     {
         private readonly CT_ThongTinService _service;
@@ -35,7 +35,7 @@ namespace new_wr_api.Controllers
 
         [HttpPost]
         [Route("luu")]
-        public async Task<ActionResult<CT_ThongTin>> Save(CT_ThongTinDto dto)
+        public async Task<ActionResult<CT_ThongTin>> Save(CT_ThongTinDto_Save dto)
         {
             var res = await _service.SaveAsync(dto);
             if (res > 0)

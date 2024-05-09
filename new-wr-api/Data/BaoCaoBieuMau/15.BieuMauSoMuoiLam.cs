@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace new_wr_api.Data
 {
-    public class BieuMauSoMuoiNam
+    public class BieuMauSoMuoiLam
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

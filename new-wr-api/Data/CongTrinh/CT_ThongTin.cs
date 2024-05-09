@@ -10,8 +10,6 @@ namespace new_wr_api.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int? IdLoaiCT { get; set; }
-        public string? IdHuyen { get; set; }
-        public string? IdXa { get; set; }
         public int? IdSong { get; set; }
         public int? IdLuuVuc { get; set; }
         public int? IdTieuLuuVuc { get; set; }
@@ -26,7 +24,6 @@ namespace new_wr_api.Data
         public int? NamBatDauVanHanh { get; set; }
         public string? NguonNuocKT { get; set; }
         public string? PhuongThucKT { get; set; }
-        public string? NguonNuocXT { get; set; }
         public string? ThoiGianKT { get; set; }
         public string? ThoiGianHNK { get; set; }
         public string? MucDichKT { get; set; }
@@ -58,12 +55,6 @@ namespace new_wr_api.Data
         [ForeignKey("IdLoaiCT")]
         public virtual CT_Loai? LoaiCT { get; set; }
 
-        [ForeignKey("IdHuyen")]
-        public virtual Huyen? Huyen { get; set; }
-
-        [ForeignKey("IdXa")]
-        public virtual Xa? Xa { get; set; }
-
         [ForeignKey("IdLuuVuc")]
         public virtual LuuVucSong? LuuVuc { get; set; }
 
@@ -74,7 +65,6 @@ namespace new_wr_api.Data
         public virtual ICollection<CT_HangMuc>? HangMuc { get; set; }
         public virtual ICollection<GP_ThongTin>? GiayPhep { get; set; }
         public virtual ICollection<LuuLuongTheoMucDich>? LuuLuongTheoMucDich { get; set; }
-
-
+        public virtual ICollection<CT_ViTri>? CT_ViTri { get; set; }
     }
 }

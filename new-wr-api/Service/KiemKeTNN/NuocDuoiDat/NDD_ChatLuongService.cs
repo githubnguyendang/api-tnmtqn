@@ -26,14 +26,14 @@ namespace new_wr_api.Service
         {
             var items = await _context.KKTNN_NuocDuoiDat_ChatLuong!.Where(x => x.DaXoa == false).OrderBy(x => x.Id).ToListAsync();
             var chatLuongNDDDto = _mapper.Map<List<KKTNN_NuocDuoiDat_ChatLuongDto>>(items);
-            foreach (var dto in chatLuongNDDDto)
-            {
-                if (!string.IsNullOrEmpty(dto.IdXa.ToString()))
-                {
-                    dto.donvi_hanhchinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
-                        .FirstOrDefaultAsync(dv => dv.IdXa == dto.IdXa.ToString()));
-                }
-            }
+            //foreach (var dto in chatLuongNDDDto)
+            //{
+            //    if (!string.IsNullOrEmpty(dto.IdXa.ToString()))
+            //    {
+            //        dto.donvi_hanhchinh = _mapper.Map<ViTriDto>(await _context.DonViHC!
+            //            .FirstOrDefaultAsync(dv => dv.IdXa == dto.IdXa.ToString()));
+            //    }
+            //}
             return chatLuongNDDDto;
 
 

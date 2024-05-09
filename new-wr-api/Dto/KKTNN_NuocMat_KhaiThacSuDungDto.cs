@@ -6,9 +6,8 @@
         public string? ten_ct { get; set; }
         public double? x { get; set; }
         public double? y { get; set; }
-        public string? xa { get; set; }
-        public string? huyen { get; set; }
-        public string? tinh { get; set; }
+        public List<ViTriDto>? vitri { get; set; }
+        public string? tinh { get; set; } = "Quảng Ngãi";
         public string? lv_song { get; set; }
         public string? loai_ct { get; set; }
         public string? nguonnuoc_kt { get; set; }

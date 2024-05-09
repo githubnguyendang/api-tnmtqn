@@ -32,6 +32,7 @@ namespace new_wr_api.Data
         public DbSet<CT_Loai>? CT_Loai { get; set; }
         public DbSet<CT_ThongTin>? CT_ThongTin { get; set; }
         public DbSet<CT_ThongSo>? CT_ThongSo { get; set; }
+        public DbSet<CT_ViTri>? CT_ViTri { get; set; }
         public DbSet<TangChuaNuoc>? TangChuaNuoc { get; set; }
         public DbSet<LuuVucSong>? LuuVucSong { get; set; }
         public DbSet<Song>? Song { get; set; }
@@ -43,7 +44,7 @@ namespace new_wr_api.Data
         public DbSet<MucDichKT>? MucDichKT { get; set; }
 
         //DonViHanhChinh
-        public DbSet<DonViHC>? DonViHC { get; set; }
+        //public DbSet<DonViHC>? DonViHC { get; set; }
         public DbSet<Huyen>? Huyen { get; set; }
         public DbSet<Xa>? Xa { get; set; }
 
@@ -127,12 +128,7 @@ namespace new_wr_api.Data
         public DbSet<BieuMauSoBay>? BieuMauSoBay { get; set; }
         public DbSet<BieuMauSoTam>? BieuMauSoTam { get; set; }
         public DbSet<BieuMauSoChin>? BieuMauSoChin { get; set; }
-        public DbSet<BieuMauSoMuoi>? BieuMauSoMuoi { get; set; }
-        public DbSet<BieuMauSoMuoiMot>? BieuMauSoMuoiMot { get; set; }
-        public DbSet<BieuMauSoMuoiHai>? BieuMauSoMuoiHai { get; set; }
-        public DbSet<BieuMauSoMuoiBa>? BieuMauSoMuoiBa { get; set; }
-        public DbSet<BieuMauSoMuoiBon>? BieuMauSoMuoiBon { get; set; }
-        public DbSet<BieuMauSoMuoiNam>? BieuMauSoMuoiNam { get; set; }
+        public DbSet<BieuMauSoMuoiLam>? BieuMauMuoiLam { get; set; }
         public DbSet<BieuMauSoMuoiSau>? BieuMauSoMuoiSau { get; set; }
         public DbSet<BieuMauSoMuoiBay>? BieuMauSoMuoiBay { get; set; }
         public DbSet<BieuMauSoMuoiTam>? BieuMauSoMuoiTam { get; set; }

@@ -17,6 +17,6 @@
         public double? SulfatMin { get; set; }
         public double? AsenMax { get; set; }
         public double? AsenMin { get; set; }
-        public DonViHCDto? donvi_hanhchinh { get; set; }
+        public ViTriDto? donvi_hanhchinh { get; set; }
     }
 }

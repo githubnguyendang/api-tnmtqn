@@ -39,34 +39,34 @@ namespace new_wr_api.Controllers
             return (await _service.GetAllCommuneByDistrictAsync(id_huyen));
         } 
 
-        [HttpPost]
-        [Route("luu")]
-        public async Task<ActionResult<DonViHC>> Save(DonViHCDto moddel)
-        {
-            var res = await _service.SaveAsync(moddel);
-            if (res == true)
-            {
-                return Ok(new { message = "Dữ liệu đã được lưu" });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lỗi lưu dữ liệu", error = true });
-            }
-        }
+        //[HttpPost]
+        //[Route("luu")]
+        //public async Task<ActionResult<DonViHC>> Save(ViTriDto moddel)
+        //{
+        //    var res = await _service.SaveAsync(moddel);
+        //    if (res == true)
+        //    {
+        //        return Ok(new { message = "Dữ liệu đã được lưu" });
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { message = "Lỗi lưu dữ liệu", error = true });
+        //    }
+        //}
 
-        [HttpGet]
-        [Route("xoa/{Id}")]
-        public async Task<ActionResult<DonViHC>> Delete(int Id)
-        {
-            var res = await _service.DeleteAsync(Id);
-            if (res == true)
-            {
-                return Ok(new { message = "Dữ liệu đã được xóa" });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lỗi xóa dữ liệu", error = true });
-            }
-        }
+        //[HttpGet]
+        //[Route("xoa/{Id}")]
+        //public async Task<ActionResult<DonViHC>> Delete(int Id)
+        //{
+        //    var res = await _service.DeleteAsync(Id);
+        //    if (res == true)
+        //    {
+        //        return Ok(new { message = "Dữ liệu đã được xóa" });
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { message = "Lỗi xóa dữ liệu", error = true });
+        //    }
+        //}
     }
 }

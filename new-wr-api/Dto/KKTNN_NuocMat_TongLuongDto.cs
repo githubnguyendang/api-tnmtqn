@@ -22,6 +22,6 @@ namespace new_wr_api.Dto
         public double? Thang11 { get; set; }
         public double? Thang12 { get; set; }
         public LuuVucSong? LuuVucSong { get; set; }
-        public DonViHCDto? donvi_hanhchinh { get; set; }
+        public ViTriDto? vitri { get; set; }
     }
 }

@@ -62,7 +62,7 @@ services.AddScoped<BieuMauMuoiMotService>();
 services.AddScoped<BieuMauMuoiHaiService>();
 services.AddScoped<BieuMauMuoiBaService>();
 services.AddScoped<BieuMauMuoiBonService>();
-services.AddScoped<BieuMauMuoiNamService>();
+services.AddScoped<BieuMauMuoiLamService>();
 services.AddScoped<BieuMauMuoiSauService>();
 services.AddScoped<BieuMauMuoiBayService>();
 services.AddScoped<BieuMauMuoiTamService>();

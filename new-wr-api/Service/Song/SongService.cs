@@ -33,9 +33,9 @@ namespace new_wr_api.Service
                 item.luuvuc_song = _mapper.Map<LuuVucSongDto>(basin);
                 //Song.Location
                 //var hc_dau = await _context!.DonViHC!.FirstOrDefaultAsync(l => l.IdXa == item.IdXaDauSong.ToString() && l.DaXoa == false);
-                //item.hc_dau = _mapper.Map<DonViHCDto>(hc_dau);
+                //item.hc_dau = _mapper.Map<ViTriDto>(hc_dau);
                 //var hc_cuoi = await _context!.DonViHC!.FirstOrDefaultAsync(l => l.IdXa == item.IdXaCuoiSong.ToString() && l.DaXoa == false);
-                //item.hc_cuoi = _mapper.Map<DonViHCDto>(hc_cuoi);
+                //item.hc_cuoi = _mapper.Map<ViTriDto>(hc_cuoi);
             }
 
             return listItems;

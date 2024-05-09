@@ -31,7 +31,7 @@ namespace new_wr_api.Service
             var soLuongNuocMatDto = _mapper.Map<List<KKTNN_NuocMat_TongLuongDto>>(items);
             foreach (var dto in soLuongNuocMatDto)
             {
-                dto.donvi_hanhchinh = _mapper.Map<DonViHCDto>(await _context.DonViHC!
+                dto.vitri = _mapper.Map<ViTriDto>(await _context.Xa!
                         .FirstOrDefaultAsync(dv => dv.IdXa == dto.LuuVucSong!.IdXa.ToString()));
             }
             return soLuongNuocMatDto;

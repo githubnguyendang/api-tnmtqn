@@ -8,11 +8,11 @@ namespace new_wr_api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class BieuMauSoMuoiNamController : ControllerBase
+    public class BieuMauSoMuoiLamController : ControllerBase
     {
-        private readonly BieuMauMuoiNamService _service;
+        private readonly BieuMauMuoiLamService _service;
 
-        public BieuMauSoMuoiNamController(BieuMauMuoiNamService service)
+        public BieuMauSoMuoiLamController(BieuMauMuoiLamService service)
         {
             _service = service;
         }
@@ -21,14 +21,14 @@ namespace new_wr_api.Controllers
         [Route("danhsach")]
         public async Task<List<BieuMauMuoiLamDto>> GetAll()
         {
-            return await _service.GetAllBieuMauMuoiNamAsync();
+            return await _service.GetAllBieuMauMuoiLamAsync();
         }
 
         [HttpPost]
         [Route("luu")]
-        public async Task<ActionResult<BieuMauSoMuoiNam>> Save(BieuMauMuoiLamDto dto)
+        public async Task<ActionResult<BieuMauSoMuoiLam>> Save(BieuMauMuoiLamDto dto)
         {
-            var res = await _service.SaveBieuMauMuoiNamAsync(dto);
+            var res = await _service.SaveBieuMauMuoiLamAsync(dto);
             if (res == true)
             {
                 return Ok(new { message = "Biểu mẫu: Dữ liệu đã được lưu", id = res });
@@ -44,7 +44,7 @@ namespace new_wr_api.Controllers
         [Route("xoa/{Id}")]
         public async Task<ActionResult> Delete(int Id)
         {
-            var res = await _service.DeleteBieuMauMuoiNamAsync(Id);
+            var res = await _service.DeleteBieuMauMuoiLamAsync(Id);
             if (res == true)
             {
                 return Ok(new { message = "Biểu mẫu: Dữ liệu đã được xóa" });
