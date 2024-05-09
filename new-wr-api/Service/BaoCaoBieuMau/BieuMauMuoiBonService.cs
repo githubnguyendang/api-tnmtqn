@@ -37,16 +37,22 @@ namespace new_wr_api.Service
                     NitrateTrungBinh = Math.Round((double)new[] { cln.NitrateDot1 , cln.NitrateDot2 , cln.NitrateDot3  }.Average()!, 2),
                     AmonilonNhat = new[] { cln.AmoniDot1 , cln.AmoniDot2 , cln.AmoniDot3  }.Max(),
                     AmoniNhoNhat = new[] { cln.AmoniDot1 , cln.AmoniDot2 , cln.AmoniDot3  }.Min(),
-                    AmoniTrungBinh = Math.Round((double)new[] { cln.AmoniDot1 , cln.AmoniDot2 , cln.AmoniDot3  }.Average()!, 2),
+                    AmoniTrungBinh = Math.Round((double)new[] { cln.AmoniDot1 , cln.AmoniDot2 , cln.AmoniDot3  }.Average()!, 3),
                     TDSlonNhat = new[] { cln.TDSDot1 , cln.TDSDot2 , cln.TDSDot3  }.Max(),
                     TDSNhoNhat = new[] { cln.TDSDot1 , cln.TDSDot2 , cln.TDSDot3  }.Min(),
                     TDSTrungBinh = Math.Round((double)new[] { cln.TDSDot1 , cln.TDSDot2 , cln.TDSDot3  }.Average()!, 2),
-                    DoCungLonNhat =new[] { cln.DoCungDot1 ?? 0, cln.DoCungDot2 ??0, cln.DoCungDot3 ?? 0 }.Max(),
-                    DoCungNhoNhat = new[] { cln.DoCungDot1 ?? 0, cln.DoCungDot2 ?? 0, cln.DoCungDot3 ?? 0 }.Min(),
-                    DoCungTrungBinh = Math.Round((double)new[] { cln.DoCungDot1 ?? 0, cln.DoCungDot2 ??0, cln.DoCungDot3 ??0}.Average()!, 2),
-                    ArsenicLonNhat = new[] { cln.ArsenicDot1 ?? 0, cln.ArsenicDot2 ?? 0, cln.ArsenicDot3 ?? 0 }.Max(),
-                    ArsenicNhoNhat = new[] { cln.ArsenicDot1 ?? 0, cln.ArsenicDot2 ?? 0, cln.ArsenicDot3 ?? 0 }.Min(),
-                    ArsenicTrungBinh =Math.Round((double)new[] { cln.ArsenicDot1 ?? 0, cln.ArsenicDot2 ?? 0, cln.ArsenicDot3 ?? 0 }.Average()!, 2),
+                    DoCungLonNhat = cln.DoCungDot1 == null && cln.DoCungDot2 == null && cln.DoCungDot3 == null ? null 
+                    : new[] { cln.DoCungDot1, cln.DoCungDot2, cln.DoCungDot3 }.Max(),
+                    DoCungNhoNhat = cln.DoCungDot1 == null && cln.DoCungDot2 == null && cln.DoCungDot3 == null ? null
+                    : new[] { cln.DoCungDot1, cln.DoCungDot2, cln.DoCungDot3 }.Min(),
+                    DoCungTrungBinh = cln.DoCungDot1 == null && cln.DoCungDot2 == null && cln.DoCungDot3 == null ? null
+                    : Math.Round((double)new[] { cln.DoCungDot1, cln.DoCungDot2, cln.DoCungDot3 }.Average()!, 2),
+                    ArsenicLonNhat = cln.ArsenicDot1 == null && cln.ArsenicDot2 == null && cln.ArsenicDot3 == null ? null 
+                    : new[] { cln.ArsenicDot1, cln.ArsenicDot2, cln.ArsenicDot3 }.Max(),
+                    ArsenicNhoNhat = cln.ArsenicDot1 == null && cln.ArsenicDot2 == null && cln.ArsenicDot3 == null ? null 
+                    : new[] { cln.ArsenicDot1, cln.ArsenicDot2, cln.ArsenicDot3 }.Min(),
+                    ArsenicTrungBinh = cln.ArsenicDot1 == null && cln.ArsenicDot2 == null && cln.ArsenicDot3 == null ? null 
+                    : Math.Round((double)new[] { cln.ArsenicDot1, cln.ArsenicDot2, cln.ArsenicDot3 }.Average()!, 4),
                     ChlorideLonNhat = new[] { cln.ChlorideDot1 , cln.ChlorideDot2 , cln.ChlorideDot3  }.Max(),
                     ChlorideNhoNhat = new[] { cln.ChlorideDot1 , cln.ChlorideDot2 , cln.ChlorideDot3  }.Min(),
                     ChlorideTrungBinh = Math.Round((double)new[] { cln.ChlorideDot1 , cln.ChlorideDot2 , cln.ChlorideDot3  }.Average()!, 2),
@@ -59,6 +65,8 @@ namespace new_wr_api.Service
 
             return ttdlDto;
         }
+
+
     }
 }
 

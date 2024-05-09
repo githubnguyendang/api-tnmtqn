@@ -34,7 +34,7 @@ namespace new_wr_api.Service.BaoCaoBieuMau
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
                 .Include(ct => ct.LuuLuongTheoMucDich)
-                .Where(ct => ct.LoaiCT!.IdCha == 1 || ct.LoaiCT.IdCha == 2)
+                .Where(ct => ct.LoaiCT!.IdCha == 1 || ct.LoaiCT.Id == 7)
                 .OrderBy(x => x.IdLoaiCT)
                 .AsQueryable();
 
