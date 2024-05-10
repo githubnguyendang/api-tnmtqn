@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using new_wr_api.Dto;
 using new_wr_api.Service;
+using new_wr_api.Service.BaoCaoBieuMau;
 
 namespace new_wr_api.Controllers
 {
@@ -13,14 +14,22 @@ namespace new_wr_api.Controllers
         private readonly BieuMauMuoiHaiService _bm12;
         private readonly BieuMauMuoiBaService _bm13;
         private readonly BieuMauMuoiBonService _bm14;
+        private readonly BieuMauHaiMuoiService _bm20;
 
-        public BaoCaoBieuMauController(BieuMauMuoiService bm10, BieuMauMuoiMotService bm11, BieuMauMuoiHaiService bm12, BieuMauMuoiBaService bm13, BieuMauMuoiBonService bm14)
+        public BaoCaoBieuMauController(BieuMauMuoiService bm10,
+                                        BieuMauMuoiMotService bm11,
+                                        BieuMauMuoiHaiService bm12,
+                                        BieuMauMuoiBaService bm13,
+                                        BieuMauMuoiBonService bm14,
+                                        BieuMauHaiMuoiService bm20
+            )
         {
             _bm10 = bm10;
             _bm11 = bm11;
             _bm12 = bm12;
             _bm13 = bm13;
             _bm14 = bm14;
+            _bm20 = bm20;
         }
 
         [HttpGet]
@@ -56,6 +65,13 @@ namespace new_wr_api.Controllers
         public async Task<List<BieuMauMuoiBonDto>> BieuMau14([FromQuery] int? nam)
         {
             return await _bm14.GetAllAsync(nam);
+        }
+
+        [HttpGet]
+        [Route("so20")]
+        public async Task<List<CT_ThongTinDto>> GetAll()
+        {
+            return await _bm20.GetAllAsync();
         }
     }
 }

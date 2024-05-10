@@ -53,22 +53,12 @@ namespace new_wr_api.Helpers
                 .ForMember(dest => dest.loaiCT, opt => opt.MapFrom(src => src.LoaiCT))
                 .ForMember(dest => dest.hangmuc, opt => opt.MapFrom(src => src.HangMuc))
                 .ForMember(dest => dest.thongso, opt => opt.MapFrom(src => src.ThongSo))
-                .ForMember(dest => dest.vitri, opt => opt.MapFrom(src => src.CT_ViTri!
-                .Where(v => v.Xa != null && v.Xa.Huyen != null)
-                .GroupBy(v => v.Xa!.Huyen!.IdHuyen)
-                .Select(g => new ViTriDto
-                {
-                    IdHuyen = g.Key,
-                    TenHuyen = g.First().Xa!.Huyen!.TenHuyen,
-                    Xa = g.Select(x => new XaDto
-                    {
-                        IdXa = x.Xa!.IdXa,
-                        TenXa = x.Xa.TenXa
-                    }).ToList()
-                })))
                 .ForMember(dest => dest.giayphep, opt => opt.MapFrom(src => src.GiayPhep))
                 .ForMember(dest => dest.luuluongtheo_mucdich, opt => opt.MapFrom(src => src.LuuLuongTheoMucDich))
-            .ReverseMap();
+                .ForMember(dest => dest.huyen, opt => opt.MapFrom(src => src.CT_ViTri!.Where(v => v.Huyen != null).Select(v => v.Huyen).GroupBy(h => h.IdHuyen).Select(g => g.First()).ToList()))
+                .ForMember(dest => dest.xa, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Xa).ToList()))
+                .ReverseMap();
+
 
             CreateMap<CT_ViTri, ViTriDto>()
             .ForMember(dest => dest.Xa, opt => opt.MapFrom(src => src.Xa))
@@ -87,25 +77,6 @@ namespace new_wr_api.Helpers
             .ForMember(dest => dest.congtrinh, opt => opt.MapFrom(src => src.CongTrinh))
             .ForMember(dest => dest.gp_tcq, opt => opt.MapFrom(src => src.GP_TCQ))
             .ForMember(dest => dest.tiencq, opt => opt.MapFrom((src, dest) => dest.tiencq))
-            .AfterMap((src, dest) =>
-            {
-                if (src.CongTrinh != null && src.CongTrinh.CT_ViTri != null)
-                {
-                    dest.congtrinh!.vitri = src.CongTrinh.CT_ViTri
-                        .Where(v => v.Xa != null && v.Xa.Huyen != null)
-                        .GroupBy(v => v.Xa!.Huyen!.IdHuyen)
-                        .Select(g => new ViTriDto
-                        {
-                            IdHuyen = g.Key,
-                            TenHuyen = g.First().Xa!.Huyen!.TenHuyen,
-                            Xa = g.Select(x => new XaDto
-                            {
-                                IdXa = x.Xa!.IdXa,
-                                TenXa = x.Xa.TenXa
-                            }).ToList()
-                        }).ToList();
-                }
-            })
             .ReverseMap();
 
             CreateMap<GP_TCQ, GP_TCQDto>().ReverseMap();
@@ -217,19 +188,8 @@ namespace new_wr_api.Helpers
                  .ForMember(dest => dest.mucdich_kt, opt => opt.MapFrom(src => src.MucDichKTSD!.MucDich))
                  .ForMember(dest => dest.dungtich_ho, opt => opt.MapFrom(src => src.ThongSo!.DungTichToanBo))
                  .ForMember(dest => dest.congsuat, opt => opt.MapFrom(src => src.ThongSo!.CongSuatLM))
-                 .ForMember(dest => dest.vitri, opt => opt.MapFrom(src => src.CT_ViTri!
-                    .Where(v => v.Xa != null && v.Xa.Huyen != null)
-                    .GroupBy(v => v.Xa!.Huyen!.IdHuyen)
-                    .Select(g => new ViTriDto
-                    {
-                        IdHuyen = g.Key,
-                        TenHuyen = g.First().Xa!.Huyen!.TenHuyen,
-                        Xa = g.Select(x => new XaDto
-                        {
-                            IdXa = x.Xa!.IdXa,
-                            TenXa = x.Xa.TenXa
-                        }).ToList()
-                    })))
+                 .ForMember(dest => dest.huyen, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Huyen).ToList()))
+                 .ForMember(dest => dest.xa, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Xa).ToList()))
                  .ForMember(dest => dest.q_kt_tuoi, opt => opt.MapFrom(src => src.MucDichKTSD!.Id == 4 ? src.ThongSo!.QMaxKT : null))
                  .ForMember(dest => dest.q_kt_kddv_sx_phi_nn, opt => opt.MapFrom(src => new List<int> { 2, 3 }.Contains(src.MucDichKTSD!.Id) ? src.ThongSo!.QMaxKT * 86400 : null))
                  .ForMember(dest => dest.mucdich_khac, opt => opt.MapFrom(src => !new List<int> { 2, 3, 4 }.Contains(src.MucDichKTSD!.Id) ? src.ThongSo!.QMaxKT * 86400 : null))

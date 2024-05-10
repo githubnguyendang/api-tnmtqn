@@ -18,6 +18,7 @@ namespace new_wr_api.Data
 
         // Navigation property to represent the one-to-many relationship
         public virtual ICollection<Xa>? Xa { get; set; }
+        public virtual ICollection<CT_ViTri>? CT_ViTri { get; set; }
         public virtual ICollection<Tram_ThongTin>? Tram { get; set; }
     }
 

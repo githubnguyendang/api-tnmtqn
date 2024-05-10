@@ -11,6 +11,7 @@ namespace new_wr_api.Data
         public int Id { get; set; }
         public int IdCongTrinh { get; set; }
         public string? IdXa { get; set; }
+        public string? IdHuyen { get; set; }
 
         // Navigation property to represent the relationship
         [ForeignKey("IdCongTrinh")]
@@ -18,5 +19,8 @@ namespace new_wr_api.Data
 
         [ForeignKey("IdXa")]
         public virtual Xa? Xa { get; set; }
+
+        [ForeignKey("IdHuyen")]
+        public virtual Huyen? Huyen { get; set; }
     }
 }
