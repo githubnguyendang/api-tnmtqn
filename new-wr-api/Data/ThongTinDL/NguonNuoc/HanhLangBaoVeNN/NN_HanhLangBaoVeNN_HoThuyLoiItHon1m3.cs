@@ -9,7 +9,9 @@ namespace new_wr_api.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? Ten { get; set; }
+        public string? LoaiHo { get; set; }
         public string? XaPhuongTT { get; set; }
+        public string? DiaPhanHanhChinh { get; set; }
         public string? HuyenTP { get; set; }
         public double? DungTichHo106m3 { get; set; }
         public string? PhamViHanhLang { get; set; }

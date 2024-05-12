@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240512162337_HanhLangBaoVe")]
+    partial class HanhLangBaoVe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2425,17 +2428,12 @@ namespace new_wr_api.Migrations
                     b.Property<int>("IdCongTrinh")
                         .HasColumnType("int");
 
-                    b.Property<string>("IdHuyen")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("IdXa")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdCongTrinh");
-
-                    b.HasIndex("IdHuyen");
 
                     b.HasIndex("IdXa");
 
@@ -6970,17 +6968,11 @@ namespace new_wr_api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("new_wr_api.Data.Huyen", "Huyen")
-                        .WithMany("CT_ViTri")
-                        .HasForeignKey("IdHuyen");
-
                     b.HasOne("new_wr_api.Data.Xa", "Xa")
                         .WithMany("CT_ViTri")
                         .HasForeignKey("IdXa");
 
                     b.Navigation("CongTrinh");
-
-                    b.Navigation("Huyen");
 
                     b.Navigation("Xa");
                 });
@@ -7302,8 +7294,6 @@ namespace new_wr_api.Migrations
 
             modelBuilder.Entity("new_wr_api.Data.Huyen", b =>
                 {
-                    b.Navigation("CT_ViTri");
-
                     b.Navigation("Tram");
 
                     b.Navigation("Xa");
