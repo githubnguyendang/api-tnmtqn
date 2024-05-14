@@ -24,15 +24,18 @@ namespace new_wr_api.Service.BaoCaoBieuMau
             _context.Database.SetCommandTimeout(120);
 
             var query = _context.CT_ThongTin!
-                .Where(ct => ct.DaXoa == false)
+                 .Where(ct => ct.DaXoa == false)
                 .Include(ct => ct.LoaiCT)
                 .Include(ct => ct.TangChuaNuoc)
                 .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
                 .Include(ct => ct.ThongSo)
-                .Include(ct => ct!.CT_ViTri!).ThenInclude(vt => vt.Xa)
-                .Include(ct => ct!.CT_ViTri!).ThenInclude(vt => vt.Huyen)
-                .Include(ct => ct.LuuLuongTheoMucDich)
-                .Where(ct => ct.LoaiCT!.IdCha == 1 || ct.LoaiCT.Id == 7)
+                .Include(ct => ct.LuuVuc)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Huyen)
+                .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
+                .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
+                .Include(ct => ct.LuuLuongTheoMucDich!).ThenInclude(lld => lld.MucDichKT)
+                .Where(ct => ct.LoaiCT!.IdCha == 1 || ct.LoaiCT.Id == 7 || ct.LoaiCT.Id == 10)
                 .OrderBy(x => x.IdLoaiCT)
                 .AsQueryable();
 

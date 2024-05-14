@@ -19,7 +19,7 @@ namespace new_wr_api.Service
         }
         public async Task<List<BieuMauMuoiMotDto>> GetAllAsync()
         {
-            var ids = new HashSet<int?> { 4, 5, 10, 11, 12, 6, 14, 7, 15 };
+            var ids = new HashSet<int?> { 4, 5, 6, 7, 10, 11, 12, 13, 14, 15 };
 
             var items = await _context.LuuVucSong!
                  .Where(lvs => lvs.Id > 0)
@@ -32,8 +32,8 @@ namespace new_wr_api.Service
                      CongTrinhDapDang = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 11 && ct.DaXoa == false).Count(),
                      CongTrinhCong = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 12 && ct.DaXoa == false).Count(),
                      CongTrinhTramBom = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 6 && ct.DaXoa == false).Count(),
-                     CongTrinhKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 14 || ct.IdLoaiCT == 10 || ct.IdLoaiCT == 4 && ct.DaXoa == false).Count(),
-                     CongTrinhGieng = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 && ct.DaXoa == false).Count(),
+                     CongTrinhKhacNuocMat = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 14 || ct.IdLoaiCT == 13 || ct.IdLoaiCT == 4 && ct.DaXoa == false).Count(),
+                     CongTrinhGieng = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 7 || ct.IdLoaiCT == 10 && ct.DaXoa == false).Count(),
                      CongTrinhKhacNDD = lvs.CongTrinh!.Where(ct => ct.IdLoaiCT == 15 && ct.DaXoa == false).Count(),
                  })
                  .ToListAsync();

@@ -84,6 +84,12 @@ namespace new_wr_api.Helpers
                 {
                     // Calculate the total LuuLuong after mapping
                     dest.TongLuuLuong = Math.Round((double)dest.mucdich_kt.SelectMany(mk => mk.LuuLuong!).Sum(ll => ll.LuuLuong!), 2);
+
+                    // Check if any 'MucDich' in 'mucdich_kt' contains the term "phát điện"
+                    bool hasPhatDien = dest.mucdich_kt.Any(md => md.MucDich != null && md.MucDich.ToLower().Contains("phát điện"));
+
+                    // Set 'DonViTinhLuuLuong' based on the presence of "phát điện"
+                    dest.DonViTinhLuuLuong = dest.TongLuuLuong != 0 ? hasPhatDien ? "MW" : "m3/ngày đêm" : "";
                 })
             .ReverseMap();
 

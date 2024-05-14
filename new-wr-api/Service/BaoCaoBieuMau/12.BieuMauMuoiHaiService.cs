@@ -25,23 +25,23 @@ namespace new_wr_api.Service
                      Id = lvs.Id,
                      TenLVS = lvs.TenLVS,
                      TongCongTrinh = lvs.CongTrinh!
-                                    .Count(ct => ct.DaXoa == false && ct.LoaiCT!.IdCha == 1 || ct.IdLoaiCT == 7),
+                                    .Count(ct => ct.DaXoa == false && ct.LoaiCT!.IdCha == 1 || ct.IdLoaiCT == 7 || ct.IdLoaiCT == 10),
                      TuoiNguonNuocMat = Math.Round((double)(lvs.CongTrinh!
                                         .Where(ct => ct.IdLoaiCT == 5 && ct.DaXoa == false)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
-                                        .Where(lld => lld.IdMucDich == 5)
+                                        .Where(lld => lld.MucDichKT.MucDich!.ToLower().Contains("tưới"))
                                         .Sum(lld => lld.LuuLuong) / 86400), 2), //convert m3/day to m3/s
                      TuoiNguonNuocDuoiDat = 0,
                      KhaiThacThuyDien = Math.Round((double)lvs.CongTrinh!
                                          .Where(ct => ct.IdLoaiCT == 4 && ct.DaXoa == false)
                                          .Sum(ct => ct.ThongSo != null ? ct.ThongSo.CongSuatLM : 0), 2),
                      MucDichKhacNguonNuocMat = Math.Round((double)lvs.CongTrinh!
-                                        .Where(ct => ct.LoaiCT!.IdCha == 1 && ct.IdLoaiCT != 5 && ct.DaXoa == false)
+                                        .Where(ct => ct.LoaiCT!.IdCha == 1 && ct.IdLoaiCT != 5 && ct.IdLoaiCT != 4 && ct.DaXoa == false)
                                         .SelectMany(ct => ct.LuuLuongTheoMucDich!)
-                                        .Where(lld => lld.IdMucDich != 5)
+                                        .Where(lld => !lld.MucDichKT.MucDich.ToLower().Contains("tưới"))
                                         .Sum(lld => lld.LuuLuong), 2),
                      MucDichKhacNguonNuocDD = Math.Round((double)lvs.CongTrinh!
-                                        .Where(ct => ct.IdLoaiCT == 7 && ct.DaXoa == false)
+                                        .Where(ct => ct.IdLoaiCT == 7 || ct.IdLoaiCT == 10 && ct.DaXoa == false)
                                         .Sum(ct => ct.ThongSo.QKTLonNhat), 2),
                  })
                  .ToListAsync();

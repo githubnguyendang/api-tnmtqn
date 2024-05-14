@@ -52,7 +52,9 @@ namespace new_wr_api.Dto
         //Muc dich kt va  luu luong
         [JsonPropertyName("mucdich_kt")]
         public List<MucDichKTDto>? mucdich_kt { get; set; }
-        
+
         public double? TongLuuLuong { get; set; }
+        public string? DonViTinhLuuLuong { get; set; }
+
     }
 }
