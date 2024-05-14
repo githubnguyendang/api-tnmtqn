@@ -14,7 +14,6 @@ namespace new_wr_api.Data
         public int? IdLuuVuc { get; set; }
         public int? IdTieuLuuVuc { get; set; }
         public int? IdTangChuaNuoc { get; set; }
-        public int? IdMucDichKT { get; set; }
         public string? TenCT { get; set; }
         public string? MaCT { get; set; }
         public string? ViTriCT { get; set; }
@@ -57,9 +56,6 @@ namespace new_wr_api.Data
 
         [ForeignKey("IdLuuVuc")]
         public virtual LuuVucSong? LuuVuc { get; set; }
-
-        [ForeignKey("IdMucDichKT")]
-        public virtual MucDichKT? MucDichKTSD { get; set; }
 
         public virtual CT_ThongSo? ThongSo { get; set; }
         public virtual ICollection<CT_HangMuc>? HangMuc { get; set; }

@@ -1,5 +1,6 @@
 ﻿using new_wr_api.Data;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace new_wr_api.Dto
 {
@@ -40,11 +41,18 @@ namespace new_wr_api.Dto
         public bool? DaXoa { get; set; }
 
         public CT_LoaiDto? loaiCT { get; set; }
+        public LuuVucSongDto? luuvuc { get; set; }
         public List<CT_HangMucDto>? hangmuc { get; set; }
         public CT_ThongSoDto? thongso { get; set; }
         public List<XaDto>? xa { get; set; }
         public List<HuyenDto>? huyen { get; set; }
         public List<GP_ThongTinDto>? giayphep { get; set; }
-        public List<LuuLuongTheoMucDichDto>? luuluongtheo_mucdich { get; set; }
+
+
+        //Muc dich kt va  luu luong
+        [JsonPropertyName("mucdich_kt")]
+        public List<MucDichKTDto>? mucdich_kt { get; set; }
+        
+        public double? TongLuuLuong { get; set; }
     }
 }

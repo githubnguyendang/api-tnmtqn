@@ -15,7 +15,6 @@ namespace new_wr_api.Data
         public string? TaiKhoanSua { get; set; }
         public bool? DaXoa { get; set; }
 
-        public virtual ICollection<CT_ThongTin>? CongTrinh { get; set; }
         public virtual ICollection<LuuLuongTheoMucDich>? LuuLuongTheoMucDich { get; set; }
     }
 }

@@ -33,11 +33,12 @@ namespace new_wr_api.Service
                 .Include(ct => ct.TangChuaNuoc)
                 .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
                 .Include(ct => ct.ThongSo)
+                .Include(ct => ct.LuuVuc)
                 .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa)
                 .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Huyen)
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
                 .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
-                .Include(ct => ct.LuuLuongTheoMucDich)
+                .Include(ct => ct.LuuLuongTheoMucDich!).ThenInclude(lld => lld.MucDichKT)
                 .OrderBy(x => x.IdLoaiCT)
                 .AsQueryable();
 
@@ -152,7 +153,7 @@ namespace new_wr_api.Service
         private async Task PopulateDataAsync(CT_ThongTinDto dto)
         {
             dto.hangmuc = _mapper.Map<List<CT_HangMucDto>>(dto.hangmuc!.Where(x => x.DaXoa == false));
-            dto.luuluongtheo_mucdich = _mapper.Map<List<LuuLuongTheoMucDichDto>>(dto.luuluongtheo_mucdich!.Where(x => x.DaXoa == false));
+            //dto.luuluongtheo_mucdich = _mapper.Map<List<LuuLuongTheoMucDichDto>>(dto.luuluongtheo_mucdich!.Where(x => x.DaXoa == false));
 
             dto.giayphep = _mapper.Map<List<GP_ThongTinDto>>(dto.giayphep!.Where(x => x.DaXoa == false));
 

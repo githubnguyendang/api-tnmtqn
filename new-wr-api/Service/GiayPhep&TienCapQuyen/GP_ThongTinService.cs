@@ -33,13 +33,15 @@ namespace new_wr_api.Service
                 .Where(gp => gp.DaXoa == false)
                 .Include(gp => gp.LoaiGP)
                 .Include(gp => gp.ToChuc_CaNhan)
+                .Include(gp => gp.GP_TCQ!).ThenInclude(gp => gp.TCQ_ThongTin)
                 .Include(gp => gp.CongTrinh)
+                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.HangMuc!)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.HangMuc!).ThenInclude(hm => hm!.ThongSo)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.ThongSo)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LoaiCT)
-                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LuuLuongTheoMucDich)
+                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LuuVuc)
+                .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.LuuLuongTheoMucDich!).ThenInclude(lld => lld.MucDichKT)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.CT_ViTri!).ThenInclude(vt => vt.Xa!).ThenInclude(x => x.Huyen)
-                .Include(gp => gp.GP_TCQ)
                 .OrderBy(x => x.NgayKy)
                 .AsQueryable();
 
@@ -186,30 +188,7 @@ namespace new_wr_api.Service
 
         private async Task PopulateDataAsync(GP_ThongTinDto dto)
         {
-            if (dto.congtrinh != null)
-            {
-                dto.congtrinh!.giayphep = null;
-                dto.congtrinh.hangmuc = dto.congtrinh.hangmuc != null ? _mapper.Map<List<CT_HangMucDto>>(dto.congtrinh.hangmuc!.Where(x => x.DaXoa == false)) : null;
-                dto.congtrinh.luuluongtheo_mucdich = dto.congtrinh.luuluongtheo_mucdich != null ? _mapper.Map<List<LuuLuongTheoMucDichDto>>(dto.congtrinh.luuluongtheo_mucdich!.Where(x => x.DaXoa == false)) : null;
-            }
 
-            var gp_cu = await _context.GP_ThongTin!.FirstOrDefaultAsync(gp => gp.Id == dto.IdCon && gp.DaXoa == false);
-            if (gp_cu != null)
-            {
-                dto.giayphep_cu = _mapper.Map<GP_ThongTinDto>(gp_cu);
-            }
-
-            // Assuming this code is within an async method
-            var tcqIds = dto.gp_tcq!.Select(x => x.IdTCQ).ToList();
-
-            var tcqThongTinList = await _context.TCQ_ThongTin!
-                .Where(x => tcqIds.Contains(x.Id) && x.DaXoa == false)
-                .OrderBy(x => x.Id)
-                .ToListAsync();
-
-            dto.tiencq = _mapper.Map<List<TCQ_ThongTinDto>>(tcqThongTinList);
-
-            dto.gp_tcq = null;
         }
 
         // Method to count the number of GP_ThongTin entities based on licensing authorities

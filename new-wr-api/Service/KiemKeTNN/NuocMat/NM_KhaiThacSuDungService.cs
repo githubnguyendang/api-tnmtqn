@@ -28,7 +28,7 @@ namespace new_wr_api.Service
                 //.Include(d => d.Huyen)
                 .Include(d => d.LoaiCT)
                 .Include(d => d.ThongSo)
-                .Include(d => d.MucDichKTSD)
+                //.Include(d => d.MucDichKTSD)
                 .Include(d => d.LuuLuongTheoMucDich)
                 .ToListAsync();
 
@@ -38,12 +38,12 @@ namespace new_wr_api.Service
 
             var sxnn_ntts = items
                 .Where(c => c.LoaiCT != null && new List<int> { 5, 6 }.Contains(c.LoaiCT.Id)
-                            && c.MucDichKTSD != null && new List<int> { 4, 5 }.Contains(c.MucDichKTSD.Id)
+                            //&& c.MucDichKTSD != null && new List<int> { 4, 5 }.Contains(c.MucDichKTSD.Id)
                             && c.ThongSo!.QMaxKT > 0.1);
 
             var kddv_sxpnn = items
                 .Where(c => c.LoaiCT != null && new List<int> { 4, 5, 6 }.Contains(c.LoaiCT.Id)
-                            && c.MucDichKTSD != null && new List<int> { 2, 3 }.Contains(c.MucDichKTSD.Id)
+                            //&& c.MucDichKTSD != null && new List<int> { 2, 3 }.Contains(c.MucDichKTSD.Id)
                             && c.ThongSo!.QKhaiThac > 0.00116 && c.ThongSo.CongSuatLM > 50);
 
             // Combine filtered data from different categories
