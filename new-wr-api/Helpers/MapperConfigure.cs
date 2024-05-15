@@ -122,6 +122,7 @@ namespace new_wr_api.Helpers
                 .ForMember(dest => dest.tochuc_canhan, opt => opt.MapFrom(src => src.ToChuc_CaNhan))
                 .ForMember(dest => dest.loaiGP, opt => opt.MapFrom(src => src.LoaiGP))
                 .ForMember(dest => dest.congtrinh, opt => opt.MapFrom(src => src.CongTrinh))
+                .ForMember(dest => dest.giayphep_cu, opt => opt.MapFrom(src => src.giayphep_cu))
                 .ForMember(dest => dest.tiencq, opt => opt.MapFrom(src => src.GP_TCQ!.Select(tcq => tcq.TCQ_ThongTin).ToList()))
                 .ReverseMap();
 

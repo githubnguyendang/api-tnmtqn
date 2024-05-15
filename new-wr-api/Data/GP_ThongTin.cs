@@ -40,5 +40,12 @@ namespace new_wr_api.Data
         public virtual ToChuc_CaNhan? ToChuc_CaNhan { get; set; }
 
         public virtual ICollection<GP_TCQ>? GP_TCQ { get; set; }
+
+        // Navigation property to represent the relationship to the old license
+        [ForeignKey("IdCon")]
+        public virtual GP_ThongTin? giayphep_cu { get; set; } // The older GP this one replaces or revokes
+
+        // Assuming a collection for history tracking if necessary
+        public virtual ICollection<GP_ThongTin> HistoryGPs { get; set; } = new List<GP_ThongTin>();
     }
 }

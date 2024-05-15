@@ -35,6 +35,7 @@ namespace new_wr_api.Service
                 .Include(gp => gp.ToChuc_CaNhan)
                 .Include(gp => gp.GP_TCQ!).ThenInclude(gp => gp.TCQ_ThongTin)
                 .Include(gp => gp.CongTrinh)
+                .Include(gp => gp.giayphep_cu)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.HangMuc!)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.HangMuc!).ThenInclude(hm => hm!.ThongSo)
                 .Include(gp => gp.CongTrinh).ThenInclude(ct => ct!.ThongSo)
