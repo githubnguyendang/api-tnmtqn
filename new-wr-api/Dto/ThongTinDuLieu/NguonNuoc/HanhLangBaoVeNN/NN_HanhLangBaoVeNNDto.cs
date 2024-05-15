@@ -40,8 +40,9 @@
 
     public class NN_HanhLangBaoVeNN_SongSuoiDto
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string? DoanSong { get; set; }
+        public string? TenSong { get; set; }
         public double? ChieuDai { get; set; }
         public string? DiaPhanHanhChinh { get; set; }
         public string? Huyen { get; set; }
@@ -51,6 +52,6 @@
         public double? YDiemCuoi { get; set; }
         public string? ChucNang { get; set; }
         public string? PhamViHanhLangBaoVe { get; set; }
-        public DateTime? ThoiGianThucHien { get; set; }
+        public string? ThoiGianThucHien { get; set; }
     }
 }

@@ -18,9 +18,15 @@
 
     public class NN_CNNN_SongSuoiDto
     {
-        public int? Id { get; set; }
-        public string? MaSong { get; set; }
+        public int Id { get; set; }
+        public string? MaSong1 { get; set; }
+        public string? MaSong2 { get; set; }
+        public string? MaSong3 { get; set; }
+        public string? MaSong4 { get; set; }
+        public string? MaSong5 { get; set; }
+        public string? MaSong6 { get; set; }
         public string? TenSongSuoi { get; set; }
+        public string? PhanDoan { get; set; }
         public double? ChayRa { get; set; }
         public double? ChieuDai { get; set; }
         public string? DiaPhanHanhChinh { get; set; }
@@ -31,6 +37,7 @@
         public double? YDiemCuoi { get; set; }
         public string? ChucNangNguonNuoc { get; set; }
         public string? MucTieuChatLuong { get; set; }
+        public DateTime? ThoiGianThucHien { get; set; }
     }
 
     public class NN_CNNN_TangChuaNuocDto

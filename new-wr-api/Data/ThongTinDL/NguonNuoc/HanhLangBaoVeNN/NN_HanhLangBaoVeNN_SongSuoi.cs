@@ -9,6 +9,7 @@ namespace new_wr_api.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string? DoanSong { get; set; }
+        public string? TenSong { get; set; }
         public double? ChieuDai { get; set; }
         public string? DiaPhanHanhChinh { get; set; }
         public string? Huyen { get; set; }
@@ -18,7 +19,7 @@ namespace new_wr_api.Data
         public double? YDiemCuoi { get; set; }
         public string? ChucNang { get; set; }
         public string? PhamViHanhLangBaoVe { get; set; }
-        public DateTime? ThoiGianThucHien { get; set; }
+        public string? ThoiGianThucHien { get; set; }
         public DateTime? ThoiGianTao { get; set; }
         public string? TaiKhoanTao { get; set; }
         public DateTime? ThoiGianSua { get; set; }

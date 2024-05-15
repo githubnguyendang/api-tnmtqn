@@ -81,6 +81,7 @@ namespace new_wr_api.Dto
         public int Total { get; set; } = 0;
         public int Btnmt { get; set; } = 0;
         public int Ubndt { get; set; } = 0;
+        public int Stnmt { get; set; } = 0;
     }
 
     public class CountFolowConstructionTypesDto
