@@ -71,26 +71,40 @@ namespace new_wr_api.Helpers
                 {
                     Id = g.Key,
                     MucDich = g.First().MucDichKT!.MucDich,
-                    LuuLuong = g.SelectMany(l => l.MucDichKT!.LuuLuongTheoMucDich!
-                        .Where(ll => ll != null && ll.CT_ThongTin!.Id == src.Id && ll.DaXoa == false)
-                        .Select(ll => new LuuLuongDto
-                        {
-                            Id = ll.Id,
-                            LuuLuong = ll.LuuLuong,
-                            DonViDo = ll.DonViDo
-                        })).ToList()
+                    LuuLuong = new LuuLuongDto
+                    {
+                        Id = g.First().Id,
+                        IdMucDich = g.First().IdMucDich,
+                        IdCT = g.First().IdCT,
+                        LuuLuong = g.Sum(ll => ll.MucDichKT!.LuuLuongTheoMucDich!.Where(llmd => llmd.CT_ThongTin!.Id == src.Id && llmd.DaXoa == false).Sum(llmd => llmd.LuuLuong ?? 0)),
+                        DonViDo = g.First().MucDichKT!.LuuLuongTheoMucDich!.Where(lld => lld.DaXoa == false).First().DonViDo
+                    }
                 }).ToList() : new List<MucDichKTDto>()))
-                .AfterMap((src, dest) =>
-                {
-                    // Calculate the total LuuLuong after mapping
-                    dest.TongLuuLuong = Math.Round((double)dest.mucdich_kt.SelectMany(mk => mk.LuuLuong!).Sum(ll => ll.LuuLuong!), 2);
+              .AfterMap((src, dest) =>
+              {
+                  // Assuming `dest.mucdich_kt` is a List<MucDichKTDto> and each `mk.LuuLuong` is not null
+                  if (dest.mucdich_kt != null)
+                  {
+                      // Sum up all LuuLuong values safely considering they could be null.
+                      dest.TongLuuLuong = dest.mucdich_kt
+                          .Where(mk => mk.LuuLuong != null && mk.LuuLuong.LuuLuong.HasValue)
+                          .Sum(mk => mk.LuuLuong!.LuuLuong!.Value);
 
-                    // Check if any 'MucDich' in 'mucdich_kt' contains the term "phát điện"
-                    bool hasPhatDien = dest.mucdich_kt.Any(md => md.MucDich != null && md.MucDich.ToLower().Contains("phát điện"));
+                      // Round the total LuuLuong value to two decimal places.
+                      dest.TongLuuLuong = Math.Round((double)dest.TongLuuLuong, 2);
 
-                    // Set 'DonViTinhLuuLuong' based on the presence of "phát điện"
-                    dest.DonViTinhLuuLuong = dest.TongLuuLuong != 0 ? hasPhatDien ? "MW" : "m3/ngày đêm" : "";
-                })
+                      // Determine the unit of measure. Assuming the same unit can be applied across all entries.
+                      // Here, we select the first non-null `DonViDo`. You might need a more complex logic based on your requirements.
+                      dest.DonViTinhLuuLuong = dest.mucdich_kt
+                          .Select(x => x.LuuLuong?.DonViDo)
+                          .FirstOrDefault(x => x != null) ?? "";
+                  }
+                  else
+                  {
+                      dest.TongLuuLuong = 0;
+                      dest.DonViTinhLuuLuong = "";
+                  }
+              })
             .ReverseMap();
 
             CreateMap<MucDichKT, MucDichKTDto>()

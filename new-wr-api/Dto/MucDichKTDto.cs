@@ -5,7 +5,9 @@ namespace new_wr_api.Data
 {
     public class LuuLuongDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
+        public int? IdCT { get; set; }
+        public int? IdMucDich { get; set; }
         public double? LuuLuong { get; set; }
         public string? DonViDo { get; set; }
     }
@@ -15,6 +17,6 @@ namespace new_wr_api.Data
         public int Id { get; set; }
         public string? MucDich { get; set; }
 
-        public List<LuuLuongDto>? LuuLuong { get; set; }
+        public LuuLuongDto? LuuLuong { get; set; }
     }
 }
