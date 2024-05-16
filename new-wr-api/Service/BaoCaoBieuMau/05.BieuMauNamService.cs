@@ -15,9 +15,9 @@ namespace new_wr_api.Service
             _context = context;
             _mapper = mapper;
         }
-        public async Task<List<BieuMauNamDto>> GetAllBieuMauNamAsync()
+        public async Task<List<BieuMauNamDto>> GetAllBieuMauNamAsync(int? nam)
         {
-            var items = await _context.BieuMauSoNam!.Where(x => x.Id > 0).ToListAsync();
+            var items = await _context.BieuMauSoNam!.Where(x => x.Id > 0 && x.Nam == nam).ToListAsync();
             return _mapper.Map<List<BieuMauNamDto>>(items);
         }
 

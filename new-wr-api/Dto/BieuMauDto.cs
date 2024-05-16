@@ -74,6 +74,7 @@
     public class BieuMauNamDto
     {
         public int? Id { get; set; }
+        public int? Nam { get; set; }
         public string? TenTram { get; set; }
         public double? LuuLuongThang1 { get; set; }
         public double? LuuLuongThang2 { get; set; }
@@ -87,7 +88,7 @@
         public double? LuuLuongThang10 { get; set; }
         public double? LuuLuongThang11 { get; set; }
         public double? LuuLuongThang12 { get; set; }
-        public double? LuuLuongNam { get; set; }
+        public double? LuuLuongNam => Math.Round((double)new[] { LuuLuongThang1, LuuLuongThang2, LuuLuongThang3, LuuLuongThang4, LuuLuongThang5, LuuLuongThang6, LuuLuongThang7, LuuLuongThang8, LuuLuongThang9, LuuLuongThang10, LuuLuongThang11, LuuLuongThang12, }.Average()!, 2);
         public string? GhiChu { get; set; }
     }
 

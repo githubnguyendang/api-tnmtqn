@@ -19,9 +19,9 @@ namespace new_wr_api.Controllers
 
         [HttpGet]
         [Route("danhsach")]
-        public async Task<List<BieuMauNamDto>> GetAll()
+        public async Task<List<BieuMauNamDto>> GetAll(int? nam)
         {
-            return await _service.GetAllBieuMauNamAsync();
+            return await _service.GetAllBieuMauNamAsync(nam);
         }
 
         [HttpPost]
