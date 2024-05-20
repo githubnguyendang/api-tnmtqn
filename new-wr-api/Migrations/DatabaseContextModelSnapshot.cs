@@ -946,6 +946,9 @@ namespace new_wr_api.Migrations
                     b.Property<double?>("LuuLuongThang9")
                         .HasColumnType("float");
 
+                    b.Property<int?>("Nam")
+                        .HasColumnType("int");
+
                     b.Property<string>("TenTram")
                         .HasColumnType("nvarchar(max)");
 
@@ -2460,7 +2463,19 @@ namespace new_wr_api.Migrations
                     b.Property<string>("HuyenTPDiemDau")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaSong")
+                    b.Property<string>("MaSong1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong5")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaiKhoanSua")
@@ -4751,10 +4766,28 @@ namespace new_wr_api.Migrations
                     b.Property<string>("Huyen")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaSong")
+                    b.Property<string>("MaSong1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong5")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong6")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MucTieuChatLuong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhanDoan")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaiKhoanSua")
@@ -5142,14 +5175,17 @@ namespace new_wr_api.Migrations
                     b.Property<string>("TaiKhoanTao")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TenSong")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ThoiGianSua")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("ThoiGianTao")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("ThoiGianThucHien")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("ThoiGianThucHien")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("XDiemCuoi")
                         .HasColumnType("float");
@@ -5197,7 +5233,19 @@ namespace new_wr_api.Migrations
                     b.Property<string>("LoaiSongSuoi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MaSong")
+                    b.Property<string>("MaSong1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSong5")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TaiKhoanSua")

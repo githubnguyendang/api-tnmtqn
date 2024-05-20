@@ -15,13 +15,13 @@
         public double? CtGiaCamTSS { get; set; }
         public double? CtGiaCamColiform { get; set; }
 
-        public double? LtGiaCamBOD => Math.Round((SoGiaCam ?? 0) * (CtGiaCamBOD ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamCOD => Math.Round((SoGiaCam ?? 0) * (CtGiaCamCOD ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamAmoni => Math.Round((SoGiaCam ?? 0) * (CtGiaCamAmoni ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamTongN => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTongN ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamTongP => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTongP ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamTSS => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTSS ?? 0) * (HeSoSuyGiam ?? 0));
-        public double? LtGiaCamColiform => Math.Round((SoGiaCam ?? 0) * (CtGiaCamColiform ?? 0) * (HeSoSuyGiam ?? 0));
+        public double? LtGiaCamBOD => Math.Round((SoGiaCam ?? 0) * (CtGiaCamBOD ?? 0) * (HeSoSuyGiam ?? 0)/1000);
+        public double? LtGiaCamCOD => Math.Round((SoGiaCam ?? 0) * (CtGiaCamCOD ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
+        public double? LtGiaCamAmoni => Math.Round((SoGiaCam ?? 0) * (CtGiaCamAmoni ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
+        public double? LtGiaCamTongN => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTongN ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
+        public double? LtGiaCamTongP => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTongP ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
+        public double? LtGiaCamTSS => Math.Round((SoGiaCam ?? 0) * (CtGiaCamTSS ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
+        public double? LtGiaCamColiform => Math.Round((SoGiaCam ?? 0) * (CtGiaCamColiform ?? 0) * (HeSoSuyGiam ?? 0) / 1000);
 
         public string? GhiChu { get; set; }
         public bool? DaXoa { get; set; }

@@ -16,13 +16,13 @@
         public double? CtTrauBoTSS { get; set; }
         public double? CtTrauBoColiform { get; set; }
 
-        public double? LtTrauBoBOD => Math.Round(((SoTrau + SoBo) ?? 0)* (CtTrauBoBOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoCOD => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoCOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoAmoni => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoAmoni ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoTongN => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTongN ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoTongP => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTongP ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoTSS => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTSS ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtTrauBoColiform => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoColiform ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtTrauBoBOD => Math.Round(((SoTrau + SoBo) ?? 0)* (CtTrauBoBOD ?? 0) * (HeSoSuyGiam ?? 0)/1000, 2);
+        public double? LtTrauBoCOD => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoCOD ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
+        public double? LtTrauBoAmoni => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoAmoni ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
+        public double? LtTrauBoTongN => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTongN ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
+        public double? LtTrauBoTongP => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTongP ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
+        public double? LtTrauBoTSS => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoTSS ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
+        public double? LtTrauBoColiform => Math.Round(((SoTrau + SoBo) ?? 0) * (CtTrauBoColiform ?? 0) * (HeSoSuyGiam ?? 0) / 1000, 2);
 
         public string? GhiChu { get; set; }
         public bool? DaXoa { get; set; }
