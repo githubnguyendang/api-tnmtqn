@@ -1,22 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using new_wr_api.Dto;
 
 namespace new_wr_api.Data
 {
-    public class LuuLuongDto
-    {
-        public int? Id { get; set; }
-        public int? IdCT { get; set; }
-        public int? IdMucDich { get; set; }
-        public double? LuuLuong { get; set; }
-        public string? DonViDo { get; set; }
-    }
-
     public class MucDichKTDto
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string? MucDich { get; set; }
-
-        public LuuLuongDto? LuuLuong { get; set; }
+        public bool? DaXoa { get; set; } = false;
+        public LuuLuongTheoMucDichDto? LuuLuong { get; set; }
     }
 }

@@ -25,7 +25,7 @@ services.AddScoped<RoleService>();
 services.AddScoped<DashboardService>();
 services.AddScoped<RoleDashboardService>();
 services.AddScoped<UserDashboardService>();
-services.AddScoped<PermissionService>();                                                                                   
+services.AddScoped<PermissionService>();
 
 //Other Service
 services.AddScoped<CT_ThongTinService>();
@@ -33,6 +33,7 @@ services.AddScoped<CT_ThongSoService>();
 services.AddScoped<CT_LoaiService>();
 services.AddScoped<CT_HangMucService>();
 services.AddScoped<LuuLuongTheoMucDichService>();
+services.AddScoped<MucDichKTService>();
 
 services.AddScoped<GP_ThongTinService>();
 services.AddScoped<GP_LoaiService>();

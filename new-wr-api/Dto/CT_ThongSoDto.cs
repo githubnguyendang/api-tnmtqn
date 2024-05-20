@@ -2,6 +2,7 @@
 {
     public class CT_ThongSoDto
     {
+        public int? Id { get; set; }
         public int? IdCT { get; set; }
         public int? IdHangMucCT { get; set; }
         public string? CaoTrinhCong { get; set; }
@@ -75,5 +76,6 @@
         public string? ThoiGianBomLonNhat { get; set; }
         public string? ThoiGianBomNhoNhat { get; set; }
         public string? ThoiGianBomTB { get; set; }
+        public bool? DaXoa { get; set; } = false;
     }
 }

@@ -122,18 +122,20 @@ namespace new_wr_api.Service
         public async Task<CT_ThongTinDto?> GetByIdAsync(int Id)
         {
             var query = _context.CT_ThongTin!
-            .Where(ct => ct.DaXoa == false)
-            .Include(ct => ct.LoaiCT)
-            .Include(ct => ct.TangChuaNuoc)
-            .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
-            .Include(ct => ct.ThongSo)
-            .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa)
-            .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Huyen)
-            .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
-            .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
-            .Include(ct => ct.LuuLuongTheoMucDich)
-            .OrderBy(x => x.IdLoaiCT)
-            .AsQueryable();
+                .Where(ct => ct.DaXoa == false)
+                .Include(ct => ct.LoaiCT)
+                .Include(ct => ct.TangChuaNuoc)
+                .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
+                .Include(ct => ct.ThongSo)
+                .Include(ct => ct.LuuVuc)
+                .Include(ct => ct.CT_ViTri)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Huyen)
+                .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.ToChuc_CaNhan)
+                .Include(ct => ct.GiayPhep!).ThenInclude(gp => gp.GP_TCQ)
+                .Include(ct => ct.LuuLuongTheoMucDich!).ThenInclude(lld => lld.MucDichKT)
+                .OrderBy(x => x.IdLoaiCT)
+                .AsQueryable();
 
             var congTrinh = await query.SingleOrDefaultAsync(ct => ct.Id == Id);
 
@@ -172,7 +174,7 @@ namespace new_wr_api.Service
         }
 
         // Method to save or update a CT_ThongTin entity
-        public async Task<int> SaveAsync(CT_ThongTinDto dto)
+        public async Task<int> SaveAsync(CT_ThongTinSaveDto dto)
         {
             int id = 0;
             var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
