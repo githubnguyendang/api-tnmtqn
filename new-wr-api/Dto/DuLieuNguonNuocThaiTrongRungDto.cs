@@ -7,7 +7,6 @@
         public double? DienTichTrongRung { get; set; }
         public double? HeSoSuyGiam { get; set; }
 
-
         //tongtailuong
         public double? CtTrongRungBOD { get; set; }
         public double? CtTrongRungCOD { get; set; }

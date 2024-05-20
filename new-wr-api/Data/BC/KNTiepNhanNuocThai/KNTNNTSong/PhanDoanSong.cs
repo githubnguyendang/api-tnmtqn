@@ -21,6 +21,7 @@ namespace new_wr_api.Data
         public string? DiaGioiHanhChinh { get; set; }
         public string? MucDichSuDung { get; set; }
         public string? ChatLuongNuoc { get; set; }
+        public string? FileKML { get; set; }
         public string? GhiChu { get; set; }
         public DateTime? ThoiGianTao { get; set; }
         public string? TaiKhoanTao { get; set; }

@@ -7,7 +7,6 @@
         public double? DienTichThuySan { get; set; }
         public double? HeSoSuyGiam { get; set; }
 
-
         //tongtailuong
         public double? CtThuySanBOD { get; set; }
         public double? CtThuySanCOD { get; set; }
@@ -17,13 +16,13 @@
         public double? CtThuySanTSS { get; set; }
         public double? CtThuySanColiform { get; set; }
 
-        public double? LtThuySanBOD => Math.Round((DienTichThuySan ?? 0) * (CtThuySanBOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanCOD => Math.Round((DienTichThuySan ?? 0) * (CtThuySanCOD ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanAmoni => Math.Round((DienTichThuySan ?? 0) * (CtThuySanAmoni ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanTongN => Math.Round((DienTichThuySan ?? 0) * (CtThuySanTongN ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanTongP => Math.Round((DienTichThuySan ?? 0) * (CtThuySanTongP ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanTSS => Math.Round((DienTichThuySan ?? 0) * (CtThuySanTSS ?? 0) * (HeSoSuyGiam ?? 0), 2);
-        public double? LtThuySanColiform => Math.Round((DienTichThuySan ?? 0) * (CtThuySanColiform ?? 0) * (HeSoSuyGiam ?? 0), 2);
+        public double? LtThuySanBOD => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanBOD ?? 0) *0.8)/10, 2);
+        public double? LtThuySanCOD => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanCOD ?? 0) *0.8)/10, 2);
+        public double? LtThuySanAmoni => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanAmoni ?? 0) *0.8)/10, 2);
+        public double? LtThuySanTongN => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanTongN ?? 0) *0.8)/10, 2);
+        public double? LtThuySanTongP => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanTongP ?? 0) *0.8)/10, 2);
+        public double? LtThuySanTSS => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanTSS ?? 0) *0.8)/10, 2);
+        public double? LtThuySanColiform => Math.Round(((DienTichThuySan ?? 0) * (CtThuySanColiform ?? 0) *0.8)/10, 2);
 
         public string? GhiChu { get; set; }
         public bool? DaXoa { get; set; }
