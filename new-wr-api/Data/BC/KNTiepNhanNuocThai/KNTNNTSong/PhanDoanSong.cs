@@ -36,6 +36,7 @@ namespace new_wr_api.Data
         public virtual DuLieuNguonNuocThaiTrongCay? DuLieuNguonNuocThaiTrongCay { get; set; }
         public virtual DuLieuNguonNuocThaiTrongLua? DuLieuNguonNuocThaiTrongLua { get; set; }
         public virtual DuLieuNguonNuocThaiTrongRung? DuLieuNguonNuocThaiTrongRung { get; set; }
+        public virtual DuLieuNguonNuocThaiThuySan? DuLieuNguonNuocThaiThuySan { get; set; }
 
     }
 }

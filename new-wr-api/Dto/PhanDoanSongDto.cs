@@ -48,6 +48,7 @@ namespace new_wr_api.Dto
         public DuLieuNguonNuocThaiTrongCayDto? DuLieuNguonNuocThaiTrongCay { get; set; }
         public DuLieuNguonNuocThaiTrongLuaDto? DuLieuNguonNuocThaiTrongLua { get; set; }
         public DuLieuNguonNuocThaiTrongRungDto? DuLieuNguonNuocThaiTrongRung { get; set; }
+        public DuLieuNguonNuocThaiThuySanDto? DuLieuNguonNuocThaiThuySan { get; set; }
     }
 
 }

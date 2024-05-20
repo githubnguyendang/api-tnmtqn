@@ -40,6 +40,7 @@ namespace new_wr_api.Service
                 .Include(p => p.DuLieuNguonNuocThaiTrongCay)
                 .Include(p => p.DuLieuNguonNuocThaiTrongLua)
                 .Include(p => p.DuLieuNguonNuocThaiTrongRung)
+                .Include(p => p.DuLieuNguonNuocThaiThuySan)
                 .Where(p => p.DuLieuNguonNuocNhan != null)
                 .ToListAsync();
 
@@ -56,6 +57,7 @@ namespace new_wr_api.Service
                 dto.DuLieuNguonNuocThaiTrongCay = null;
                 dto.DuLieuNguonNuocThaiTrongLua = null;
                 dto.DuLieuNguonNuocThaiTrongRung = null;
+                dto.DuLieuNguonNuocThaiThuySan = null;
             }
 
             return pdsDtos;
