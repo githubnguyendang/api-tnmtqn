@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
 using new_wr_api.Dto;
+using System.Linq;
 
 namespace new_wr_api.Service
 {
@@ -24,26 +25,30 @@ namespace new_wr_api.Service
             // Retrieve data from the database asynchronously
             var items = await _context.CT_ThongTin!
                 .Where(d => d.DaXoa == false)
-                //.Include(d => d.Xa)
-                //.Include(d => d.Huyen)
-                .Include(d => d.LoaiCT)
-                .Include(d => d.ThongSo)
-                //.Include(d => d.MucDichKTSD)
-                .Include(d => d.LuuLuongTheoMucDich)
+                .Include(ct => ct.LoaiCT)
+                .Include(ct => ct.TangChuaNuoc)
+                .Include(ct => ct.HangMuc!).ThenInclude(hm => hm.ThongSo)
+                .Include(ct => ct.ThongSo)
+                .Include(ct => ct.LuuVuc)
+                .Include(ct => ct.CT_ViTri)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Xa)
+                .Include(ct => ct.CT_ViTri!).ThenInclude(vt => vt.Huyen)
+                .Include(ct => ct.LuuLuongTheoMucDich!).ThenInclude(lld => lld.MucDichKT)
                 .ToListAsync();
 
             // Filter and categorize the retrieved data
             var hochua_dapdang = items
-                .Where(c => c.LoaiCT!.Id == 4 && c.ThongSo != null && c.ThongSo.DungTichToanBo != null && c.ThongSo.DungTichToanBo >= 0.01);
+                .Where(c => c.IdLoaiCT == 4 && c.ThongSo != null && c.ThongSo.DungTichToanBo != null && c.ThongSo.DungTichToanBo >= 0.01);
 
             var sxnn_ntts = items
-                .Where(c => c.LoaiCT != null && new List<int> { 5, 6 }.Contains(c.LoaiCT.Id)
-                            //&& c.MucDichKTSD != null && new List<int> { 4, 5 }.Contains(c.MucDichKTSD.Id)
-                            && c.ThongSo!.QMaxKT > 0.1);
+                   .Where(c => c.LoaiCT != null && new List<int> { 5, 6 }.Contains(c.LoaiCT.Id)
+                   && c.LuuLuongTheoMucDich != null
+                   && c.LuuLuongTheoMucDich.Any(lld => lld.MucDichKT!.MucDich!.ToLower().Contains("nuôi trồng thủy sản") || lld.MucDichKT!.MucDich!.ToLower().Contains("nông nghiệp"))
+                   && c.LuuLuongTheoMucDich.Sum(lld => lld.LuuLuong ?? 0) > 0.1);
 
             var kddv_sxpnn = items
                 .Where(c => c.LoaiCT != null && new List<int> { 4, 5, 6 }.Contains(c.LoaiCT.Id)
-                            //&& c.MucDichKTSD != null && new List<int> { 2, 3 }.Contains(c.MucDichKTSD.Id)
+                            && c.LuuLuongTheoMucDich != null && c.LuuLuongTheoMucDich.Any(lld => new List<int?> { 2, 3 }.Contains(lld.IdMucDich))
                             && c.ThongSo!.QKhaiThac > 0.00116 && c.ThongSo.CongSuatLM > 50);
 
             // Combine filtered data from different categories
@@ -60,5 +65,6 @@ namespace new_wr_api.Service
 
             return dtos;
         }
+
     }
 }

@@ -220,7 +220,7 @@ namespace new_wr_api.Helpers
                 .ForMember(dest => dest.LtAmoni, opt => opt.MapFrom(src => (src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemAmoni : 0) + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatAmoni + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamAmoni + src.DuLieuNguonNuocThaiLon!.LtLonAmoni + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoAmoni + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayAmoni + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaAmoni + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungAmoni + src.DuLieuNguonNuocThaiThuySan!.LtThuySanAmoni))
                 .ForMember(dest => dest.LtTongN, opt => opt.MapFrom(src => (src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemTongN : 0) + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatTongN + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamTongN + src.DuLieuNguonNuocThaiLon!.LtLonTongN + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoTongN + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayTongN + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaTongN + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungTongN + src.DuLieuNguonNuocThaiThuySan!.LtThuySanTongN))
                 .ForMember(dest => dest.LtTongP, opt => opt.MapFrom(src => (src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemTongP : 0) + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatTongP + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamTongP + src.DuLieuNguonNuocThaiLon!.LtLonTongP + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoTongP + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayTongP + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaTongP + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungTongP + src.DuLieuNguonNuocThaiThuySan!.LtThuySanTongP))
-                .ForMember(dest => dest.LtTSS, opt => opt.MapFrom(src =>src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemTSS : 0 + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatTSS + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamTSS + src.DuLieuNguonNuocThaiLon!.LtLonTSS + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoTSS + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayTSS + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaTSS + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungTSS+ src.DuLieuNguonNuocThaiThuySan!.LtThuySanTSS))
+                .ForMember(dest => dest.LtTSS, opt => opt.MapFrom(src => src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemTSS : 0 + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatTSS + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamTSS + src.DuLieuNguonNuocThaiLon!.LtLonTSS + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoTSS + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayTSS + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaTSS + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungTSS + src.DuLieuNguonNuocThaiThuySan!.LtThuySanTSS))
                 .ForMember(dest => dest.LtColiform, opt => opt.MapFrom(src => (src.DuLieuNguonNuocThaiDiem != null ? src.DuLieuNguonNuocThaiDiem.LtdiemColiform : 0) + src.DuLieuNguonNuocThaiSinhHoat!.LtSinhHoatColiform + src.DuLieuNguonNuocThaiGiaCam!.LtGiaCamColiform + src.DuLieuNguonNuocThaiLon!.LtLonColiform + src.DuLieuNguonNuocThaiTrauBo!.LtTrauBoColiform + src.DuLieuNguonNuocThaiTrongCay!.LtTrongCayColiform + src.DuLieuNguonNuocThaiTrongLua!.LtTrongLuaColiform + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungColiform + src.DuLieuNguonNuocThaiThuySan!.LtThuySanColiform))
 
                 //ltd
@@ -259,18 +259,42 @@ namespace new_wr_api.Helpers
             CreateMap<KKTNN_NuocMat_SoLuong_AoHoDamPha, KKTNN_NuocMat_SoLuong_AoHoDamPhaDto>().ReverseMap();
 
             CreateMap<CT_ThongTin, KKTNN_NuocMat_KhaiThacSuDungDto>()
-                         .ForMember(dest => dest.ten_ct, opt => opt.MapFrom(src => src.TenCT))
-                         .ForMember(dest => dest.loai_ct, opt => opt.MapFrom(src => src.LoaiCT!.TenLoaiCT))
-                         .ForMember(dest => dest.nguonnuoc_kt, opt => opt.MapFrom(src => src.NguonNuocKT))
-                         //.ForMember(dest => dest.mucdich_kt, opt => opt.MapFrom(src => src.MucDichKTSD!.MucDich))
-                         .ForMember(dest => dest.dungtich_ho, opt => opt.MapFrom(src => src.ThongSo!.DungTichToanBo))
-                         .ForMember(dest => dest.congsuat, opt => opt.MapFrom(src => src.ThongSo!.CongSuatLM))
-                         .ForMember(dest => dest.huyen, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Huyen).ToList()))
-                         .ForMember(dest => dest.xa, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Xa).ToList()))
-                         //.ForMember(dest => dest.q_kt_tuoi, opt => opt.MapFrom(src => src.MucDichKTSD!.Id == 4 ? src.ThongSo!.QMaxKT : null))
-                         //.ForMember(dest => dest.q_kt_kddv_sx_phi_nn, opt => opt.MapFrom(src => new List<int> { 2, 3 }.Contains(src.MucDichKTSD!.Id) ? src.ThongSo!.QMaxKT * 86400 : null))
-                         //.ForMember(dest => dest.mucdich_khac, opt => opt.MapFrom(src => !new List<int> { 2, 3, 4 }.Contains(src.MucDichKTSD!.Id) ? src.ThongSo!.QMaxKT * 86400 : null))
-                         .ReverseMap();
+                 .ForMember(dest => dest.ten_ct, opt => opt.MapFrom(src => src.TenCT))
+                 .ForMember(dest => dest.loai_ct, opt => opt.MapFrom(src => src.LoaiCT!.TenLoaiCT))
+                 .ForMember(dest => dest.nguonnuoc_kt, opt => opt.MapFrom(src => src.NguonNuocKT))
+                 .ForMember(dest => dest.dungtich_ho, opt => opt.MapFrom(src => src.ThongSo!.DungTichToanBo))
+                 .ForMember(dest => dest.congsuat, opt => opt.MapFrom(src => src.ThongSo!.CongSuatLM))
+                 .ForMember(dest => dest.lv_song, opt => opt.MapFrom(src => src.LuuVuc!.TenLVS))
+                 .ForMember(dest => dest.huyen, opt => opt.MapFrom(src => src.CT_ViTri!.Where(v => v.Huyen != null)
+                    .Select(v => v.Huyen).GroupBy(h => h!.IdHuyen).Select(g => g.First()).ToList()))
+                 .ForMember(dest => dest.xa, opt => opt.MapFrom(src => src.CT_ViTri!.Select(v => v.Xa).ToList()))
+                 .ForMember(dest => dest.mucdich_kt, opt => opt.MapFrom(src => src.LuuLuongTheoMucDich != null
+                     ? string.Join(", ", src.LuuLuongTheoMucDich
+                         .Where(l => l.MucDichKT != null && l.DaXoa == false)
+                         .Select(l => l.MucDichKT!.MucDich)
+                         .Distinct())
+                     : string.Empty))
+                 .ForMember(dest => dest.q_kt_tuoi, opt => opt.MapFrom(src => src.LuuLuongTheoMucDich!
+                     .Where(lld => lld.IdCT == src.Id && lld.MucDichKT!.MucDich!.ToLower().Contains("tưới") && lld.DaXoa == false)
+                     .ToList()
+                     .Sum(x => x.DonViDo == "m3/ngày đêm" ? x.LuuLuong ?? 0 * 86400 : x.LuuLuong ?? 0)))
+                 .ForMember(dest => dest.q_kt_kddv_sx_phi_nn, opt => opt.MapFrom(src => src.LuuLuongTheoMucDich!
+                     .Where(lld => lld.IdCT == src.Id &&
+                        lld.MucDichKT!.MucDich!.ToLower().Contains("kinh doanh, dịch vụ") ||
+                        lld.MucDichKT!.MucDich!.ToLower().Contains("sản xuất") && lld.DaXoa == false)
+                     .ToList()
+                     .Sum(x => x.DonViDo == "m3/ngày đêm" ? x.LuuLuong ?? 0 * 86400 : x.LuuLuong ?? 0)))
+                 .ForMember(dest => dest.mucdich_khac, opt => opt.MapFrom(src => src.LuuLuongTheoMucDich!
+                     .Where(lld => lld.IdCT == src.Id &&
+                         !lld.MucDichKT!.MucDich!.ToLower().Contains("kinh doanh, dịch vụ") ||
+                         !lld.MucDichKT!.MucDich!.ToLower().Contains("sản xuất") ||
+                         !lld.MucDichKT!.MucDich!.ToLower().Contains("tưới") &&
+                         lld.DaXoa == false)
+                     .ToList()
+                     .Sum(x => x.DonViDo == "m3/ngày đêm" ? x.LuuLuong ?? 0 * 86400 : x.LuuLuong ?? 0)))
+                 .ReverseMap();
+
+
 
             CreateMap<KKTNN_NuocMat_TongLuong, KKTNN_NuocMat_TongLuongDto>()
                         .ForMember(dest => dest.LuuVucSong, opt => opt.MapFrom(src => src.LuuVucSong))

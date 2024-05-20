@@ -35,7 +35,7 @@ namespace new_wr_api.Controllers
 
         [HttpPost]
         [Route("luu")]
-        public async Task<ActionResult<CT_ThongTin>> Save(CT_ThongTinDto dto)
+        public async Task<ActionResult<CT_ThongTin>> Save(CT_ThongTinSaveDto dto)
         {
             var res = await _service.SaveAsync(dto);
             if (res > 0)
