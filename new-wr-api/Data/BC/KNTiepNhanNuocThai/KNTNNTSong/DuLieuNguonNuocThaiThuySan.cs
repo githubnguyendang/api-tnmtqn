@@ -6,7 +6,7 @@ namespace new_wr_api.Data
     {
         public int Id { get; set; }
         public int IdPhanDoanSong { get; set; }
-        public int? DienTichThuySan { get; set; }
+        public double? DienTichThuySan { get; set; }
         public double? HeSoSuyGiam { get; set; }
 
         //tongtailuong
