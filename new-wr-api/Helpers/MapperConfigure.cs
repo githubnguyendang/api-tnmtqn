@@ -254,13 +254,13 @@ namespace new_wr_api.Helpers
                 + src.DuLieuNguonNuocThaiTrongRung!.LtTrongRungColiform + src.DuLieuNguonNuocThaiThuySan!.LtThuySanColiform))
 
                 //ltd
-                .ForMember(dest => dest.LtnBod, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdBOD : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnBOD : 0) - dest.LtBod) * 0.7)))
-                .ForMember(dest => dest.LtnCod, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdCOD : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnCOD : 0) - dest.LtCod) * 0.7)))
-                .ForMember(dest => dest.LtnAmoni, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdAmoni : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnAmoni : 0) - dest.LtAmoni) * 0.7)))
-                .ForMember(dest => dest.LtnTongN, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTongN : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTongN : 0) - dest.LtTongN) * 0.7)))
-                .ForMember(dest => dest.LtnTongP, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTongP : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTongP : 0) - dest.LtTongP) * 0.7)))
-                .ForMember(dest => dest.LtnTSS, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTSS : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTSS : 0) - dest.LtTSS) * 0.7)))
-                .ForMember(dest => dest.LtnColiform, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdColiform : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnColiform : 0) - dest.LtColiform) * 0.7)))
+                .ForMember(dest => dest.LtnBod, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdBOD : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnBOD : 0) - dest.LtBod) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnCod, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdCOD : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnCOD : 0) - dest.LtCod) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnAmoni, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdAmoni : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnAmoni : 0) - dest.LtAmoni) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnTongN, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTongN : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTongN : 0) - dest.LtTongN) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnTongP, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTongP : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTongP : 0) - dest.LtTongP) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnTSS, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdTSS : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnTSS : 0) - dest.LtTSS) * dest.HeSoFS)))
+                .ForMember(dest => dest.LtnColiform, opt => opt.MapFrom((src, dest) => (((src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LtdColiform : 0) - (src.DuLieuNguonNuocNhan != null ? src.DuLieuNguonNuocNhan.LnnColiform : 0) - dest.LtColiform) * dest.HeSoFS)))
 
             .ReverseMap();
 
