@@ -20,7 +20,6 @@ namespace new_wr_api.Controllers
         }
 
         [HttpPost("upload")]
-        [Authorize]
         public async Task<IActionResult> UploadFile([FromForm] UploadModel uploadFile)
         {
             try

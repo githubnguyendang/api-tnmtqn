@@ -20,6 +20,7 @@ namespace new_wr_api.Dto
         public string? ChatLuongNuoc { get; set; }
         public string? GhiChu { get; set; }
         public string? FileKML { get; set; }
+        public double? HeSoFS { get; set; }
         public DateTime? ThoiGianTao { get; set; }
         public string? TaiKhoanTao { get; set; }
         public DateTime? ThoiGianSua { get; set; }
