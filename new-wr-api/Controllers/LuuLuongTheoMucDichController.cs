@@ -6,46 +6,46 @@ using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
-    [Route("luu-luong-theo-muc-dich")]
-    [ApiController]
-    [Authorize]
-    public class LuuLuongTheoMucDichController : ControllerBase
-    {
-        private readonly LuuLuongTheoMucDichService _service;
+    //[Route("luu-luong-theo-muc-dich")]
+    //[ApiController]
+    //[Authorize]
+    //public class LuuLuongTheoMucDichController : ControllerBase
+    //{
+    //    private readonly LuuLuongTheoMucDichService _service;
 
-        public LuuLuongTheoMucDichController(LuuLuongTheoMucDichService service)
-        {
-            _service = service;
-        }
+    //    public LuuLuongTheoMucDichController(LuuLuongTheoMucDichService service)
+    //    {
+    //        _service = service;
+    //    }
 
-        [HttpPost]
-        [Route("luu")]
-        public async Task<ActionResult<LuuLuongTheoMucDich>> Save(LuuLuongTheoMucDichDto dto)
-        {
-            var res = await _service.SaveAsync(dto);
-            if (res > 0)
-            {
-                return Ok(new { message = "Lưu lượng theo mục đích: Dữ liệu đã được lưu", id = res });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lưu lượng theo mục đích: Lỗi lưu dữ liệu", error = true });
-            }
-        }
+    //    [HttpPost]
+    //    [Route("luu")]
+    //    public async Task<ActionResult<LuuLuongTheoMucDich>> Save(LuuLuongTheoMucDichDto dto)
+    //    {
+    //        var res = await _service.SaveAsync(dto);
+    //        if (res > 0)
+    //        {
+    //            return Ok(new { message = "Lưu lượng theo mục đích: Dữ liệu đã được lưu", id = res });
+    //        }
+    //        else
+    //        {
+    //            return BadRequest(new { message = "Lưu lượng theo mục đích: Lỗi lưu dữ liệu", error = true });
+    //        }
+    //    }
 
-        [HttpGet]
-        [Route("xoa/{Id}")]
-        public async Task<ActionResult<LuuLuongTheoMucDich>> Delete(int Id)
-        {
-            var res = await _service.DeleteAsync(Id);
-            if (res == true)
-            {
-                return Ok(new { message = "Lưu lượng theo mục đích: Dữ liệu đã được xóa" });
-            }
-            else
-            {
-                return BadRequest(new { message = "Lưu lượng theo mục đích: Lỗi xóa dữ liệu", error = true });
-            }
-        }
-    }
+    //    [HttpGet]
+    //    [Route("xoa/{Id}")]
+    //    public async Task<ActionResult<LuuLuongTheoMucDich>> Delete(int Id)
+    //    {
+    //        var res = await _service.DeleteAsync(Id);
+    //        if (res == true)
+    //        {
+    //            return Ok(new { message = "Lưu lượng theo mục đích: Dữ liệu đã được xóa" });
+    //        }
+    //        else
+    //        {
+    //            return BadRequest(new { message = "Lưu lượng theo mục đích: Lỗi xóa dữ liệu", error = true });
+    //        }
+    //    }
+    //}
 }

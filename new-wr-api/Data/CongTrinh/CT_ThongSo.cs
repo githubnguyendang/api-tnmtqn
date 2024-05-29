@@ -81,11 +81,7 @@ namespace new_wr_api.Data
         public string? ThoiGianBomLonNhat { get; set; }
         public string? ThoiGianBomNhoNhat { get; set; }
         public string? ThoiGianBomTB { get; set; }
-        public DateTime? ThoiGianTao { get; set; }
-        public string? TaiKhoanTao { get; set; }
-        public DateTime? ThoiGianSua { get; set; }
-        public string? TaiKhoanSua { get; set; }
-        public bool? DaXoa { get; set; }
+
 
         [ForeignKey("IdCT")]
         public virtual CT_ThongTin? CongTrinh { get; set; }

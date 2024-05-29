@@ -132,7 +132,9 @@ namespace new_wr_api.Helpers
                         .ForMember(dest => dest.Huyen, opt => opt.Ignore())
                         .ForMember(dest => dest.Xa, opt => opt.Ignore());
 
-            CreateMap<CT_ViTri, CT_ViTriDto>();
+            CreateMap<CT_ViTri, CT_ViTriDto>()
+                .ForMember(dest => dest.TenHuyen, opt => opt.MapFrom(src => src.Huyen!.TenHuyen))
+                .ForMember(dest => dest.TenXa, opt => opt.MapFrom(src => src.Xa!.TenXa));
 
 
 

@@ -76,6 +76,5 @@
         public string? ThoiGianBomLonNhat { get; set; }
         public string? ThoiGianBomNhoNhat { get; set; }
         public string? ThoiGianBomTB { get; set; }
-        public bool? DaXoa { get; set; } = false;
     }
 }

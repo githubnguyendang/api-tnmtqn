@@ -6,5 +6,7 @@
         public int? IdCongTrinh { get; set; }
         public string? IdXa { get; set; }
         public string? IdHuyen { get; set; }
+        public string? TenHuyen { get; set; }
+        public string? TenXa { get; set; }
     }
 }

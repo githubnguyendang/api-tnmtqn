@@ -9,7 +9,7 @@ namespace new_wr_api.Controllers
 {
     [Route("cong-trinh")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CongTrinhController : ControllerBase
     {
         private readonly CT_ThongTinService _service;
