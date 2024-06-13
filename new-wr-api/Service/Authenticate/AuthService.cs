@@ -216,19 +216,53 @@ namespace new_wr_api.Service
             return false;
         }
 
+        //public async Task<bool> CheckAccessPermission(string userName, string linkControl, string action)
+        //{
+        //    var user = await _userManager.FindByNameAsync(userName);
+        //    if (user == null || linkControl == null || action == null) { return false; }
+        //    if (await _userManager.IsInRoleAsync(user, "Administrator")) return true;
+
+        //    var dash = _context.Dashboards!.Where(x => x.Path == linkControl).FirstOrDefault();
+        //    if (dash == null) return false;
+        //    var existingPermission = await _context!.Permissions!.FirstOrDefaultAsync(d => d.FunctionCode!.ToLower() == action.ToLower() && d.DashboardId == dash.Id && d.UserId == user.Id);
+        //    if (existingPermission != null) return true;
+
+        //    return false;
+        //}
+
         public async Task<bool> CheckAccessPermission(string userName, string linkControl, string action)
         {
+            // Get user by username
             var user = await _userManager.FindByNameAsync(userName);
             if (user == null || linkControl == null || action == null) { return false; }
-            if (await _userManager.IsInRoleAsync(user, "Administrator")) return true;
 
-            var dash = _context.Dashboards!.Where(x => x.Path == linkControl).FirstOrDefault();
+            // Get user roles
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (userRoles == null || !userRoles.Any()) return false;
+
+            // Check if user is an administrator
+            if (userRoles.Contains("Administrator")) return true;
+
+            // Find dashboard by path
+            var dash = _context.Dashboards!.FirstOrDefault(x => x.Path == linkControl);
             if (dash == null) return false;
-            var existingPermission = await _context!.Permissions!.FirstOrDefaultAsync(d => d.FunctionCode!.ToLower() == action.ToLower() && d.DashboardId == dash.Id && d.UserId == user.Id);
-            if (existingPermission != null) return true;
+
+            // Check for permissions for each role
+            foreach (var role in userRoles)
+            {
+                var existingPermission = await _context.Permissions
+                    .FirstOrDefaultAsync(d => d.FunctionCode.ToLower() == action.ToLower()
+                                           && d.DashboardId == dash.Id
+                                           && d.RoleName == role);
+                if (existingPermission != null)
+                {
+                    return true;
+                }
+            }
 
             return false;
         }
+
 
 
         public async Task<bool> LogoutAsync(HttpContext context)
