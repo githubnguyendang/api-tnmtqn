@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240703092125_KNTNNuocHo")]
+    partial class KNTNNuocHo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4532,10 +4535,7 @@ namespace new_wr_api.Migrations
                     b.Property<double?>("Flv")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Ftuoi1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Ftuoi2")
+                    b.Property<double?>("Ftuoi")
                         .HasColumnType("float");
 
                     b.Property<string>("GhiChu")
@@ -4565,10 +4565,7 @@ namespace new_wr_api.Migrations
                     b.Property<double?>("Vh")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Wtru1")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("Wtru2")
+                    b.Property<double?>("Wtru")
                         .HasColumnType("float");
 
                     b.Property<string>("Xa")
