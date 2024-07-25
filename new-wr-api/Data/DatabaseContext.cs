@@ -61,6 +61,9 @@ namespace new_wr_api.Data
         public DbSet<GS_TaiKhoanTruyen>? GS_TaiKhoanTruyen { get; set; }
 
         //KiemKeTaiNguyenNuoc
+        //tong hop chi tieu
+        public DbSet<ChiTieuLVSTraKhuc>? ChiTieuLVSTraKhuc { get; set; }
+
         public DbSet<KKTNN_NuocDuoiDat_SoLuong>? KKTNN_NuocDuoiDat_SoLuong { get; set; }
         public DbSet<KKTNN_NuocDuoiDat_TongLuong>? KKTNN_NuocDuoiDat_TongLuong { get; set; }
         public DbSet<LuuVucSong>? KKTNN_NuocDuoiDat_ChatLuong { get; set; }

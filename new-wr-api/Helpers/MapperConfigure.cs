@@ -283,6 +283,8 @@ namespace new_wr_api.Helpers
             CreateMap<KhaNangTiepNhanNuocHo, KhaNangTiepNhanNuocHoDto>().ReverseMap();
 
             //KiemKeTaiNguyenNuoc
+            //tong hop chi tieu
+            CreateMap<ChiTieuLVSTraKhuc, ChiTieuLVSTraKhucDto>().ReverseMap();
             CreateMap<Tram_ThongTin, Tram_ThongTinDto>()
                         .ForMember(dest => dest.tongluong_nuocmua, opt => opt.MapFrom(src => src.KKTNN_NuocMua_TongLuong))
                         .ForMember(dest => dest.huyen, opt => opt.MapFrom(src => src.Huyen))

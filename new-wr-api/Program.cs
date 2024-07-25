@@ -94,6 +94,10 @@ services.AddScoped<PhanDoanSongService>();
 services.AddScoped<ThongTinAoHoService>();
 services.AddScoped<KhaNangTiepNhanNuocHoService>();
 
+//kiem ke
+//tong hop chi tieu
+services.AddScoped<ChiTieuLVSTraKhucService>();
+
 services.AddScoped<Tram_ThongTinService>();
 services.AddScoped<NM_SoLuongService>();
 services.AddScoped<NM_TongLuongService>();
@@ -234,7 +238,7 @@ services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.WithOrigins("http://localhost:3000", "https://tnmt.vercel.app", "https://tnmt-quangngai.vercel.app")
+        builder.WithOrigins("http://localhost:3000", "https://tnmt.vercel.app", "https://tnmt-quangngai.vercel.app", "https://tnmt-phutho.vercel.app")
                .AllowAnyMethod()
                .AllowAnyHeader();
     });
