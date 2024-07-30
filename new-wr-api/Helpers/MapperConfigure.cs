@@ -187,6 +187,7 @@ namespace new_wr_api.Helpers
 
             //KNTiepNhanNuocThai
             CreateMap<ThongSoCLNSong, ThongSoCLNSongDto>().ReverseMap();
+            CreateMap<NguonThaiDiem, NguonThaiDiemDto>().ReverseMap();
             CreateMap<ThongSoCLNAo, ThongSoCLNAoDto>().ReverseMap();
             CreateMap<DoanSong, DoanSongDto>()
                         .ForMember(dest => dest.ThongSoLtd, opt => opt.MapFrom(src => src.ThongSoLtd))

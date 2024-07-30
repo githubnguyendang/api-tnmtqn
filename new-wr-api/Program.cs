@@ -93,6 +93,7 @@ services.AddScoped<DuLieuNguonNuocThaiThuySanService>();
 services.AddScoped<PhanDoanSongService>();
 services.AddScoped<ThongTinAoHoService>();
 services.AddScoped<KhaNangTiepNhanNuocHoService>();
+services.AddScoped<NguonThaiDiemService>();
 
 //kiem ke
 //tong hop chi tieu

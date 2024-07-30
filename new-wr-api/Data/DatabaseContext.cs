@@ -152,6 +152,7 @@ namespace new_wr_api.Data
         public DbSet<PhanDoanSong>? PhanDoanSong { get; set; }
         public DbSet<ThongTinAoHo>? ThongTinAoHo { get; set; }
         public DbSet<KhaNangTiepNhanNuocHo>? KhaNangTiepNhanNuocHo { get; set; }
+        public DbSet<NguonThaiDiem>? NguonThaiDiem { get; set; }
 
 
         ///Du lieu nguon thai diem song
