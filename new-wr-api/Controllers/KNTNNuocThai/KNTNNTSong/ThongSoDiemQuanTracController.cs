@@ -16,19 +16,18 @@ namespace new_wr_api.Controllers
         {
             _service = service;
         }
+        [HttpGet]
+        [Route("list")]
+        public async Task<List<ThongSoDiemQuanTracDto>> GetAllData()
+        {
+            return (await _service.GetAllDataAsync());
+        }
 
         [HttpGet]
         [Route("danh-sach")]
         public async Task<List<ThongSoDiemQuanTracDto>> GetAll(int nam)
         {
             return (await _service.GetAllAsync(nam));
-        }
-
-        [HttpGet]
-        [Route("{Id}")]
-        public async Task<ThongSoDiemQuanTracDto> GetById(int Id)
-        {
-            return await _service.GetByIdAsync(Id);
         }
 
         [HttpPost]

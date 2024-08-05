@@ -37,10 +37,19 @@ namespace new_wr_api.Service
             return listItems;
         }
 
-        public async Task<ThongSoDiemQuanTracDto> GetByIdAsync(int Id)
+        public async Task<List<ThongSoDiemQuanTracDto>> GetAllDataAsync()
         {
-            var item = await _context.ThongSoDiemQuanTrac!.FindAsync(Id);
-            return _mapper.Map<ThongSoDiemQuanTracDto>(item);
+            var query = _context.ThongSoDiemQuanTrac!
+                .Where(d => d.DaXoa == false )
+                .Include(x => x.DiemQuanTrac)
+                .AsQueryable();
+
+            // Apply filters based on input parameters
+            var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
+
+            var listItems = _mapper.Map<List<ThongSoDiemQuanTracDto>>(query);
+
+            return listItems;
         }
 
 

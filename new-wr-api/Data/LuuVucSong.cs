@@ -11,6 +11,11 @@ namespace new_wr_api.Data
         public int? IdXa { get; set; }
         public int? IdHuyen { get; set; }
         public string? TenLVS { get; set; }
+        public string? DienTich { get; set; }
+        public string? ChieuDaiSongChinh { get; set; }
+        public string? BanDo { get; set; }
+        public string? SoQuyTrinh { get; set; }
+        public string? FileKML { get; set; }
         public string? ChuGiai { get; set; }
         public string? ViTriQT { get; set; }
         public int? NgayBatDau { get; set; }

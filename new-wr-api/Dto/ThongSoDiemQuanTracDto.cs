@@ -22,9 +22,6 @@ namespace new_wr_api.Dto
         public double? Coliform { get; set; }
         public int? Year { get; set; }
         public bool? DaXoa { get; set; }
-        public string? TaiKhoanTao { get; set; }
-        public DateTime? ThoiGianSua { get; set; }
-        public string? TaiKhoanSua { get; set; }
         [ForeignKey("IdDiemQT")]
         public virtual DiemQuanTrac? DiemQuanTrac { get; set; }
     }
