@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using new_wr_api.Data;
 using new_wr_api.Dto;
@@ -12,12 +11,14 @@ namespace new_wr_api.Service
         private readonly DatabaseContext _context;
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContext;
+        private readonly ILogChangeService _logChangeService;
 
-        public DemoService(DatabaseContext context, IMapper mapper, IHttpContextAccessor httpContext)
+        public DemoService(DatabaseContext context, IMapper mapper, IHttpContextAccessor httpContext, ILogChangeService logChangeService)
         {
             _context = context;
             _mapper = mapper;
             _httpContext = httpContext;
+            _logChangeService = logChangeService;
         }
 
         public async Task<List<DemoDto>> GetAllAsync()
@@ -32,34 +33,39 @@ namespace new_wr_api.Service
             return _mapper.Map<DemoDto>(item);
         }
 
-
         public async Task<bool> SaveAsync(DemoDto dto)
         {
             var existingItem = await _context.Demo!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.DaXoa == false);
+            var userName = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
 
             if (existingItem == null || dto.Id == 0)
             {
                 var newItem = _mapper.Map<Demo>(dto);
                 newItem.DaXoa = false;
                 newItem.ThoiGianTao = DateTime.Now;
-                newItem.TaiKhoanTao = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
+                newItem.TaiKhoanTao = userName;
+
                 _context.Demo!.Add(newItem);
+
+                // Log POST action
+                await _logChangeService.LogChangeAsync("Demo", "CREATED", null, newItem, userName);
             }
             else
             {
-                var updateItem = await _context.Demo!.FirstOrDefaultAsync(d => d.Id == dto.Id && d.DaXoa == false);
-
-                updateItem = _mapper.Map(dto, updateItem);
+                var oldItem = _mapper.Map<DemoDto>(existingItem);
+                var updateItem = _mapper.Map(dto, existingItem);
 
                 updateItem!.ThoiGianSua = DateTime.Now;
-                updateItem.TaiKhoanSua = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
+                updateItem.TaiKhoanSua = userName;
                 _context.Demo!.Update(updateItem);
+
+                // Log PUT action
+                await _logChangeService.LogChangeAsync("Demo", "UPDATE", oldItem, updateItem, userName);
             }
 
             await _context.SaveChangesAsync();
             return true;
         }
-
 
         public async Task<bool> DeleteAsync(int Id)
         {
@@ -67,10 +73,16 @@ namespace new_wr_api.Service
 
             if (existingItem == null) { return false; }
 
+            var oldItem = _mapper.Map<DemoDto>(existingItem);
             existingItem!.DaXoa = true;
             _context.Demo!.Update(existingItem);
-            await _context.SaveChangesAsync();
 
+            var userName = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.Name) ?? "";
+
+            // Log DELETE action
+            await _logChangeService.LogChangeAsync("Demo", "DELETE", oldItem, null, userName);
+
+            await _context.SaveChangesAsync();
             return true;
         }
     }

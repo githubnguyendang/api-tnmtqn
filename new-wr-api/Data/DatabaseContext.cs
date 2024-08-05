@@ -29,6 +29,10 @@ namespace new_wr_api.Data
         public DbSet<Functions>? Functions { get; set; }
 
         //Other database
+
+        //ChangeHistory
+        public DbSet<ChangeHistory>? ChangeHistory { get; set; }
+
         public DbSet<CT_HangMuc>? CT_HangMuc { get; set; }
         public DbSet<CT_Loai>? CT_Loai { get; set; }
         public DbSet<CT_ThongTin>? CT_ThongTin { get; set; }

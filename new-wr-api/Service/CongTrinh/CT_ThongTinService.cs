@@ -12,14 +12,16 @@ namespace new_wr_api.Service
         private readonly IMapper _mapper;
         private readonly IHttpContextAccessor _httpContext;
         private readonly UserManager<AspNetUsers> _userManager;
+        private readonly ILogChangeService _logChangeService;
 
         // Constructor to initialize the service with required dependencies
-        public CT_ThongTinService(DatabaseContext context, IMapper mapper, IHttpContextAccessor httpContext, UserManager<AspNetUsers> userManager)
+        public CT_ThongTinService(DatabaseContext context, IMapper mapper, IHttpContextAccessor httpContext, UserManager<AspNetUsers> userManager, ILogChangeService logChangeService)
         {
             _context = context;
             _mapper = mapper;
             _httpContext = httpContext;
             _userManager = userManager;
+            _logChangeService = logChangeService;
         }
 
         // Method to retrieve a list of CT_ThongTin entities based on specified filters
@@ -191,16 +193,35 @@ namespace new_wr_api.Service
                 item.ThoiGianTao = DateTime.Now;
                 item.TaiKhoanTao = currentUser != null ? currentUser.UserName : null;
                 _context.CT_ThongTin!.Add(item);
+
+                // Log the creation (CREATED)
+                await _logChangeService.LogChangeAsync(
+                    "CT_ThongTin",
+                    "CREATED",
+                    null,
+                    item,
+                    currentUser != null ? currentUser.UserName : null
+                );
             }
             else
             {
                 // If the item exists, update it with values from the dto
+                var oldItem = _mapper.Map<CT_ThongTinSaveDto>(existingItem);
                 item = existingItem;
                 _mapper.Map(dto, item);
                 item.DaXoa = false;
                 item.ThoiGianSua = DateTime.Now;
                 item.TaiKhoanSua = currentUser != null ? currentUser.UserName : null;
                 _context.CT_ThongTin!.Update(item);
+
+                // Log the creation (UPDATED)
+                await _logChangeService.LogChangeAsync(
+                    "CT_ThongTin",
+                    "UPDATED",
+                    oldItem,
+                    dto,
+                    currentUser != null ? currentUser.UserName : null
+                );
             }
 
             // Save changes to the database
@@ -222,10 +243,20 @@ namespace new_wr_api.Service
 
             if (existingItem == null) { return false; } // If the item doesn't exist, return false
 
+            var oldItem = _mapper.Map<CT_ThongTinSaveDto>(existingItem);
             existingItem!.DaXoa = true; // Mark the item as deleted
             existingItem.ThoiGianSua = DateTime.Now;
             existingItem.TaiKhoanSua = currentUser != null ? currentUser.UserName : null;
             _context.CT_ThongTin!.Update(existingItem);
+
+            // Log the creation (DELETE)
+            await _logChangeService.LogChangeAsync(
+                "CT_ThongTin",
+                "DELETE",
+                null,
+                oldItem,
+                currentUser != null ? currentUser.UserName : null
+            );
 
             // Save changes to the database
             await _context.SaveChangesAsync();

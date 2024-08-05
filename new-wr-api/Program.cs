@@ -28,6 +28,10 @@ services.AddScoped<UserDashboardService>();
 services.AddScoped<PermissionService>();
 
 //Other Service
+
+//LogChange
+services.AddScoped<ILogChangeService, LogChangeService>();
+
 services.AddScoped<CT_ThongTinService>();
 services.AddScoped<CT_ThongSoService>();
 services.AddScoped<CT_LoaiService>();
