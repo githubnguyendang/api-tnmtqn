@@ -98,6 +98,8 @@ services.AddScoped<PhanDoanSongService>();
 services.AddScoped<ThongTinAoHoService>();
 services.AddScoped<KhaNangTiepNhanNuocHoService>();
 services.AddScoped<NguonThaiDiemService>();
+services.AddScoped<DiemQuanTracService>();
+services.AddScoped<ThongSoDiemQuanTracService>();
 
 //kiem ke
 //tong hop chi tieu

@@ -155,6 +155,8 @@ namespace new_wr_api.Data
         public DbSet<DuLieuNguonNuocNhan>? DuLieuNguonNuocNhan { get; set; }
         //diem quan trac
         public DbSet<DiemQuanTrac>? DiemQuanTrac { get; set; }
+        public DbSet<ThongSoDiemQuanTrac>? ThongSoDiemQuanTrac { get; set; }
+
         public DbSet<PhanDoanSong>? PhanDoanSong { get; set; }
         public DbSet<ThongTinAoHo>? ThongTinAoHo { get; set; }
         public DbSet<KhaNangTiepNhanNuocHo>? KhaNangTiepNhanNuocHo { get; set; }
