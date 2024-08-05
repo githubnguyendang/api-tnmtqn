@@ -283,6 +283,10 @@ namespace new_wr_api.Helpers
             //KNTNNuocThaiHo
             CreateMap<KhaNangTiepNhanNuocHo, KhaNangTiepNhanNuocHoDto>().ReverseMap();
 
+            //diem quan trac
+            CreateMap<DiemQuanTrac, DiemQuanTracDto>().ReverseMap();
+
+
             //KiemKeTaiNguyenNuoc
             //tong hop chi tieu
             CreateMap<ChiTieuLVSTraKhuc, ChiTieuLVSTraKhucDto>().ReverseMap();
