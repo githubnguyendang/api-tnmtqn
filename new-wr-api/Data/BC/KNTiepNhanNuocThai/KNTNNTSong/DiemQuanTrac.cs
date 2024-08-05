@@ -8,7 +8,7 @@ namespace new_wr_api.Data
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int TenDiemDo { get; set; }
+        public string? TenDiemDo { get; set; }
         public double ToaDoX { get; set; }
         public double ToaDoY { get; set; }
         public DateTime? ThoiGianTao { get; set; }

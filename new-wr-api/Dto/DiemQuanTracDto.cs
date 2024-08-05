@@ -3,7 +3,7 @@
     public class DiemQuanTracDto
     {
         public int Id { get; set; }
-        public int TenDiemDo { get; set; }
+        public string? TenDiemDo { get; set; }
         public double ToaDoX { get; set; }
         public double ToaDoY { get; set; }
         public DateTime? ThoiGianTao { get; set; }
