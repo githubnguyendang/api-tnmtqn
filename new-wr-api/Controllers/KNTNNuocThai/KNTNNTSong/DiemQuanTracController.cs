@@ -6,7 +6,7 @@ using new_wr_api.Service;
 
 namespace new_wr_api.Controllers
 {
-    [Route("loai-ct")]
+    [Route("diem-quan-trac")]
     [ApiController]
     public class DiemQuanTracController : ControllerBase
     {
