@@ -416,6 +416,7 @@ namespace new_wr_api.Helpers
             CreateMap<VHHC_LuuVucSong, VHHC_LuuVucSongDto>().ReverseMap();
             CreateMap<VHHC_HoChua_ThongSoKT, VHHC_HoChua_ThongSoKTDto>().ReverseMap();
             CreateMap<MuaHienTai, MuaHienTaiDto>().ReverseMap();
+            CreateMap<HTTT, HTTTDto>().ReverseMap();
 
 
             //demo

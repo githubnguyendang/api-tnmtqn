@@ -177,6 +177,8 @@ namespace new_wr_api.Data
         public DbSet<Demo>? Demo { get; set; }
         ///TramQuangNgai
         public DbSet<DuLieuTram>? DuLieuTram { get; set; }
+        public DbSet<HTTT>? HTTT { get; set; }
+
 
 
         ////GS

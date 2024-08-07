@@ -171,6 +171,7 @@ services.AddScoped<DemoService>();
 
 //TramQuangNgai
 services.AddScoped<DuLieuTramService>();
+services.AddScoped<HTTTService>();
 
 services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
 {
