@@ -414,7 +414,9 @@ namespace new_wr_api.Helpers
 
             //VanHanhHoChua
             CreateMap<VHHC_LuuVucSong, VHHC_LuuVucSongDto>().ReverseMap();
-            CreateMap<VHHC_HoChua_ThongSoKT, VHHC_HoChua_ThongSoKTDto>().ReverseMap();
+            CreateMap<VHHC_HoChua_ThongSoKT, VHHC_HoChua_ThongSoKTDto>()
+                .ForMember(dest => dest.CT_ThongTin, opt => opt.MapFrom((src) => src.CT_ThongTin))
+                .ReverseMap();
             CreateMap<MuaHienTai, MuaHienTaiDto>().ReverseMap();
             CreateMap<HTTT, HTTTDto>().ReverseMap();
 

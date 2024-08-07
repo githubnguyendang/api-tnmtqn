@@ -23,14 +23,29 @@ namespace new_wr_api.Service
         }
         public async Task<List<VHHC_HoChua_ThongSoKTDto>> GetAllVHHC_HoChua_ThongSoKTAsync()
         {
-            var items = await _context.VHHC_HoChua_ThongSoKT!.Where(d => d.DaXoa == false)
-                .OrderBy(d => d.Id)
+            var items = await _context.VHHC_HoChua_ThongSoKT!.Where(d => d.DaXoa == false )
+                .Include(ct => ct.CT_ThongTin)
                 .AsQueryable().ToListAsync();
 
             var vhhcDto = _mapper.Map<List<VHHC_HoChua_ThongSoKTDto>>(items);
 
             return vhhcDto;
         }
+
+        //public async Task<List<DuLieuNguonNuocNhanDto>> GetAllAsync()
+        //{
+        //    var query = _context.DuLieuNguonNuocNhan!
+        //        .Where(gp => gp.DaXoa == false)
+        //        .Include(x => x.PhanDoanSong)
+        //        .AsQueryable();
+
+        //    // Apply filters based on input parameters
+        //    var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext!.User);
+
+        //    var listItems = _mapper.Map<List<DuLieuNguonNuocNhanDto>>(query);
+
+        //    return listItems;
+        //}
         public async Task<bool> SaveAsync(VHHC_HoChua_ThongSoKTDto dto)
         {
 
