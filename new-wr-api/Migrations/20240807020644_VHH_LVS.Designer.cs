@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using new_wr_api.Data;
 
@@ -11,9 +12,11 @@ using new_wr_api.Data;
 namespace new_wr_api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240807020644_VHH_LVS")]
+    partial class VHH_LVS
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4121,82 +4124,6 @@ namespace new_wr_api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HSKTT_NuocMat");
-                });
-
-            modelBuilder.Entity("new_wr_api.Data.HTTT", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CapDoBao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ChiTietTranLu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("DaXoa")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("GhiChu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Gio")
-                        .HasColumnType("int");
-
-                    b.Property<string>("HinhTheThoiTiet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Nam")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Ngay")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("NgayDoBo")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("NgayHinhThanh")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NhanDangLu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhanCapLu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("STTLu")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TaiKhoanSua")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TaiKhoanTao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TamBaoVungAnhHuongManh")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Thang")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ThoiGianSua")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ThoiGianTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double?>("TongLuongMua")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ViTriDoBo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HTTT");
                 });
 
             modelBuilder.Entity("new_wr_api.Data.Huyen", b =>

@@ -15,6 +15,7 @@ namespace new_wr_api.Data
         public string? SoDoCacCT { get; set; }
         public string? SoQuyTrinh { get; set; }
         public string? TepDinhKem { get; set; }
+        public string? FileKML { get; set; }
         public string? GhiChu { get; set; }
         public DateTime? ThoiGianTao { get; set; }
         public string? TaiKhoanTao { get; set; }
